@@ -37,7 +37,11 @@ namespace Common
             //2、获取所有继承IModuleRegister的类
             foreach (var assembly in assemblies)
             {
-                var types = assembly.GetTypes().Where(x => x.IsDefined(typeof(ModuleRegisterAttribute)));
+                var types = assembly.GetTypes()
+                    .Where(t => typeof(IModuleRegister).IsAssignableFrom(t)
+                       && !t.IsInterface && !t.IsAbstract
+                        && t.IsDefined(typeof(ModuleRegisterAttribute), false));
+
                 //3、使用所有类的RegisterModule()方法
                 foreach (var type in types)
                 {
