@@ -38,16 +38,22 @@ namespace Common
             foreach (var assembly in assemblies)
             {
                 var types = assembly.GetTypes()
-                    .Where(t => typeof(IModuleRegister).IsAssignableFrom(t)
-                       && !t.IsInterface && !t.IsAbstract
-                        && t.IsDefined(typeof(ModuleRegisterAttribute), false));
+                                    .Where(t => typeof(IModuleRegister).IsAssignableFrom(t)
+                                              && !t.IsInterface && !t.IsAbstract
+                                              && t.IsDefined(typeof(ModuleRegisterAttribute), false));
+                var moduletypes = types
+                    .Select(t => new
+                    {
+                        Type = t,
+                        Order = t.GetCustomAttribute<ModuleRegisterAttribute>().Order
+                    }).OrderBy(t => t.Order).ToList();
 
                 //3、使用所有类的RegisterModule()方法
-                foreach (var type in types)
+                foreach (var moduletype in moduletypes)
                 {
                     try
                     {
-                        var instance = (IModuleRegister)Activator.CreateInstance(type);
+                        var instance = (IModuleRegister)Activator.CreateInstance(moduletype.Type);
                         instance.Register(builder);
                     }
                     catch (Exception e)
