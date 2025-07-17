@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+    [ModuleRegister]
     public class CommonModuleRegister : IModuleRegister
     {
         public void Register(ContainerBuilder builder)
         {
-            var configPath = ConfigurationManager.AppSettings["ConfigPath"]; 
+            var configPath = ConfigurationManager.AppSettings["ConfigPath"];
             var configType = (ConfigType)Enum.Parse(typeof(ConfigType), ConfigurationManager.AppSettings["ConfigType"]);
 
             //注册日志工厂

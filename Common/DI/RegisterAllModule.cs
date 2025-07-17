@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -20,6 +22,7 @@ namespace Common
         {
             //1、加载所有assembly
             List<Assembly> assemblies = new List<Assembly>();
+            var assemblyNames = ConfigurationManager.AppSettings["ModuleAssemblies"].Split(',');
             foreach (var name in assemblyNames)
             {
                 try
@@ -34,8 +37,7 @@ namespace Common
             //2、获取所有继承IModuleRegister的类
             foreach (var assembly in assemblies)
             {
-                var types = assembly.GetTypes().Where(x => typeof(IModuleRegister).IsAssignableFrom(x)
-                                              && !x.IsInterface);
+                var types = assembly.GetTypes().Where(x => x.IsDefined(typeof(ModuleRegisterAttribute)));
                 //3、使用所有类的RegisterModule()方法
                 foreach (var type in types)
                 {
@@ -52,17 +54,5 @@ namespace Common
             }
             return builder;
         }
-
-        /// <summary>
-        /// 解决方案内所有项目名称集合
-        /// </summary>
-        private static readonly List<string> assemblyNames = new List<string>
-        {
-            "Common",
-            "Sophon.Application",
-            "Sophon.Core",
-            "Sophon.Infrastructure",
-            "Sophon.UI"
-        };
     }
 }
