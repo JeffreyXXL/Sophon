@@ -22,7 +22,7 @@ namespace Common
         {
             //1、加载所有assembly
             List<Assembly> assemblies = new List<Assembly>();
-            var assemblyNames = ConfigurationManager.AppSettings["ModuleAssemblies"].Split(',');
+            var assemblyNames = ConfigurationManager.AppSettings["ModuleAssemblies"].Split(';');
             foreach (var name in assemblyNames)
             {
                 try
