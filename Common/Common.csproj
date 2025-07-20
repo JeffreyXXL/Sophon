@@ -34,8 +34,14 @@
     <Reference Include="Autofac, Version=8.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.8.3.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
+      <HintPath>..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.6.0.1\lib\net46\NLog.dll</HintPath>
@@ -78,12 +84,14 @@
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\IConfigManager.cs" />
     <Compile Include="Config\IConfigSerializer.cs" />
+    <Compile Include="Config\IniConfigSerializer.cs" />
     <Compile Include="Config\JsonConfigSerializer.cs" />
     <Compile Include="Config\XmlConfigSerializer.cs" />
     <Compile Include="DI\CommonModuleRegister.cs" />
     <Compile Include="DI\IModuleRegister.cs" />
     <Compile Include="DI\ModuleRegisterAttribute.cs" />
     <Compile Include="DI\RegisterAllModule.cs" />
+    <Compile Include="Customize\ConfigDeserializeException.cs" />
     <Compile Include="Logger\ILoggerManager.cs" />
     <Compile Include="Logger\ILoggerFactory.cs" />
     <Compile Include="Logger\LoggerFactory.cs" />

@@ -70,6 +70,8 @@ namespace Common
                     return new JsonConfigSerializer();
                 case ConfigType.xml:
                     return new XmlConfigSerializer();
+                case ConfigType.ini:
+                    return new IniConfigSerializer();
                 default:
                     throw new NotSupportedException($"暂未支持{type}格式");
             }
@@ -79,6 +81,7 @@ namespace Common
     public enum ConfigType
     {
         json,
-        xml
+        xml,
+        ini
     }
 }
