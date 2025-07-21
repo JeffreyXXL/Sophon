@@ -81,21 +81,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\ConfigBuilder.cs" />
-    <Compile Include="Config\IniConfigException.cs" />
-    <Compile Include="Config\ConfigInstanceNameAttribute.cs" />
+    <Compile Include="Config\Customized\IniConfigException.cs" />
+    <Compile Include="Config\Customized\ConfigInstanceNameAttribute.cs" />
     <Compile Include="Config\ConfigManager.cs" />
-    <Compile Include="Config\IConfigManager.cs" />
-    <Compile Include="Config\IConfigSerializer.cs" />
+    <Compile Include="Config\Interface\IConfigManager.cs" />
+    <Compile Include="Config\Interface\IConfigSerializer.cs" />
     <Compile Include="Config\IniConfigSerializer.cs" />
     <Compile Include="Config\JsonConfigSerializer.cs" />
     <Compile Include="Config\XmlConfigSerializer.cs" />
     <Compile Include="DI\CommonModuleRegister.cs" />
-    <Compile Include="DI\IModuleRegister.cs" />
-    <Compile Include="DI\ModuleRegisterAttribute.cs" />
+    <Compile Include="DI\Interface\IModuleRegister.cs" />
+    <Compile Include="DI\Customized\ModuleRegisterAttribute.cs" />
     <Compile Include="DI\RegisterAllModule.cs" />
-    <Compile Include="Config\ConfigDeserializeException.cs" />
-    <Compile Include="Logger\ILoggerManager.cs" />
-    <Compile Include="Logger\ILoggerFactory.cs" />
+    <Compile Include="Config\Customized\ConfigDeserializeException.cs" />
+    <Compile Include="Logger\Interface\ILoggerManager.cs" />
+    <Compile Include="Logger\Interface\ILoggerFactory.cs" />
     <Compile Include="Logger\LoggerFactory.cs" />
     <Compile Include="Logger\NlogManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
