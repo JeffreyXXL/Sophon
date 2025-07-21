@@ -35,11 +35,18 @@ namespace Common
         {
             lock (_lock)
             {
-                if (!File.Exists(_path))
+                try
                 {
-                    return default;
+                    if (!File.Exists(_path))
+                    {
+                        return default;
+                    }
+                    return _serializer.Deserialize<T>(File.ReadAllText(_path));
                 }
-                return _serializer.Deserialize<T>(File.ReadAllText(_path));
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
 
@@ -52,7 +59,15 @@ namespace Common
         {
             lock (_lock)
             {
-                File.WriteAllText(_path, _serializer.Serialize(config));
+                try
+                {
+                    File.WriteAllText(_path, _serializer.Serialize(config));
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
 
