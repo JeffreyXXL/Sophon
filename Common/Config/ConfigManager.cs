@@ -15,15 +15,14 @@ namespace Common
         private string _path;
 
         /// <summary>
-        /// 注册时传入类型和路径，文件名在Resolve时传入
+        /// 从工厂传入序列化器与完整路径
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="path"></param>
-        /// <param name="fileName"></param>
-        public ConfigManager(ConfigType type, string path, string fileName)
+        /// <param name="serializer"></param>
+        /// <param name="fullPath"></param>
+        public ConfigManager(IConfigSerializer serializer, string fullPath)
         {
-            _serializer = CreateSerializer(type);
-            _path = Path.Combine(path, $"{fileName}.{type}");
+            _serializer = serializer;
+            _path = fullPath;
         }
 
         /// <summary>
@@ -71,26 +70,7 @@ namespace Common
             }
         }
 
-        /// <summary>
-        /// 简单工厂方法创建Serializer
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        /// <exception cref="NotSupportedException"></exception>
-        private IConfigSerializer CreateSerializer(ConfigType type)
-        {
-            switch (type)
-            {
-                case ConfigType.json:
-                    return new JsonConfigSerializer();
-                case ConfigType.xml:
-                    return new XmlConfigSerializer();
-                case ConfigType.ini:
-                    return new IniConfigSerializer();
-                default:
-                    throw new NotSupportedException($"暂未支持{type}格式");
-            }
-        }
+   
     }
 
     public enum ConfigType
