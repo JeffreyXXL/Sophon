@@ -81,14 +81,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\ConfigBuilder.cs" />
+    <Compile Include="Config\ConfigManagerFactory.cs" />
     <Compile Include="Config\Customized\IniConfigException.cs" />
     <Compile Include="Config\Customized\ConfigInstanceNameAttribute.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\Interface\IConfigManager.cs" />
+    <Compile Include="Config\Interface\IConfigManagerFactory.cs" />
     <Compile Include="Config\Interface\IConfigSerializer.cs" />
-    <Compile Include="Config\IniConfigSerializer.cs" />
-    <Compile Include="Config\JsonConfigSerializer.cs" />
-    <Compile Include="Config\XmlConfigSerializer.cs" />
+    <Compile Include="Config\Serializer\IniConfigSerializer.cs" />
+    <Compile Include="Config\Serializer\JsonConfigSerializer.cs" />
+    <Compile Include="Config\Serializer\XmlConfigSerializer.cs" />
     <Compile Include="DI\CommonModuleRegister.cs" />
     <Compile Include="DI\Interface\IModuleRegister.cs" />
     <Compile Include="DI\Customized\ModuleRegisterAttribute.cs" />

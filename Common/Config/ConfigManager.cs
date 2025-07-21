@@ -20,7 +20,7 @@ namespace Common
         /// <param name="type"></param>
         /// <param name="path"></param>
         /// <param name="fileName"></param>
-        public ConfigManager(ConfigType type, string path, string fileName = "defaultconfig")
+        public ConfigManager(ConfigType type, string path, string fileName)
         {
             _serializer = CreateSerializer(type);
             _path = Path.Combine(path, $"{fileName}.{type}");
