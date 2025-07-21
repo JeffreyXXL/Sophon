@@ -21,7 +21,8 @@ namespace Common
                    .SingleInstance();
             //注册配置器工厂
             builder.RegisterType<ConfigManagerFactory>()
-                   .As<IConfigManagerFactory>();
+                   .As<IConfigManagerFactory>()
+                   .SingleInstance();
         }
     }
 }
