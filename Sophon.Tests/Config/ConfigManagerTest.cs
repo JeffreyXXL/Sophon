@@ -43,7 +43,7 @@ namespace Sophon.Tests.Config
         {
             File.WriteAllText(_tempFile, "fake-content");
             var expected = new TestConfig { Name = "Loaded" };
-            _mockSerializer.Setup(s => s.Deserialize<Test欸之Config>("fake-content")).Returns(expected);
+            _mockSerializer.Setup(s => s.Deserialize<TestConfig>("fake-content")).Returns(expected);
 
             var result = _manager.LoadConfig<TestConfig>();
             Assert.That(result.Name, Is.EqualTo("Loaded"));
