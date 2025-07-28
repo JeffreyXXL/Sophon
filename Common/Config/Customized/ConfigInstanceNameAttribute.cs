@@ -12,7 +12,7 @@ namespace Common
     [AttributeUsage(AttributeTargets.Property)]
     public class IniConfigInstanceNameAttribute : Attribute
     {
-        public IniConfigInstanceNameAttribute(string instanceName)
+        public IniConfigInstanceNameAttribute()
         {
 
         }
