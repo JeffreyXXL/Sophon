@@ -160,7 +160,7 @@ namespace Common
         /// <exception cref="IniConfigException"></exception>
         private string GetInstanceName(object obj)
         {
-            var props = obj.GetType().GetProperties(BindingFlags.Public);
+            var props = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var p = props.FirstOrDefault(x => x.GetCustomAttribute<IniConfigInstanceNameAttribute>() != null);
             if (p == null)
             {
