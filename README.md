@@ -27,6 +27,8 @@
                         2025/7/17 已完成
         4、配置管理 支持XML/JSON/INI等
                         2025/7/21 已完成
+        5、编写测试用例并进行测试
+                        2025/7/28 已完成
 
 阶段二：流程与状态机
 
@@ -56,7 +58,20 @@
 
 这个就是一个大概的计划，具体的实施可能还需要在进行中来完善。所用的时间也没法预估，但是我自己也给自己定了另一个小目标，最好是能在今年之前完成的。
 
+# 引用
+当前软件中所有用到的第三方库都来自Nuget，Clone代码后可以直接在Nuget中还原。
 
+| Nuget包 | 版本 | 主要使用项目 |
+| --- | --- | --- |
+| Autofac | 8.3.0 | Common |
+| NLog | 6.0.1 | Common |
+| NLog.config | 4.7.15 | Common |
+| ini-parser | 2.5.5 | Common |
+| Newtonsoft.Json | 13.0.3 | Common |
+| ini-parser | 2.5.5 | Common |
+| NUnit | 4.3.2 | Tests |
+| NUnit3TestAdapter | 5.0.0 | Tests |
+| Moq | 4.20.72 | Tests |
 
 
 # 联系方式
