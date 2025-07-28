@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,11 @@ namespace Common
         /// <returns></returns>
         public ILoggerManager CreateLogger(string loggername)
         {
+            string path = $"D:/SophonDATA/logs/{loggername}/";
+            string path_debug = $"D:/SophonDATA/logs_debug/{loggername}/";
+            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(path_debug);
+
             return _loggercache.GetOrAdd(loggername, _loggerCreator);
         }
     }
