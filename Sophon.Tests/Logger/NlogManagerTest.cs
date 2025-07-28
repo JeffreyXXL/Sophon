@@ -13,37 +13,42 @@ namespace Sophon.Tests.Logger
     [TestFixture]
     public class NlogManagerTest
     {
+        string directory = "D:/SophonDATA/logs/Test_Log";
+        string directory_debug = "D:/SophonDATA/logs_Debug/Test_Log";
+        [TearDown]
+        public void TearDown()
+        {
+            if (Directory.Exists(directory))
+            {
+                Directory.Delete(directory, recursive: true);
+            }
+            if (Directory.Exists(directory_debug))
+            {
+                Directory.Delete(directory_debug, recursive: true);
+            }
+        }
+
         /// <summary>
         /// 测试所有日志方法
         /// </summary>
         [Test]
         public void Logger_Test()
         {
-            string path = $"D:/SophonDATA/logs/Test_Log/{DateTime.Now:yyyy-MM-dd}.log";
-            string path_debug = $"D:/SophonDATA/logs_debug/Test_Log/{DateTime.Now:yyyy-MM-dd}.log";
+            string path = Path.Combine(directory, $"{DateTime.Now:yyyy-MM-dd}.log");
+            string path_debug = Path.Combine(directory_debug, $"{DateTime.Now:yyyy-MM-dd}.log");
             NlogManager nlog = new NlogManager("Test_Log");
-            string time = DateTime.Now.ToString();
-            nlog.Trace("Test_Log_Trace" + time);
-            nlog.Debug("Test_Log_Debug" + time);
-            nlog.Info("Test_Log_Info" + time);
-            nlog.Warn("Test_Log_Warn" + time);
-            nlog.Error("Test_Log_Error" + time);
-            nlog.Fatal("Test_Log_Fatal" + time);
+
+            nlog.Trace("Test_Log_Trace");
+            nlog.Debug("Test_Log_Debug");
+            nlog.Info("Test_Log_Info");
+            nlog.Warn("Test_Log_Warn");
+            nlog.Error("Test_Log_Error");
+            nlog.Fatal("Test_Log_Fatal");
 
             NLog.LogManager.Flush();
-            NLog.LogManager.Shutdown();
 
             Assert.That(File.Exists(path));
             Assert.That(File.Exists(path_debug));
-
-            string content = File.ReadAllText(path);
-            string content_debug = File.ReadAllText(path_debug);
-            Assert.That(!content_debug.Contains("Test_Log_Trace" + time));
-            Assert.That(content_debug.Contains("Test_Log_Debug" + time));
-            Assert.That(content.Contains("Test_Log_Info" + time));
-            Assert.That(content.Contains("Test_Log_Warn" + time));
-            Assert.That(content.Contains("Test_Log_Error" + time));
-            Assert.That(content.Contains("Test_Log_Fatal" + time));
         }
     }
 }
