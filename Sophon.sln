@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sophon.Infrastructure", "So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{57A0909F-1E0F-4AEC-A142-47D70DEE3061}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sophon.Tests", "Sophon.Tests\Sophon.Tests.csproj", "{F669FB67-49C4-4870-AA0D-8F68C0C15223}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{57A0909F-1E0F-4AEC-A142-47D70DEE3061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57A0909F-1E0F-4AEC-A142-47D70DEE3061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57A0909F-1E0F-4AEC-A142-47D70DEE3061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F669FB67-49C4-4870-AA0D-8F68C0C15223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F669FB67-49C4-4870-AA0D-8F68C0C15223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F669FB67-49C4-4870-AA0D-8F68C0C15223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F669FB67-49C4-4870-AA0D-8F68C0C15223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
