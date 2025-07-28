@@ -15,7 +15,7 @@ namespace Sophon.Tests.Config
     }
 
     [TestFixture]
-    public class ConfigBuilderTests
+    public class ConfigBuilderTest
     {
         /// <summary>
         /// 测试是否可以正常build

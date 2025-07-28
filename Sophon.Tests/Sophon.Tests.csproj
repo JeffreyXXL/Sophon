@@ -118,7 +118,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\ConfigBuilderTests.cs" />
+    <Compile Include="Config\ConfigBuilderTest.cs" />
     <Compile Include="Config\ConfigManagerFactoryTest.cs" />
     <Compile Include="Config\ConfigManagerTest.cs" />
     <Compile Include="Config\Serializer\IniConfigSerializerTest.cs" />
@@ -136,6 +136,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
