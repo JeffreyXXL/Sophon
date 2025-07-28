@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,9 +15,24 @@ namespace Sophon.Tests.Logger
     [TestFixture]
     public class LoggerFactoryTest
     {
-        private LoggerFactory _factory;
-        private readonly Func<string, ILoggerManager> _loggerManager;
-
+        [TearDown]
+        public void TearDown()
+        {
+            var directoriesToDelete = new[]
+            {
+                "D:/SophonDATA/logs/test",
+                "D:/SophonDATA/logs_Debug/test",
+                "D:/SophonDATA/logs/test2",
+                "D:/SophonDATA/logs_Debug/test2"
+            };
+            foreach (var dir in directoriesToDelete)
+            {
+                if (Directory.Exists(dir))
+                {
+                    Directory.Delete(dir, recursive: true);
+                }
+            }
+        }
         /// <summary>
         /// 测试是否能正确创建日志,是否同名只创建一个日志，是否能创建不同名称的日志
         /// </summary>

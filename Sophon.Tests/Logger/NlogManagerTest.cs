@@ -18,13 +18,17 @@ namespace Sophon.Tests.Logger
         [TearDown]
         public void TearDown()
         {
-            if (Directory.Exists(directory))
+            var directoriesToDelete = new[]
             {
-                Directory.Delete(directory, recursive: true);
-            }
-            if (Directory.Exists(directory_debug))
+                directory,
+                directory_debug
+            };
+            foreach (var dir in directoriesToDelete)
             {
-                Directory.Delete(directory_debug, recursive: true);
+                if (Directory.Exists(dir))
+                {
+                    Directory.Delete(dir, recursive: true);
+                }
             }
         }
 
