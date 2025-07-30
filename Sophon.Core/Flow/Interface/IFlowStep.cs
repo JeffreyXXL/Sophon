@@ -12,10 +12,9 @@ namespace Sophon.Core
     /// </summary>
     public interface IFlowStep
     {
-        int StepName { get; }
+        string StepName { get; }
+        int GetNextStep(IFlowContext context);
 
-        Task<StepResult> AsyncExcuteStep(IFlowContext context);
+        Task<StepResult> AsyncExcuteStep(IFlowContext context, CancellationToken cs = default);
     }
-
-
 }
