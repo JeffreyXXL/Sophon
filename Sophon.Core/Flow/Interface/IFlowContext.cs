@@ -13,8 +13,8 @@ namespace Sophon.Core
         int NextStepIndex { get; set; }
         int TotalSteps { get; set; }
 
-        Dictionary<string, object> Data { get; set; }
-        T GetContext<T>(string key);
-        void SetContext<T>(string key, T value);
+        Dictionary<string, object> Data { get; }
+        T GetData<T>(string key);
+        void SetData<T>(string key, T value);
     }
 }

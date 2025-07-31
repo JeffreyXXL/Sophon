@@ -31,7 +31,7 @@ namespace Sophon.Application
         #region 方法
         public int GetNextStep(IFlowContext context)
         {
-            bool condition = context.GetContext<bool>("Condition");
+            bool condition = context.GetData<bool>("Condition");
             return condition ? 3 : 5;
         }
         //todo

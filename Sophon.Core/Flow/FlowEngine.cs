@@ -13,11 +13,11 @@ namespace Sophon.Core
     public class FlowEngine : IFlowEngine, IFlowController
     {
         #region 构造函数
-        public FlowEngine(string flowName, IConfigManagerFactory configfactory, ILoggerFactory loggerFactory)
+        public FlowEngine(string flowName, IConfigManagerFactory configFactory, ILoggerFactory loggerFactory)
         {
             FlowName = flowName;
             //从文件中加载流程集合
-            _configManager = configfactory.CreateConfigManager(ConfigType.json, FlowName, "FlowData");
+            _configManager = configFactory.CreateConfigManager(ConfigType.json, FlowName, "FlowData");
             _logger = loggerFactory.CreateLogger(FlowName);
             _steps = _configManager.LoadConfig<List<IFlowStep>>();
         }

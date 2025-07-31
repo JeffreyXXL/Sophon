@@ -68,12 +68,14 @@
   <ItemGroup>
     <Compile Include="DI\CoreModuleRegister.cs" />
     <Compile Include="Flow\Exception\StepExcuteException.cs" />
-    <Compile Include="Flow\Implement\FlowContext.cs" />
-    <Compile Include="Flow\Implement\FlowEngine.cs" />
+    <Compile Include="Flow\FlowContext.cs" />
+    <Compile Include="Flow\FlowEngine.cs" />
     <Compile Include="Flow\Application_Steps\FlowStep_Delay.cs" />
+    <Compile Include="Flow\FlowEngineFactory.cs" />
     <Compile Include="Flow\Interface\IFlowContext.cs" />
     <Compile Include="Flow\Interface\IFlowController.cs" />
     <Compile Include="Flow\Interface\IFlowEngine.cs" />
+    <Compile Include="Flow\Interface\IFlowEngineFactory.cs" />
     <Compile Include="Flow\Interface\IFlowStep.cs" />
     <Compile Include="Flow\StepResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

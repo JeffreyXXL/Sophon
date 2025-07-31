@@ -13,8 +13,13 @@ namespace Sophon.Core
     {
         public void Register(ContainerBuilder builder)
         {
+            builder.RegisterType<FlowEngineFactory>()
+                   .As<IFlowEngineFactory>()
+                   .SingleInstance();
 
-
+            builder.RegisterType<FlowContext>()
+                    .As<IFlowContext>()
+                    .InstancePerDependency();
         }
     }
 }
