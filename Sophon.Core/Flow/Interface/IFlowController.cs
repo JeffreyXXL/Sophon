@@ -10,6 +10,9 @@ namespace Sophon.Core
     {
         bool IsPaused { get; }
         bool IsStopped { get; }
+        bool IsRunning { get; }
+        int CurrentIndex { get; }
+        IFlowStep CurrentStep { get; }
 
         void Pause();
         void Resume();

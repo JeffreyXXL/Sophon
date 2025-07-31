@@ -13,7 +13,7 @@ namespace Sophon.Core
     {
         public StepStatus Status { get; set; }
         public string Message { get; set; }
-
+        
 
         public static StepResult Success() =>
             new StepResult() { Status = StepStatus.Success };

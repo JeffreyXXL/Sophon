@@ -36,7 +36,7 @@ namespace Sophon.Application
         }
         //todo
 
-        public async Task<StepResult> AsyncExcuteStep(IFlowContext context, CancellationToken cs = default)
+        public async Task<StepResult> AsyncExcuteStep(IFlowContext context, CancellationToken token = default)
         {
             await Task.Delay(_delayTime_ms);
             context.NextStepIndex = NextStep;

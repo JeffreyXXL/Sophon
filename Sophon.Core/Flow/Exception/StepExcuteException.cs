@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Sophon.Core
 {
-    public interface IFlowEngine
+    public class StepExcuteException : Exception
     {
-        string FlowName { get; }
-
-        Task AsyncExcuteFlow(IFlowContext context);
+        public StepExcuteException(string message) : base(message) { }
     }
 }

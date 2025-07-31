@@ -15,6 +15,6 @@ namespace Sophon.Core
         string StepName { get; }
         int GetNextStep(IFlowContext context);
 
-        Task<StepResult> AsyncExcuteStep(IFlowContext context, CancellationToken cs = default);
+        Task<StepResult> AsyncExcuteStep(IFlowContext context, CancellationToken token = default);
     }
 }
