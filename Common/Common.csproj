@@ -82,8 +82,8 @@
   <ItemGroup>
     <Compile Include="Config\ConfigBuilder.cs" />
     <Compile Include="Config\ConfigManagerFactory.cs" />
-    <Compile Include="Config\Customized\IniConfigException.cs" />
-    <Compile Include="Config\Customized\ConfigInstanceNameAttribute.cs" />
+    <Compile Include="Config\Exception\IniConfigException.cs" />
+    <Compile Include="Config\Attribute\ConfigInstanceNameAttribute.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\Interface\IConfigManager.cs" />
     <Compile Include="Config\Interface\IConfigManagerFactory.cs" />
@@ -93,9 +93,9 @@
     <Compile Include="Config\Serializer\XmlConfigSerializer.cs" />
     <Compile Include="DI\CommonModuleRegister.cs" />
     <Compile Include="DI\Interface\IModuleRegister.cs" />
-    <Compile Include="DI\Customized\ModuleRegisterAttribute.cs" />
+    <Compile Include="DI\Attribute\ModuleRegisterAttribute.cs" />
     <Compile Include="DI\RegisterAllModule.cs" />
-    <Compile Include="Config\Customized\ConfigDeserializeException.cs" />
+    <Compile Include="Config\Exception\ConfigDeserializeException.cs" />
     <Compile Include="Logger\Interface\ILoggerManager.cs" />
     <Compile Include="Logger\Interface\ILoggerFactory.cs" />
     <Compile Include="Logger\LoggerFactory.cs" />
