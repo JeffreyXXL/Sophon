@@ -1,0 +1,39 @@
+﻿using Sophon.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Sophon.Application
+{
+    /// <summary>
+    /// 模块间通信事件设置
+    /// </summary>
+    public class FlowStep_SetEvent : FlowStepBase
+    {
+        #region 构造函数
+        public FlowStep_SetEvent(string stepName) : base(stepName)
+        {
+        }
+
+        #endregion
+
+        #region 属性
+
+        #endregion
+
+        #region 字段
+
+        #endregion
+
+        #region 方法
+        protected override Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+    }
+}

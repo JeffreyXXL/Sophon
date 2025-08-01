@@ -1,5 +1,6 @@
 ﻿using Common;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,18 +10,18 @@ namespace Sophon.Core
 {
     public class FlowEngineFactory : IFlowEngineFactory
     {
-        private readonly IConfigManagerFactory _configFactory;
-        private readonly ILoggerFactory _loggerfactory;
+        private readonly ConcurrentDictionary<string, IFlowEngine> _flowEnginecache = new ConcurrentDictionary<string, IFlowEngine>();
 
-        public FlowEngineFactory(IConfigManagerFactory configFactory, ILoggerFactory loggerFactory)
+        private readonly IConfigManagerFactory _configFactory;
+
+        public FlowEngineFactory(IConfigManagerFactory configFactory)
         {
             _configFactory = configFactory;
-            _loggerfactory = loggerFactory;
         }
 
         public IFlowEngine CreateFlowEngine(string flowName)
         {
-            return new FlowEngine(flowName, _configFactory, _loggerfactory);
+            return _flowEnginecache.GetOrAdd(flowName, new FlowEngine(flowName, _configFactory));
         }
     }
 }

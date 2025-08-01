@@ -17,9 +17,9 @@ namespace Sophon.Core
                    .As<IFlowEngineFactory>()
                    .SingleInstance();
 
-            builder.RegisterType<FlowContext>()
-                    .As<IFlowContext>()
-                    .InstancePerDependency();
+            builder.RegisterType<FlowContextFactory>()
+                    .As<IFlowContextFactory>()
+                    .SingleInstance();
         }
     }
 }

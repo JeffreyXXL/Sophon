@@ -1,4 +1,5 @@
 ﻿using Common;
+using Sophon.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,11 @@ namespace Sophon.Core
     public class FlowEngine : IFlowEngine, IFlowController
     {
         #region 构造函数
-        public FlowEngine(string flowName, IConfigManagerFactory configFactory, ILoggerFactory loggerFactory)
+        public FlowEngine(string flowName, IConfigManagerFactory configFactory)
         {
             FlowName = flowName;
             //从文件中加载流程集合
             _configManager = configFactory.CreateConfigManager(ConfigType.json, FlowName, "FlowData");
-            _logger = loggerFactory.CreateLogger(FlowName);
             _steps = _configManager.LoadConfig<List<IFlowStep>>();
         }
         #endregion
@@ -29,8 +29,6 @@ namespace Sophon.Core
         public bool IsStopped => _isStopped;
         public bool IsRunning => _isRunning;
         public int CurrentIndex => _currentIndex;
-        public IFlowStep CurrentStep => _currentStep == null ? default : _currentStep;
-
         #endregion
 
         #region 字段
@@ -38,16 +36,19 @@ namespace Sophon.Core
         private bool _isStopped;
         private bool _isRunning;
         private int _currentIndex;
-        private IFlowStep _currentStep;
-        private CancellationTokenSource _cts;
-        private readonly List<IFlowStep> _steps;
+        private ILoggerManager _logger;
         private readonly IConfigManager _configManager;
-        private readonly ILoggerManager _logger;
+        private readonly List<IFlowStep> _steps;
+        private CancellationTokenSource _cts;
+        private readonly object _lock = new object();
+        private IFlowStep _currentStep;
         #endregion
-        
+
         #region 方法
-        public virtual async Task AsyncExcuteFlow(IFlowContext context)
+        public virtual async Task AsyncExecuteFlow(IFlowContext context)
         {
+            _logger = context.Logger;
+            context.TotalSteps = _steps.Count;
             try
             {
                 if (_cts != null)
@@ -76,24 +77,24 @@ namespace Sophon.Core
                     if (_currentStep != null)
                     {
                         _logger.Info($"开始执行步骤【{_currentStep.StepName}】...");
-                        var result = await _currentStep.AsyncExcuteStep(context, _cts.Token);
+                        var result = await _currentStep.AsyncExecuteStep(context, _cts.Token);
                         if (result.Status == StepStatus.Failure)
                         {
                             string msg = $"步骤【{_currentStep.StepName}】执行失败：{result.Message}";
                             _logger.Error(msg);
-                            throw new StepExcuteException(msg);
+                            throw new StepExecuteException(msg);
                         }
                     }
-                    _currentIndex++;
+                    _currentIndex = context.NextStepIndex;
                 }
             }
             catch (OperationCanceledException)
             {
                 _logger.Info($"流程【{FlowName}】被取消。");
             }
-            catch (StepExcuteException ex)
+            catch (StepExecuteException e)
             {
-                _logger.Error($"流程步骤失败：{ex.Message}");
+                _logger.Error($"流程步骤失败：{e.Message}");
                 throw;
             }
             catch (Exception ex)
@@ -121,9 +122,6 @@ namespace Sophon.Core
             }
             return false;
         }
-
-
-        private readonly object _lock = new object();
 
         public void Pause()
         {

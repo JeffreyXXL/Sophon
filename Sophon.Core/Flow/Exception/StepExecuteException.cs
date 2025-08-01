@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Sophon.Core
 {
-    public class StepExcuteException : Exception
+    public class StepExecuteException : Exception
     {
-        public StepExcuteException(string message) : base(message) { }
+        public StepExecuteException(string message) : base(message) { }
     }
 }

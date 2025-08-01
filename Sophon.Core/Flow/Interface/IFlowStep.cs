@@ -12,9 +12,11 @@ namespace Sophon.Core
     /// </summary>
     public interface IFlowStep
     {
+        /// <summary>
+        /// 流程单步名称
+        /// </summary>
         string StepName { get; }
-        int GetNextStep(IFlowContext context);
 
-        Task<StepResult> AsyncExcuteStep(IFlowContext context, CancellationToken token = default);
+        Task<StepResult> AsyncExecuteStep(IFlowContext context, CancellationToken token = default);
     }
 }

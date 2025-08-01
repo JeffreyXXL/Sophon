@@ -11,14 +11,20 @@ namespace Sophon.Core
     public class FlowContext : IFlowContext
     {
         #region 构造函数
-
+        public FlowContext(string flowName, ILoggerFactory loggerFactory)
+        {
+            FlowName = flowName;
+            Logger = loggerFactory.CreateLogger(flowName);
+            _data = new Dictionary<string, object>();
+        }
         #endregion
 
         #region 属性
+        public string FlowName { get; }
         public int NextStepIndex { get; set; }
         public int TotalSteps { get; set; }
         public Dictionary<string, object> Data => _data;
-
+        public ILoggerManager Logger { get; }
         #endregion
 
         #region 字段

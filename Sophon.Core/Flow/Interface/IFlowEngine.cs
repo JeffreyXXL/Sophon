@@ -9,8 +9,11 @@ namespace Sophon.Core
 {
     public interface IFlowEngine
     {
+        /// <summary>
+        /// 流程名称 来自WorkStation
+        /// </summary>
         string FlowName { get; }
 
-        Task AsyncExcuteFlow(IFlowContext context);
+        Task AsyncExecuteFlow(IFlowContext context);
     }
 }
