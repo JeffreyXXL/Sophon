@@ -34,6 +34,11 @@ namespace Sophon.Application
         {
             throw new NotImplementedException();
         }
+
+        protected override void SetNextStepIndex(IFlowContext context)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

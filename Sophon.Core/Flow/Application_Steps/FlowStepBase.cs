@@ -55,6 +55,12 @@ namespace Sophon.Application
         /// <param name="context"></param>
         /// <param name="token"></param>
         protected abstract Task ExecuteCoreAsync(IFlowContext context, CancellationToken token);
+
+        /// <summary>
+        /// 设置下一步索引
+        /// </summary>
+        /// <returns></returns>
+        protected abstract void SetNextStepIndex(IFlowContext context);
         #endregion
     }
 }

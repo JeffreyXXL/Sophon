@@ -36,9 +36,20 @@ namespace Sophon.Application
         {
             if (_nextStepIndex < context.TotalSteps)
             {
-                context.NextStepIndex = _nextStepIndex;
+                SetNextStepIndex(context);
+            }
+            else
+            {
+                string msg = $"步骤{StepName}设置步数{_nextStepIndex}错误,超出总步数{context.TotalSteps}";
+                context.Logger.Error(msg);
+                throw new StepExecuteException(msg);
             }
             await Task.CompletedTask;
+        }
+
+        protected override void SetNextStepIndex(IFlowContext context)
+        {
+            context.NextStepIndex = _nextStepIndex;
         }
         #endregion
     }

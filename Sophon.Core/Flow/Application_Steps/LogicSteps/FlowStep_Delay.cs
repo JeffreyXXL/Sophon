@@ -32,6 +32,11 @@ namespace Sophon.Application
         protected override async Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
         {
             await Task.Delay(_delayTime_ms, token);
+            SetNextStepIndex(context);
+        }
+
+        protected override void SetNextStepIndex(IFlowContext context)
+        {
             context.NextStepIndex++;
         }
         #endregion
