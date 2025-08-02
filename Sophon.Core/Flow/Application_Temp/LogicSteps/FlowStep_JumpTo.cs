@@ -16,9 +16,9 @@ namespace Sophon.Application
     public class FlowStep_JumpTo : FlowStepBase
     {
         #region 构造函数
-        public FlowStep_JumpTo(string stepName, int nextStepIndex) : base(stepName)
+        public FlowStep_JumpTo(string stepName, int jumpToStepIndex) : base(stepName)
         {
-            _nextStepIndex = nextStepIndex;
+            _jumpToStepIndex = jumpToStepIndex;
         }
 
         #endregion
@@ -28,28 +28,23 @@ namespace Sophon.Application
         #endregion
 
         #region 字段
-        private readonly int _nextStepIndex;
+        private readonly int _jumpToStepIndex;
         #endregion
 
         #region 方法
         protected override async Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
         {
-            if (_nextStepIndex < context.TotalSteps)
+            if (_jumpToStepIndex >= 0 && _jumpToStepIndex < context.TotalSteps)
             {
-                SetNextStepIndex(context);
+                SetNextStepIndex(context, () => { context.NextStepIndex = _jumpToStepIndex; });
             }
             else
             {
-                string msg = $"步骤{StepName}设置步数{_nextStepIndex}错误,超出总步数{context.TotalSteps}";
+                string msg = $"步骤{StepName}设置步数{_jumpToStepIndex}错误,超出总步数{context.TotalSteps}";
                 context.Logger.Error(msg);
                 throw new StepExecuteException(msg);
             }
             await Task.CompletedTask;
-        }
-
-        protected override void SetNextStepIndex(IFlowContext context)
-        {
-            context.NextStepIndex = _nextStepIndex;
         }
         #endregion
     }

@@ -22,7 +22,7 @@ namespace Sophon.Application
         #endregion
 
         #region 字段
-
+        private int _loopCount = 0;
         #endregion
 
         #region 方法
@@ -57,10 +57,30 @@ namespace Sophon.Application
         protected abstract Task ExecuteCoreAsync(IFlowContext context, CancellationToken token);
 
         /// <summary>
-        /// 设置下一步索引
+        /// 设置下一步索引,用在ExecuteCoreAsync中
         /// </summary>
-        /// <returns></returns>
-        protected abstract void SetNextStepIndex(IFlowContext context);
+        /// <param name="context"></param>
+        /// <param name="defaultNextIndex">传入设置下一步的方法</param>
+        protected void SetNextStepIndex(IFlowContext context, Action defaultNextIndex)
+        {
+            if (this is ILoopable loopStep)
+            {
+                if (_loopCount < loopStep.TotalLoops)
+                {
+                    context.NextStepIndex = loopStep.LoopStartStepIndex;
+                    _loopCount++;
+                }
+                else
+                {
+                    _loopCount = 0;
+                    defaultNextIndex();
+                }
+            }
+            else
+            {
+                defaultNextIndex();
+            }
+        }
         #endregion
     }
 }

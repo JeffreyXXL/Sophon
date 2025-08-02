@@ -67,17 +67,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DI\CoreModuleRegister.cs" />
-    <Compile Include="Flow\Application_Steps\FlowStepBase.cs" />
-    <Compile Include="Flow\Application_Steps\LogicSteps\FlowStep_GetEvent.cs" />
-    <Compile Include="Flow\Application_Steps\LogicSteps\FlowStep_SetEvent.cs" />
-    <Compile Include="Flow\Application_Steps\LogicSteps\FlowStep_JumpTo.cs" />
-    <Compile Include="Flow\Application_Steps\LogicSteps\FlowStep_Loop.cs" />
-    <Compile Include="Flow\Application_Steps\LogicSteps\FlowStep_Parallel.cs" />
+    <Compile Include="Flow\Application_Temp\FlowStepBase.cs" />
+    <Compile Include="Flow\Application_Temp\Interface\ILoopable.cs" />
+    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_GetEvent.cs" />
+    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_SetEvent.cs" />
+    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_JumpTo.cs" />
+    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_Parallel.cs" />
     <Compile Include="Flow\Exception\StepExecuteException.cs" />
     <Compile Include="Flow\FlowContext.cs" />
     <Compile Include="Flow\FlowContextFactory.cs" />
     <Compile Include="Flow\FlowEngine.cs" />
-    <Compile Include="Flow\Application_Steps\LogicSteps\FlowStep_Delay.cs" />
+    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_Delay.cs" />
     <Compile Include="Flow\FlowEngineFactory.cs" />
     <Compile Include="Flow\Interface\IFlowContext.cs" />
     <Compile Include="Flow\Interface\IFlowContextFactory.cs" />

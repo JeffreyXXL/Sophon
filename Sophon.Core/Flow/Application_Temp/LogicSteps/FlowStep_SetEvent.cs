@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 namespace Sophon.Application
 {
     /// <summary>
-    /// 并行运行
+    /// 模块间通信事件设置
     /// </summary>
-    public class FlowStep_Parallel : FlowStepBase
+    public class FlowStep_SetEvent : FlowStepBase
     {
         #region 构造函数
-        public FlowStep_Parallel(string stepName) : base(stepName)
+        public FlowStep_SetEvent(string stepName) : base(stepName)
         {
         }
 
@@ -34,10 +35,6 @@ namespace Sophon.Application
             throw new NotImplementedException();
         }
 
-        protected override void SetNextStepIndex(IFlowContext context)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }

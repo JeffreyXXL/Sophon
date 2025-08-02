@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,15 +9,17 @@ using System.Threading.Tasks;
 namespace Sophon.Application
 {
     /// <summary>
-    /// 模块间通信事件获取
+    /// 并行运行
     /// </summary>
-    public class FlowStep_GetEvent : FlowStepBase
+    public class FlowStep_Parallel : FlowStepBase
     {
         #region 构造函数
-        public FlowStep_GetEvent(string stepName) : base(stepName)
+        public FlowStep_Parallel(string stepName, List<List<IFlowStep>> branches, bool waitAll = true)
+            : base(stepName)
         {
+            _parallelBranches = branches ?? throw new ArgumentNullException(nameof(branches));
+            _waitAll = waitAll;
         }
-
         #endregion
 
         #region 属性
@@ -26,16 +27,12 @@ namespace Sophon.Application
         #endregion
 
         #region 字段
-
+        private readonly List<List<IFlowStep>> _parallelBranches;
+        private readonly bool _waitAll;
         #endregion
 
         #region 方法
         protected override Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void SetNextStepIndex(IFlowContext context)
         {
             throw new NotImplementedException();
         }
