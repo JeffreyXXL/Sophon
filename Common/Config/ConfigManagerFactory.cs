@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,12 +12,15 @@ namespace Common
 {
     public class ConfigManagerFactory : IConfigManagerFactory
     {
-        private string configPath = ConfigurationManager.AppSettings["ConfigPath"];
+        private readonly ConcurrentDictionary<string, IConfigManager> configManagercache = new ConcurrentDictionary<string, IConfigManager>();
+
+        private readonly string _configPath = ConfigurationManager.AppSettings["ConfigPath"];
+        private IConfigSerializer _configSerializer;
 
         public IConfigManager CreateConfigManager(ConfigType type, string filename, string secondPath = "")
         {
-            var serializer = CreateSerializer(type); // 集中管理序列化器
-            return new ConfigManager(serializer, Path.Combine(configPath, secondPath, filename + "." + type));
+            _configSerializer = CreateSerializer(type);
+            return configManagercache.GetOrAdd(filename, new ConfigManager(_configSerializer, Path.Combine(_configPath, secondPath, filename + "." + type)));
         }
 
         public IConfigSerializer CreateSerializer(ConfigType type)
