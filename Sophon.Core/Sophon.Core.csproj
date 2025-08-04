@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DI\CoreModuleRegister.cs" />
+    <Compile Include="EmptyClass.cs" />
     <Compile Include="Flow\Application_Temp\FlowStepBase.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_GetEvent.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_Loop.cs" />
@@ -87,6 +88,10 @@
     <Compile Include="Flow\Interface\IFlowStep.cs" />
     <Compile Include="Flow\StepResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkStation\Interface\IWorkStation.cs" />
+    <Compile Include="WorkStation\Interface\IWorkStationFactory.cs" />
+    <Compile Include="WorkStation\WorkStation.cs" />
+    <Compile Include="WorkStation\WorkStationFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
