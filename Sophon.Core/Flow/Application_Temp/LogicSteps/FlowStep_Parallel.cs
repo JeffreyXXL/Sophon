@@ -32,9 +32,35 @@ namespace Sophon.Application
         #endregion
 
         #region 方法
-        protected override Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
+        protected override async Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
         {
-            throw new NotImplementedException();
+            StepResult stepResult = null;
+            var branchTasks = new List<Task<StepResult>>();
+            for (int i = 0; i < _parallelBranches.Count; i++)
+            {
+                branchTasks.Add(ExecuteBranchAsync(context, token, _parallelBranches[i], i));
+            }
+            if (_waitAll)
+            {
+                var branchResults = await Task.WhenAll(branchTasks);
+                stepResult = branchResults.All(x => x.Status == StepStatus.Success)
+                    ? StepResult.Success() : StepResult.Failure("部分分支执行失败。");
+            }
+            else
+            {
+                var completed = await Task.WhenAny(branchTasks);
+                stepResult = await completed;
+            }
+            if (stepResult.Status != StepStatus.Success)
+            {
+                throw new StepExecuteException($"并行步骤 {StepName} 失败");
+            }
+            SetNextStepIndex(context);
+        }
+
+        protected override void SetNextStepIndex(IFlowContext context)
+        {
+            context.NextStepIndex++;
         }
         #endregion
     }

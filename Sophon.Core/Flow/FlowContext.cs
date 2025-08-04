@@ -14,7 +14,8 @@ namespace Sophon.Core
         public FlowContext(string flowName, ILoggerFactory loggerFactory)
         {
             FlowName = flowName;
-            Logger = loggerFactory.CreateLogger(flowName);
+            _loggerFactory = loggerFactory;
+            Logger = _loggerFactory.CreateLogger(flowName);
             _data = new Dictionary<string, object>();
         }
         #endregion
@@ -29,6 +30,7 @@ namespace Sophon.Core
 
         #region 字段
         private readonly Dictionary<string, object> _data;
+        private readonly ILoggerFactory _loggerFactory;
         #endregion
 
         #region 方法
@@ -40,6 +42,13 @@ namespace Sophon.Core
         public void SetData<T>(string key, T value)
         {
             _data[key] = value;
+        }
+        public IFlowContext Clone()
+        {
+            var cloned = new FlowContext(this.FlowName, _loggerFactory);
+            var dataField = typeof(FlowContext).GetField("_data", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            dataField?.SetValue(cloned, this._data);
+            return cloned;
         }
         #endregion
     }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace Sophon.Core
 {
     /// <summary>
-    /// 流程单步接口
+    /// 步骤接口
     /// </summary>
     public interface IFlowStep
     {
         /// <summary>
-        /// 流程单步名称
+        /// 步骤名称
         /// </summary>
         string StepName { get; }
 

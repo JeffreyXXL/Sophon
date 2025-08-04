@@ -68,8 +68,8 @@
   <ItemGroup>
     <Compile Include="DI\CoreModuleRegister.cs" />
     <Compile Include="Flow\Application_Temp\FlowStepBase.cs" />
-    <Compile Include="Flow\Application_Temp\Interface\ILoopable.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_GetEvent.cs" />
+    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_Loop.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_SetEvent.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_JumpTo.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_Parallel.cs" />

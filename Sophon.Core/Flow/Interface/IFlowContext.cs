@@ -33,5 +33,6 @@ namespace Sophon.Core
 
         T GetData<T>(string key);
         void SetData<T>(string key, T value);
+        IFlowContext Clone();
     }
 }

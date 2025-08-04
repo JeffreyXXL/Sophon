@@ -36,7 +36,7 @@ namespace Sophon.Application
         {
             if (_jumpToStepIndex >= 0 && _jumpToStepIndex < context.TotalSteps)
             {
-                SetNextStepIndex(context, () => { context.NextStepIndex = _jumpToStepIndex; });
+                SetNextStepIndex(context);
             }
             else
             {
@@ -45,6 +45,11 @@ namespace Sophon.Application
                 throw new StepExecuteException(msg);
             }
             await Task.CompletedTask;
+        }
+
+        protected override void SetNextStepIndex(IFlowContext context)
+        {
+            context.NextStepIndex = _jumpToStepIndex;
         }
         #endregion
     }

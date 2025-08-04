@@ -97,9 +97,9 @@ namespace Sophon.Core
                 _logger.Error($"流程步骤失败：{e.Message}");
                 throw;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                _logger.Error($"流程执行异常：{ex}");
+                _logger.Error($"流程执行异常：{e}");
                 throw;
             }
             finally

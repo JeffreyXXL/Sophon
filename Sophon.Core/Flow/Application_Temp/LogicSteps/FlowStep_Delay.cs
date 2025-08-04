@@ -11,20 +11,22 @@ namespace Sophon.Application
     /// <summary>
     /// 延时_delayTime_ms
     /// </summary>
-    public class FlowStep_Delay : FlowStepBase, ILoopable
+    public class FlowStep_Delay : FlowStepBase
     {
         #region 构造函数
-        public FlowStep_Delay(string stepName, int delayTime_ms, int totalLoops = 0, int loopStartIndex = 0) : base(stepName)
+        /// <summary>
+        /// 延时步骤构造函数
+        /// </summary>
+        /// <param name="stepName">步骤名称</param>
+        /// <param name="delayTime_ms">延时时间ms</param>
+        public FlowStep_Delay(string stepName, int delayTime_ms) : base(stepName)
         {
             _delayTime_ms = delayTime_ms;
-            TotalLoops = totalLoops;
-            LoopStartStepIndex = loopStartIndex;
         }
         #endregion
 
         #region 属性
-        public int TotalLoops { get; }
-        public int LoopStartStepIndex { get; }
+
         #endregion
 
         #region 字段
@@ -35,7 +37,12 @@ namespace Sophon.Application
         protected override async Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
         {
             await Task.Delay(_delayTime_ms, token);
-            SetNextStepIndex(context, () => context.NextStepIndex++);
+            SetNextStepIndex(context);
+        }
+
+        protected override void SetNextStepIndex(IFlowContext context)
+        {
+            context.NextStepIndex++;
         }
         #endregion
     }
