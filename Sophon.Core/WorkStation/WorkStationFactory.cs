@@ -14,17 +14,16 @@ namespace Sophon.Core
         {
             _flowEngineFactory = flowEngineFactory;
             _flowcontextfactory = flowContextFactory;
-            _stateMachine = stateMachine;
+            _stateMachine = stateMachine; 
+            WorkStationcache = new ConcurrentDictionary<string, IWorkStation>();
         }
         #endregion
 
         #region 属性
-
+        public ConcurrentDictionary<string, IWorkStation> WorkStationcache { get; }
         #endregion
 
         #region 字段
-        private readonly ConcurrentDictionary<string, IWorkStation> _workStationcache = new ConcurrentDictionary<string, IWorkStation>();
-
         private readonly IFlowEngineFactory _flowEngineFactory;
         private readonly IFlowContextFactory _flowcontextfactory;
         private readonly IStateMachine _stateMachine;
@@ -33,7 +32,7 @@ namespace Sophon.Core
         #region 方法
         public IWorkStation CreateWorkStation(string workStationName)
         {
-            return _workStationcache.GetOrAdd(workStationName, new WorkStation(workStationName, _flowEngineFactory, _flowcontextfactory, _stateMachine));
+            return WorkStationcache.GetOrAdd(workStationName, new WorkStation(workStationName, _flowEngineFactory, _flowcontextfactory, _stateMachine));
         }
         #endregion
     }

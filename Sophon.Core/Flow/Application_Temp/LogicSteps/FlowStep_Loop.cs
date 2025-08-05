@@ -34,9 +34,9 @@ namespace Sophon.Application
         {
             for (int i = 0; i < _totalLoops; i++)
             {
-                context.Logger.Info($"步骤{StepName}第{i}/{_totalLoops}次循环开始。");
+                context.Logger.Info($"步骤{StepName}第{i}/{_totalLoops}次循环开始");
                 await AsyncExecuteBranch(context, token, _loopBranch, i);
-                context.Logger.Info($"步骤{StepName}第{i}/{_totalLoops}次循环完成始。");
+                context.Logger.Info($"步骤{StepName}第{i}/{_totalLoops}次循环完成始");
             }
             SetNextStepIndex(context);
         }

@@ -17,6 +17,7 @@ namespace Sophon.Core
             _flowController = _flowEngine as IFlowController;
             _flowcontext = flowContextFactory.CreateFlowContext(WorkStationName);
             _stateMachine = stateMachine;
+            _stateMachine.StateChangeAction += OnStateChange;
         }
         #endregion
 
@@ -87,6 +88,11 @@ namespace Sophon.Core
             }
         }
 
+        public void OnStateChange(WorkStationState state)
+        {
+            _flowcontext.Logger.Info($"工站{WorkStationName}状态切换：{state}");
+
+        }
         #endregion
     }
 }

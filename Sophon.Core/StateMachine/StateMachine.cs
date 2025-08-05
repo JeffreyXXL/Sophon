@@ -14,6 +14,7 @@ namespace Sophon.Core
 
         #region 属性
         public WorkStationState CurrentState => _currentState;
+        public Action<WorkStationState> StateChangeAction { get; set; }
         #endregion
 
         #region 字段
@@ -26,6 +27,7 @@ namespace Sophon.Core
             if (state != _currentState)
             {
                 _currentState = state;
+                StateChangeAction.Invoke(state);
             }
         }
         #endregion

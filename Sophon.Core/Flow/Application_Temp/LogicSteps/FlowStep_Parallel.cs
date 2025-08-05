@@ -44,7 +44,7 @@ namespace Sophon.Application
             {
                 var branchResults = await Task.WhenAll(branchTasks);
                 stepResult = branchResults.All(x => x.Status == StepStatus.Success)
-                    ? StepResult.Success() : StepResult.Failure("部分分支执行失败。");
+                    ? StepResult.Success() : StepResult.Failure("部分分支执行失败");
             }
             else
             {

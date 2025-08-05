@@ -18,6 +18,7 @@ namespace Sophon.Core
         void Resume();
         void Stop();
 
+        void OnStateChange(WorkStationState state);
 
     }
 }

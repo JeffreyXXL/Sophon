@@ -53,7 +53,7 @@ namespace Sophon.Core
             {
                 if (_cts != null)
                 {
-                    _logger.Info($"流程【{FlowName}】已经在运行中。");
+                    _logger.Info($"流程【{FlowName}】已经在运行中");
                     return;
                 }
                 _isRunning = true;
@@ -90,7 +90,7 @@ namespace Sophon.Core
             }
             catch (OperationCanceledException)
             {
-                _logger.Info($"流程【{FlowName}】被取消。");
+                _logger.Info($"流程【{FlowName}】被取消");
             }
             catch (StepExecuteException e)
             {
@@ -104,7 +104,7 @@ namespace Sophon.Core
             }
             finally
             {
-                _logger.Info($"流程【{FlowName}】执行完成（或被中止）。");
+                _logger.Info($"流程【{FlowName}】执行完成（或被中止）");
                 _cts?.Dispose();
                 _cts = null;
                 _isStopped = false;
@@ -117,7 +117,7 @@ namespace Sophon.Core
         {
             if (_cts?.Token.IsCancellationRequested == true)
             {
-                _logger.Info($"流程【{FlowName}】运行已取消。");
+                _logger.Info($"流程【{FlowName}】运行已取消");
                 return true;
             }
             return false;
@@ -130,7 +130,7 @@ namespace Sophon.Core
                 if (_isRunning && !_isPaused)
                 {
                     _isPaused = true;
-                    _logger.Info($"流程【{FlowName}】已经暂停。");
+                    _logger.Info($"流程【{FlowName}】已经暂停");
                 }
             }
         }
@@ -141,7 +141,7 @@ namespace Sophon.Core
             {
                 if (_isRunning && _isPaused)
                 {
-                    _logger.Info($"流程【{FlowName}】已经恢复。");
+                    _logger.Info($"流程【{FlowName}】已经恢复");
                     _isPaused = false;
                 }
             }
@@ -151,11 +151,7 @@ namespace Sophon.Core
         {
             lock (_lock)
             {
-                if (_cts != null)
-                {
-                    _isStopped = true;
-                    _cts.Cancel();
-                }
+                _isStopped = true;
             }
         }
         #endregion
