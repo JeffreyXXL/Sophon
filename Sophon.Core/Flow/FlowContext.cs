@@ -43,6 +43,11 @@ namespace Sophon.Core
         {
             _data[key] = value;
         }
+
+        /// <summary>
+        /// data为浅拷贝，数据公用，其余字段不共用
+        /// </summary>
+        /// <returns></returns>
         public IFlowContext Clone()
         {
             var cloned = new FlowContext(this.FlowName, _loggerFactory);

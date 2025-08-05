@@ -36,7 +36,7 @@ namespace Sophon.Application
         {
             try
             {
-                await ExecuteCoreAsync(context, token);
+                await AsyncExecuteCore(context, token);
                 return StepResult.Success();
             }
             catch (OperationCanceledException)
@@ -54,7 +54,7 @@ namespace Sophon.Application
         /// </summary>
         /// <param name="context"></param>
         /// <param name="token"></param>
-        protected abstract Task ExecuteCoreAsync(IFlowContext context, CancellationToken token);
+        protected abstract Task AsyncExecuteCore(IFlowContext context, CancellationToken token);
 
         /// <summary>
         /// 设置下一步索引,用在ExecuteCoreAsync中
@@ -71,7 +71,7 @@ namespace Sophon.Application
         /// <param name="branch">流程</param>
         /// <param name="branchIndex">流程分支号</param>
         /// <returns></returns>
-        protected async Task<StepResult> ExecuteBranchAsync(IFlowContext context, CancellationToken token, List<IFlowStep> branch, int branchIndex)
+        protected async Task<StepResult> AsyncExecuteBranch(IFlowContext context, CancellationToken token, List<IFlowStep> branch, int branchIndex)
         {
             var branchContext = context.Clone();
             branchContext.NextStepIndex = 0;

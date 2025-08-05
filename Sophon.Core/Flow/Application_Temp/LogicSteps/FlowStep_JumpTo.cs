@@ -32,7 +32,7 @@ namespace Sophon.Application
         #endregion
 
         #region 方法
-        protected override async Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
+        protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
             if (_jumpToStepIndex >= 0 && _jumpToStepIndex < context.TotalSteps)
             {

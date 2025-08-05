@@ -20,6 +20,18 @@ namespace Sophon.Core
             builder.RegisterType<FlowContextFactory>()
                     .As<IFlowContextFactory>()
                     .SingleInstance();
+
+            builder.RegisterType<WorkStationFactory>()
+                   .As<IWorkStationFactory>()
+                   .SingleInstance();
+
+            builder.RegisterType<WorkStationManager>()
+                   .As<IWorkStationManager>()
+                   .SingleInstance();
+
+            builder.RegisterType<StateMachine>()
+                   .As<IStateMachine>()
+                   .InstancePerDependency();
         }
     }
 }

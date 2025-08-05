@@ -14,6 +14,12 @@ namespace Sophon.Core
         /// </summary>
         string FlowName { get; }
 
-        Task AsyncExecuteFlow(IFlowContext context);
+        /// <summary>
+        /// 执行流程可等待方法
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="cts"></param>
+        /// <returns></returns>
+        Task AsyncExecuteFlow(IFlowContext context, CancellationTokenSource cts);
     }
 }

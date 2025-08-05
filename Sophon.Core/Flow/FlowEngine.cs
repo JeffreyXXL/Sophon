@@ -45,7 +45,7 @@ namespace Sophon.Core
         #endregion
 
         #region 方法
-        public virtual async Task AsyncExecuteFlow(IFlowContext context)
+        public virtual async Task AsyncExecuteFlow(IFlowContext context, CancellationTokenSource cts)
         {
             _logger = context.Logger;
             context.TotalSteps = _steps.Count;
@@ -57,7 +57,7 @@ namespace Sophon.Core
                     return;
                 }
                 _isRunning = true;
-                _cts = new CancellationTokenSource();
+                _cts = cts;
                 _currentIndex = 0;
                 while (_currentIndex < _steps.Count && !_isStopped)
                 {

@@ -26,13 +26,4 @@ namespace Sophon.Core
         public static StepResult Skipped(string msg) =>
             new StepResult() { Status = StepStatus.Skipped, Message = msg };
     }
-
-    public enum StepStatus
-    {
-        Success,
-        Failure,
-        Timeout,
-        Cancelled,
-        Skipped
-    }
 }

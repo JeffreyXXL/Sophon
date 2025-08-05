@@ -30,12 +30,12 @@ namespace Sophon.Application
 
         #region 方法
 
-        protected override async Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
+        protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
             for (int i = 0; i < _totalLoops; i++)
             {
                 context.Logger.Info($"步骤{StepName}第{i}/{_totalLoops}次循环开始。");
-                await ExecuteBranchAsync(context, token, _loopBranch, i);
+                await AsyncExecuteBranch(context, token, _loopBranch, i);
                 context.Logger.Info($"步骤{StepName}第{i}/{_totalLoops}次循环完成始。");
             }
             SetNextStepIndex(context);

@@ -30,7 +30,7 @@ namespace Sophon.Application
         #endregion
 
         #region 方法
-        protected override async Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
+        protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
             throw new NotImplementedException();
         }

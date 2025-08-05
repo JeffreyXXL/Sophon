@@ -32,13 +32,13 @@ namespace Sophon.Application
         #endregion
 
         #region 方法
-        protected override async Task ExecuteCoreAsync(IFlowContext context, CancellationToken token)
+        protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
             StepResult stepResult = null;
             var branchTasks = new List<Task<StepResult>>();
             for (int i = 0; i < _parallelBranches.Count; i++)
             {
-                branchTasks.Add(ExecuteBranchAsync(context, token, _parallelBranches[i], i));
+                branchTasks.Add(AsyncExecuteBranch(context, token, _parallelBranches[i], i));
             }
             if (_waitAll)
             {

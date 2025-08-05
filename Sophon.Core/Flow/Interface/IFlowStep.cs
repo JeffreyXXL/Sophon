@@ -17,6 +17,12 @@ namespace Sophon.Core
         /// </summary>
         string StepName { get; }
 
+        /// <summary>
+        /// 执行步骤可等待方法
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
         Task<StepResult> AsyncExecuteStep(IFlowContext context, CancellationToken token = default);
 
     }
