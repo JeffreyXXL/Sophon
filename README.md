@@ -79,3 +79,5 @@
 | --- | --- |
 | E-mail | jeffrey.xia@foxmail.com |
 | CSDN | https://blog.csdn.net/Xiajie727 |
+| 知乎 | https://www.zhihu.com/people/jeffrey-21-52 |
+| 公众号 | <img width="235" height="82" alt="Snipaste_2025-08-08_13-50-59" src="https://github.com/user-attachments/assets/796ddc15-3282-4003-913a-e630993f364d" /> |
