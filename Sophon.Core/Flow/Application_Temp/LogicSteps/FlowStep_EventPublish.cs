@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,15 +9,16 @@ using System.Threading.Tasks;
 namespace Sophon.Application
 {
     /// <summary>
-    /// 模块间通信事件获取
+    /// 发布事件
     /// </summary>
-    public class FlowStep_GetEvent : FlowStepBase
+    public class FlowStep_EventPublish<T> : FlowStepBase where T : new()
     {
         #region 构造函数
-        public FlowStep_GetEvent(string stepName) : base(stepName)
+        public FlowStep_EventPublish(string stepName, IEventBus eventBus, Func<T> eventFactory = null) : base(stepName)
         {
+            _eventBus = eventBus;
+            _eventFactory = eventFactory ?? (() => new T());
         }
-
         #endregion
 
         #region 属性
@@ -26,18 +26,21 @@ namespace Sophon.Application
         #endregion
 
         #region 字段
-
+        private readonly IEventBus _eventBus;
+        private readonly Func<T> _eventFactory;
         #endregion
 
         #region 方法
         protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
-            throw new NotImplementedException();
+            var @event = _eventFactory();
+            _eventBus.Publish(@event);
+            await Task.CompletedTask;
         }
 
         protected override void SetNextStepIndex(IFlowContext context)
         {
-            throw new NotImplementedException();
+            context.NextStepIndex++;
         }
         #endregion
     }

@@ -48,7 +48,7 @@ namespace Sophon.Core
                 {
                     _stateMachine.SetState(WorkStationState.Running);
                     await _flowEngine.AsyncExecuteFlow(_flowcontext, _cts);
-                    _stateMachine.SetState(WorkStationState.Idel);
+                    _stateMachine.SetState(WorkStationState.Idle);
                 });
             }
             catch (Exception e)
@@ -91,7 +91,6 @@ namespace Sophon.Core
         public void OnStateChange(WorkStationState state)
         {
             _flowcontext.Logger.Info($"工站{WorkStationName}状态切换：{state}");
-
         }
         #endregion
     }

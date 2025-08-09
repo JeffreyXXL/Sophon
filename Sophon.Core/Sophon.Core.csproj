@@ -68,10 +68,13 @@
   <ItemGroup>
     <Compile Include="DI\CoreModuleRegister.cs" />
     <Compile Include="EmptyClass.cs" />
+    <Compile Include="EventBus\EventBus.cs" />
+    <Compile Include="EventBus\Interface\IEventBus.cs" />
+    <Compile Include="Flow\Application_Temp\Events\SampleEvent.cs" />
     <Compile Include="Flow\Application_Temp\FlowStepBase.cs" />
-    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_GetEvent.cs" />
+    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_EventSubscribe.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_Loop.cs" />
-    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_SetEvent.cs" />
+    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_EventPublish.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_JumpTo.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_Parallel.cs" />
     <Compile Include="Flow\Exception\StepExecuteException.cs" />
@@ -107,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

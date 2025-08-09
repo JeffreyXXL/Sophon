@@ -4,14 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sophon.Core
+namespace Sophon.Application
 {
-    public enum WorkStationState
+    public class SampleEvent
     {
-        Idle,
-        Running,
-        Paused,
-        Stoped,
-        Error
+        public string EventName { get; set; }
     }
 }

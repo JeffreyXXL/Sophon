@@ -22,7 +22,6 @@ namespace Sophon.Application
         #endregion
 
         #region 字段
-        private int _loopCount = 0;
         #endregion
 
         #region 方法
