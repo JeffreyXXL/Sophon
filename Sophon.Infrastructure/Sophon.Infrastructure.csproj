@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hardware\Interface\IAxisController.cs" />
+    <Compile Include="Hardware\Interface\IDeviceManager.cs" />
+    <Compile Include="Hardware\Interface\IIOController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
