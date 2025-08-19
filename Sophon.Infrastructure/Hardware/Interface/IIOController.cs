@@ -8,7 +8,11 @@ namespace Sophon.Infrastructure
 {
     public interface IIOController
     {
-        void SetOut(int cardNo, int ioNo, bool state);
+        bool Initialize();
+
+        bool GetIOCount(int cardNo, ref ushort _inCount, ref ushort _outCount);
+
+        bool SetOut(int cardNo, int ioNo, bool state);
 
         bool ReadIn(int cardNo, int ioNo);
 

@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hardware\Drives\LeadShine\LeadShineAxisControl.cs" />
+    <Compile Include="Hardware\Drives\LeadShine\LeadShineIOController.cs" />
+    <Compile Include="Hardware\Drives\LeadShine\LTDMC.cs" />
     <Compile Include="Hardware\Interface\IAxisController.cs" />
-    <Compile Include="Hardware\Interface\IDeviceManager.cs" />
     <Compile Include="Hardware\Interface\IIOController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Hardware\Drives\GoogolTech\" />
+    <Folder Include="Hardware\Drives\LingChen\" />
+    <Folder Include="Hardware\Drives\SoftWIn\" />
+    <Folder Include="Hardware\Drives\ZMotion\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
