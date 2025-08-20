@@ -18,27 +18,27 @@ namespace Sophon.Infrastructure
 
         bool ServeOff(int cardNo, int axisNo);
 
-        bool Home(int axisNo);
+        bool Home(int cardNo, int axisNo);
 
-        bool MoveAbs(int axisNo, double position);
+        bool MoveAbs(int cardNo, int axisNo, double position);
 
-        bool MoveRel(int axisNo, double distance);
+        bool MoveRel(int cardNo, int axisNo, double distance);
 
-        bool MoveInPos(int axisNo);
+        bool MoveInPos(int cardNo, int axisNo);
 
-        bool Jog(int axisno, bool direction);
+        bool Jog(int cardNo, int axisno, bool direction);
 
-        bool Stop(int axisno);
+        bool Stop(int cardNo, int axisno);
 
-        bool ResetAxis(int axisno);
+        bool ResetAxis(int cardNo, int axisno);
         
         bool ResetAll();
 
-        double GetPos(int axisNo);
+        double GetPos(int cardNo, int axisNo);
 
-        double GetVel(int axisNo);
+        double GetVel(int cardNo, int axisNo);
 
-        double GetTorque(int axisNo);
+        double GetTorque(int cardNo, int axisNo);
     }
 }
  

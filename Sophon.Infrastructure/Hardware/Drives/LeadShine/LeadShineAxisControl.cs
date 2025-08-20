@@ -41,37 +41,37 @@ namespace Sophon.Infrastructure
             return false;
         }
 
-        public bool Home(int axisNo)
+        public bool Home(int cardNo, int axisNo)
+        {
+            return LTDMC.dmc_home_move((ushort)cardNo, (ushort)axisNo) == 0;
+        }
+
+        public bool MoveAbs(int cardNo, int axisNo, double position)
         {
             return false;
         }
 
-        public bool MoveAbs(int axisNo, double position)
+        public bool MoveRel(int cardNo, int axisNo, double distance)
         {
             return false;
         }
 
-        public bool MoveRel(int axisNo, double distance)
+        public bool MoveInPos(int cardNo, int axisNo)
         {
             return false;
         }
 
-        public bool MoveInPos(int axisNo)
+        public bool Jog(int cardNo, int axisno, bool direction)
         {
             return false;
         }
 
-        public bool Jog(int axisno, bool direction)
+        public bool Stop(int cardNo, int axisno)
         {
             return false;
         }
 
-        public bool Stop(int axisno)
-        {
-            return false;
-        }
-
-        public bool ResetAxis(int axisno)
+        public bool ResetAxis(int cardNo, int axisno)
         {
             return false;
         }
@@ -81,17 +81,17 @@ namespace Sophon.Infrastructure
             return false;
         }
 
-        public double GetPos(int axisNo)
+        public double GetPos(int cardNo, int axisNo)
         {
             return 0;
         }
 
-        public double GetVel(int axisNo)
+        public double GetVel(int cardNo, int axisNo)
         {
             return 0;
         }
 
-        public double GetTorque(int axisNo)
+        public double GetTorque(int cardNo, int axisNo)
         {
             return 0;
         }
