@@ -10,10 +10,25 @@ namespace Sophon.Infrastructure
     {
         public bool IsInitialize { get; set; }
 
-        /// <summary>
-        /// 板卡数量
-        /// </summary>
+        public int CardCount => _cardCount;
+
+        public int AxisCount => _axisCount;
+
         private int _cardCount;
+        private int _axisCount;
+
+
+        public LeadShineAxisControl()
+        {
+            if (Initialize())
+            {
+                
+            }
+            else
+            {
+                throw new Exception("板卡初始化失败");
+            }
+        }
 
         public bool Initialize()
         {
@@ -22,13 +37,16 @@ namespace Sophon.Infrastructure
             return IsInitialize;
         }
 
-        public bool GetAxisCount(int cardNo, ref uint axisCount)
+        public void GetAxisCount(int cardNo, ref uint axisCount)
         {
-            if (IsInitialize)
+            if (LTDMC.dmc_get_total_axes((ushort)cardNo, ref axisCount) == 0)
             {
-                return LTDMC.dmc_get_total_axes((ushort)cardNo, ref axisCount) == 0;
+                _axisCount = (int)axisCount;
             }
-            return false;
+            else
+            {
+                _axisCount = -1;
+            }
         }
 
         public bool ServeOn(int cardNo, int axisNo)

@@ -10,6 +10,10 @@ namespace Sophon.Infrastructure
     {
         bool Initialize();
 
+        int InputCount { get; }
+
+        int OutputCount { get; }
+
         bool GetIOCount(int cardNo, ref ushort _inCount, ref ushort _outCount);
 
         bool SetOut(int cardNo, int ioNo, bool state);

@@ -8,10 +8,21 @@ namespace Sophon.Infrastructure
 {
     public class LeadShineIOController : IIOController
     {
+        public int InputCount => _inputCount;
+
+        public int OutputCount => _outputCount;
+
+
         public LeadShineAxisControl _leadShineAxisControl;
+        private int _inputCount;
+        private int _outputCount;
+
+
         public LeadShineIOController(LeadShineAxisControl leadShineAxisControl)
         {
             _leadShineAxisControl = leadShineAxisControl;
+            Initialize();
+
         }
 
         public bool Initialize()

@@ -10,9 +10,13 @@ namespace Sophon.Infrastructure
     {
         bool IsInitialize { get; set; }
 
+        int CardCount { get; }
+
+        int AxisCount { get; }
+
         bool Initialize();
 
-        bool GetAxisCount(int cardNo, ref uint axisCount);
+        void GetAxisCount(int cardNo, ref uint axisCount);
 
         bool ServeOn(int cardNo, int axisNo);
 
@@ -31,7 +35,7 @@ namespace Sophon.Infrastructure
         bool Stop(int cardNo, int axisno);
 
         bool ResetAxis(int cardNo, int axisno);
-        
+
         bool ResetAll();
 
         double GetPos(int cardNo, int axisNo);
@@ -41,4 +45,3 @@ namespace Sophon.Infrastructure
         double GetTorque(int cardNo, int axisNo);
     }
 }
- 
