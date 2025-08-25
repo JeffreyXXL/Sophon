@@ -52,9 +52,10 @@ namespace Sophon.Tests.Config
             //创建测试路径
             testRoot = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(testRoot);
+
             //设置测试路径
             typeof(ConfigManagerFactory)
-                .GetField("configPath", BindingFlags.NonPublic | BindingFlags.Instance)
+                .GetField("_configPath", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(factory, testRoot);
         }
 
@@ -78,7 +79,7 @@ namespace Sophon.Tests.Config
         [TestCase(ConfigType.xml, typeof(XmlConfigSerializer), "xml")]
         public void CreateConfigManager_Test(ConfigType type, Type expectedType, string filetype)
         {
-            var filename = "testfile";
+            var filename = "testfile"+ type.ToString();
             var secondPath = "sub";
             var expectedPath = Path.Combine(testRoot, secondPath, filename + "." + filetype);
 

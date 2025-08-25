@@ -50,6 +50,10 @@ namespace Sophon.Tests.DI
         [Test]
         public void DI_Test()
         {
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
             string path = Path.Combine(directory, $"{DateTime.Now:yyyy-MM-dd}.log");
             var builder = new ContainerBuilder();
             builder.RegisterAllModuleExt();
