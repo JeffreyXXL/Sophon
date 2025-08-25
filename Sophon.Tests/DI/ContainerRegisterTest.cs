@@ -28,7 +28,7 @@ namespace Sophon.Tests.DI
     [TestFixture]
     public class DITest
     {
-        string directory = "D:/SophonDATA/logs/DITestClass";
+        private readonly string directory = "D:/SophonDATA/logs/DITestClass";
 
         [TearDown]
         public void TearDown()
@@ -68,7 +68,7 @@ namespace Sophon.Tests.DI
     [TestFixture]
     public class ContainerRegisterTest
     {
-        string directory = "D:/SophonDATA/logs/IOC_Test_Log";
+        private readonly string directory = "D:/SophonDATA/logs/IOC_Test_Log";
 
         [TearDown]
         public void TearDown()
