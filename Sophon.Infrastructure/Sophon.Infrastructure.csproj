@@ -80,8 +80,8 @@
   <ItemGroup>
     <Compile Include="Database\DbContext.cs" />
     <Compile Include="DI\InfrastructureModuleRegister.cs" />
-    <Compile Include="Entities\Production.cs" />
-    <Compile Include="Entities\Users.cs" />
+    <Compile Include="Database\Entities\Production.cs" />
+    <Compile Include="Database\Entities\Users.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LeadShineAxisControl.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LeadShineIOController.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LTDMC.cs" />
