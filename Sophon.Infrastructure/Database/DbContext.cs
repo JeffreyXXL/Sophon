@@ -6,17 +6,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.IO;
+using Common;
 
 namespace Sophon.Infrastructure
 {
     public class DbContext
     {
-        public static SqlSugarClient db = new SqlSugarClient(new ConnectionConfig()
+        public SqlSugarClient Db { get; }
+
+        private readonly ILoggerManager _logger;
+
+        public DbContext(string connectionstring, ILoggerFactory factory)
         {
-            DbType = DbType.Sqlite,
-            ConnectionString = "Data Source =" + Path.Combine(ConfigurationManager.AppSettings["DatabasePath"], "SophonData.db") + ";",
-            IsAutoCloseConnection = true,
-            InitKeyType = InitKeyType.Attribute
-        });
+            _logger = factory.CreateLogger("Database");
+            Db = new SqlSugarClient(new ConnectionConfig()
+            {
+                DbType = DbType.Sqlite,
+                ConnectionString = connectionstring,//ConfigurationManager.AppSettings["ConnectionString"],
+                IsAutoCloseConnection = true,
+                InitKeyType = InitKeyType.Attribute
+            });
+
+            //回调记录sql语句
+            Db.Aop.OnLogExecuted = (sql, pars) =>
+            {
+                _logger.Debug(sql);
+            };
+        }
     }
 }
