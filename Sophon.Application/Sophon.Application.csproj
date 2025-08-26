@@ -52,10 +52,6 @@
       <Project>{463064ad-ead3-4e9a-89db-2e4055329f39}</Project>
       <Name>Sophon.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sophon.Infrastructure\Sophon.Infrastructure.csproj">
-      <Project>{1d9d3c4e-6d43-4b20-b0bb-0af9d2f31b70}</Project>
-      <Name>Sophon.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
