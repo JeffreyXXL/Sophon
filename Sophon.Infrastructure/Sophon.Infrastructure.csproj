@@ -78,10 +78,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="Database\DbContext.cs" />
+    <Compile Include="Database\Entities\Interface\IEntity.cs" />
+    <Compile Include="Database\Entities\LoginHistory.cs" />
+    <Compile Include="Database\Repository\Interface\IRepository.cs" />
+    <Compile Include="Database\Entities\ProductionHistory.cs" />
+    <Compile Include="Database\Repository\ProductionHistoryRepository.cs" />
+    <Compile Include="Database\Repository\LoginHistoryRepository.cs" />
+    <Compile Include="Database\Repository\RepositotyBase.cs" />
+    <Compile Include="Database\Repository\ProductionRepository.cs" />
+    <Compile Include="Database\Repository\UserRepository.cs" />
+    <Compile Include="Database\Transaction\Interface\ITransaction.cs" />
+    <Compile Include="Database\Transaction\Transaction.cs" />
     <Compile Include="DI\InfrastructureModuleRegister.cs" />
     <Compile Include="Database\Entities\Production.cs" />
-    <Compile Include="Database\Entities\Users.cs" />
+    <Compile Include="Database\Entities\User.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LeadShineAxisControl.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LeadShineIOController.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LTDMC.cs" />

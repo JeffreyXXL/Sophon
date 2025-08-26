@@ -18,7 +18,11 @@ namespace Sophon.Infrastructure
                 var factory = c.Resolve<ILoggerFactory>();
                 var connstr = ConfigurationManager.AppSettings["ConnectionString"];
                 return new DbContext(connstr, factory); ;
-            }).SingleInstance();
+            }).InstancePerLifetimeScope();
+
+            builder.RegisterType<DatabaseInitializer>()
+           .AsSelf()
+           .SingleInstance();
         }
     }
 }

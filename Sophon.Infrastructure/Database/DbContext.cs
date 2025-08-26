@@ -14,7 +14,7 @@ namespace Sophon.Infrastructure
     {
         public SqlSugarClient Db { get; }
 
-        private readonly ILoggerManager _logger;
+        public readonly ILoggerManager _logger;
 
         public DbContext(string connectionstring, ILoggerFactory factory)
         {
