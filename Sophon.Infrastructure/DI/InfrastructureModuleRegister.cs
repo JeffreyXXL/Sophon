@@ -21,8 +21,28 @@ namespace Sophon.Infrastructure
             }).InstancePerLifetimeScope();
 
             builder.RegisterType<DatabaseInitializer>()
-           .AsSelf()
-           .SingleInstance();
+                   .AsSelf()
+                   .SingleInstance();
+
+            builder.RegisterType<LoginHistoryRepository>()
+                   .AsSelf()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<UserRepository>()
+                   .AsSelf()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<ProductionHistoryRepository>()
+                   .AsSelf()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<ProductionRepository>()
+                   .AsSelf()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<Transaction>()
+                   .As<ITransaction>()
+                   .InstancePerLifetimeScope();
         }
     }
 }
