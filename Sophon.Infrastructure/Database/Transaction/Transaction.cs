@@ -23,6 +23,7 @@ namespace Sophon.Infrastructure
         #region 字段
         private readonly DbContext _dbContext;
         private bool _disposed;
+        private bool _completed;
         #endregion
 
         #region 方法
@@ -49,12 +50,14 @@ namespace Sophon.Infrastructure
 
         public void BeginTran()
         {
+            _completed = false;
             _dbContext.Db.Ado.BeginTran();
         }
 
         public void CommitTran()
         {
             _dbContext.Db.Ado.CommitTran();
+            _completed = true;
         }
 
         public void RollBack()
@@ -64,7 +67,7 @@ namespace Sophon.Infrastructure
 
         public void Dispose()
         {
-            if (!_disposed)
+            if (!_disposed && !_completed)
             {
                 RollBack();
                 _disposed = true;

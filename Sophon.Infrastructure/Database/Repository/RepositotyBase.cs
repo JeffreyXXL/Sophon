@@ -45,17 +45,17 @@ namespace Sophon.Infrastructure
             return await _dbContext.Db.Deleteable<T>().In(id).ExecuteCommandAsync() > 0;
         }
 
-        public Task<List<T>> QueryAll()
+        public virtual Task<List<T>> QueryAllAsync()
         {
             return _dbContext.Db.Queryable<T>().ToListAsync();
         }
 
-        public Task<List<T>> QueryAsync(Expression<Func<T, bool>> expression)
+        public virtual Task<List<T>> QueryAsync(Expression<Func<T, bool>> expression)
         {
             return _dbContext.Db.Queryable<T>().Where(expression).ToListAsync();
         }
 
-        public Task<T> QuerySingleAsync(Expression<Func<T, bool>> expression)
+        public virtual Task<T> QuerySingleAsync(Expression<Func<T, bool>> expression)
         {
             return _dbContext.Db.Queryable<T>().Where(expression).SingleAsync();
         }
