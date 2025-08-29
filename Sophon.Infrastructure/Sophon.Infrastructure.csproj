@@ -143,7 +143,7 @@
     <Compile Include="Database\Entities\ProductionHistory.cs" />
     <Compile Include="Database\Repository\ProductionHistoryRepository.cs" />
     <Compile Include="Database\Repository\LoginHistoryRepository.cs" />
-    <Compile Include="Database\Repository\RepositotyBase.cs" />
+    <Compile Include="Database\Repository\RepositoryBase.cs" />
     <Compile Include="Database\Repository\ProductionRepository.cs" />
     <Compile Include="Database\Repository\UserRepository.cs" />
     <Compile Include="Database\Transaction\Interface\ITransaction.cs" />

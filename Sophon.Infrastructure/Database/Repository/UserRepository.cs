@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
-    public class UserRepository : RepositotyBase<User>
+    public class UserRepository : RepositoryBase<User>
     {
         #region 构造函数
         public UserRepository(DbContext dbContext) : base(dbContext)

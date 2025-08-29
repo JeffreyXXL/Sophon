@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
-    public class RepositotyBase<T> : IRepository<T> where T : class, IEntity, new()
+    public class RepositoryBase<T> : IRepository<T> where T : class, IEntity, new()
     {
         #region 构造函数
-        public RepositotyBase(DbContext dbContext)
+        public RepositoryBase(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
