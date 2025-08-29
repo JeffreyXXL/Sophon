@@ -25,19 +25,19 @@ namespace Sophon.Infrastructure
                    .SingleInstance();
 
             builder.RegisterType<LoginHistoryRepository>()
-                   .AsSelf()
+                   .As<IRepository<LoginHistory>>()
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<UserRepository>()
-                   .AsSelf()
+                   .As<IRepository<User>>()
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<ProductionHistoryRepository>()
-                   .AsSelf()
+                   .As<IRepository<ProductionHistory>>()
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<ProductionRepository>()
-                   .AsSelf()
+                   .As<IRepository<Production>>()
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<Transaction>()
