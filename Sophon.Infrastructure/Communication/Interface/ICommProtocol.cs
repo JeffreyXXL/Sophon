@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,16 @@ namespace Sophon.Infrastructure
 {
     public interface ICommProtocol
     {
-        string ProtocolId { get; }
-        ProtocolType Type { get; }
+        //1 连接
+        void Connect();
+        void Disconnect();
+        bool IsConnected { get; }
 
-        Task<object> ReceiveDataAsync(string dataPoint);
+        //2 发送
+        Task Send(byte[] data);
+        Task SendAsync(byte[] data);
 
-        Task SendDataAsync(string dataPoint, object data);
-
-        void OnValueChanged(string dataPoint, Action<object> callback);
+        //3 接收
+        event EventHandler<DataReceivedEventArgs> DataReceived;
     }
 }
