@@ -128,9 +128,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Communication\DataReceivedEventArgs.cs" />
     <Compile Include="Communication\Interface\ICommProtocol.cs" />
     <Compile Include="Communication\Interface\IPlcProtocol.cs" />
+    <Compile Include="Communication\Interface\IProtocolBase.cs" />
     <Compile Include="Communication\Protocols\AdsProtocol.cs" />
+    <Compile Include="Communication\Protocols\HttpProtocol.cs" />
+    <Compile Include="Communication\Protocols\ModbusProtocol.cs" />
+    <Compile Include="Communication\Protocols\OpcProtocol.cs" />
     <Compile Include="Communication\Protocols\SerialPortProtocol.cs" />
     <Compile Include="Communication\Protocols\TcpIpProtocol.cs" />
     <Compile Include="Database\DatabaseInitializer.cs" />

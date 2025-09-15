@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
-    public interface ICommProtocol
+    /// <summary>
+    /// 底层协议接口
+    /// </summary>
+    public interface ICommProtocol : IProtocolBase
     {
-        //1 连接
-        void Connect();
-        void Disconnect();
-        bool IsConnected { get; }
-
-        //2 发送
+        // 发送
         Task Send(byte[] data);
         Task SendAsync(byte[] data);
 

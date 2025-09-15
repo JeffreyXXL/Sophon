@@ -9,7 +9,7 @@ using TwinCAT.Ads;
 
 namespace Sophon.Infrastructure
 {
-    internal class AdsProtocol : IPlcProtocol, ICommProtocol, IDisposable
+    public class AdsProtocol : IPlcProtocol, IDisposable
     {
         #region 构造函数
         public AdsProtocol(ILoggerFactory loggerFactory)
@@ -41,8 +41,7 @@ namespace Sophon.Infrastructure
         private AdsClient _client;
         private bool _isConnected;
         private readonly ILoggerManager _logger;
-        private readonly static object _lock = new object();
-        private readonly SemaphoreSlim _sendLock = new SemaphoreSlim(1, 1);
+        private readonly static object _lock = new object(); 
         #endregion
 
         #region 方法
@@ -95,46 +94,42 @@ namespace Sophon.Infrastructure
             }
         }
 
-        public Task Send(byte[] data)
-        {
-            return SendAsync(data);
-        }
 
-        public async Task SendAsync(byte[] data)
+        public async Task<T> ReadVariableAsync<T>(string variableName)
         {
-            if (data == null || data.Length == 0)
+            if (!_isConnected)
             {
-                throw new ArgumentException("发送数据为空", nameof(data));
+                throw new InvalidOperationException("ADS未连接");
             }
-            if (!IsConnected)
-            {
-                throw new InvalidOperationException($"{TargetNetId}:{TargetPort}未连接");
-            }
-            await _sendLock.WaitAsync();
             try
             {
-                _logger.Info($"{TargetNetId}:{TargetPort}发送数据成功{Encoding.UTF8.GetString(data)}");
+                T value = await Task.Run(() => _client.ReadValue<T>(variableName));
+                _logger.Info($"{TargetNetId}:{TargetPort}读取变量 {variableName}: {value}");
+                return value;
             }
             catch (Exception e)
             {
-                _logger.Error($"{TargetNetId}:{TargetPort}发送数据失败:{e}");
+                _logger.Error($"{TargetNetId}:{TargetPort}读取变量失败 {variableName}: {e.Message}");
                 throw;
             }
-            finally
+        }
+
+        public async Task WriteVariableAsync<T>(string variableName, T value)
+        {
+            if (!_isConnected)
             {
-                _sendLock.Release();
+                throw new InvalidOperationException("ADS未连接");
             }
-        }
-
-
-        public Task<T> ReadVariableAsync<T>(string variableName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task WriteVariableAsync<T>(string variableName, T value)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                await Task.Run(() => _client.WriteValue<T>(variableName, value));
+                _logger.Info($"{TargetNetId}:{TargetPort}写入变量 {variableName}: {value}");
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"{TargetNetId}:{TargetPort}写入变量失败 {variableName}: {e.Message}");
+                throw;
+            }
         }
 
         public Task<Dictionary<string, object>> ReadVariablesAsync(IEnumerable<string> variableNames)
@@ -151,8 +146,7 @@ namespace Sophon.Infrastructure
         public void Dispose()
         {
             Disconnect();
-
-            _sendLock?.Dispose();
+            _client?.Dispose();
         }
         #endregion
     }
