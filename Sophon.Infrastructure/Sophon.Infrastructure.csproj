@@ -129,7 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\Interface\ICommProtocol.cs" />
-    <Compile Include="Communication\Protocols\Serial.cs" />
+    <Compile Include="Communication\Protocols\SerialPortProtocol.cs" />
     <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="Database\DbContext.cs" />
     <Compile Include="Database\Entities\Interface\IEntity.cs" />
