@@ -129,6 +129,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\Interface\ICommProtocol.cs" />
+    <Compile Include="Communication\Interface\IPlcProtocol.cs" />
+    <Compile Include="Communication\Protocols\AdsProtocol.cs" />
     <Compile Include="Communication\Protocols\SerialPortProtocol.cs" />
     <Compile Include="Communication\Protocols\TcpIpProtocol.cs" />
     <Compile Include="Database\DatabaseInitializer.cs" />
