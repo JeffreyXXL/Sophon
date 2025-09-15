@@ -156,7 +156,7 @@ namespace Sophon.Infrastructure
                         if (bytes > 0)
                         {
                             _logger.Info($"{PortName}收到数据{Encoding.UTF8.GetString(buffer)}");
-                            OnDataReceived(new DataReceivedEventArgs(buffer));
+                            DataReceived?.Invoke(this, new DataReceivedEventArgs(buffer));
                         }
                     }
                 }
@@ -168,21 +168,11 @@ namespace Sophon.Infrastructure
             }
         }
 
-        protected virtual void OnDataReceived(DataReceivedEventArgs args)
-        {
-            DataReceived?.Invoke(this, args);
-        }
-
         public void Dispose()
         {
-            if (_serialPort != null)
-            {
-                if (_serialPort.IsOpen)
-                {
-                    _serialPort.Close();
-                }
-                _serialPort.Dispose();
-            }
+            Disconnect();
+            _serialPort.Dispose();
+            _sendLock?.Dispose();
         }
 
         #endregion
