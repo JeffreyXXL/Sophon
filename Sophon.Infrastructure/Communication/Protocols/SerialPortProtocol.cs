@@ -11,7 +11,7 @@ using TwinCAT.PlcOpen;
 
 namespace Sophon.Infrastructure
 {
-    public class SerialPortProtocol : ICommProtocol, IDisposable
+    public class SerialPortProtocol : ISerialPortProtocol, IDisposable
     {
         #region 构造函数
         public SerialPortProtocol(ILoggerFactory loggerFactory)
@@ -32,7 +32,6 @@ namespace Sophon.Infrastructure
             }
         }
 
-        //串口参数
         public string PortName { get; set; } = "COM1";
         public int BaudRate { get; set; } = 9600;
         public Parity Parity { get; set; } = Parity.None;
@@ -114,23 +113,21 @@ namespace Sophon.Infrastructure
         {
             if (data == null || data.Length == 0)
             {
-                throw new ArgumentException("发送数据为空", nameof(data));
+                _logger.Error($"{PortName}发送数据为空：{nameof(data)}");
             }
             if (!IsConnected)
             {
-                throw new InvalidOperationException($"{PortName}未连接");
+                _logger.Error($"{PortName}未连接");
             }
             await _sendLock.WaitAsync();
             try
             {
-                await _serialPort.BaseStream.WriteAsync(data, 0, data.Length);//.Wait();
+                await _serialPort.BaseStream.WriteAsync(data, 0, data.Length);
                 _logger.Info($"{PortName}发送数据成功{Encoding.UTF8.GetString(data)}");
-                //return Task.CompletedTask;
             }
             catch (Exception e)
             {
                 _logger.Error($"{PortName}发送数据失败:{e}");
-                throw;
             }
             finally
             {
@@ -163,7 +160,6 @@ namespace Sophon.Infrastructure
                 catch (Exception ex)
                 {
                     _logger.Error($"{PortName} 接收数据失败: {ex}");
-                    //throw;
                 }
             }
         }

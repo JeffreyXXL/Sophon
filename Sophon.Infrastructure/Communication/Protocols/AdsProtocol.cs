@@ -9,7 +9,7 @@ using TwinCAT.Ads;
 
 namespace Sophon.Infrastructure
 {
-    public class AdsProtocol : IPlcProtocol, IDisposable
+    public class AdsProtocol : IAdsProtocol, IDisposable
     {
         #region 构造函数
         public AdsProtocol(ILoggerFactory loggerFactory)
@@ -29,7 +29,7 @@ namespace Sophon.Infrastructure
             }
         }
 
-        //ADS参数
+        
         public string TargetNetId { get; set; } = "127.0.0.1.1.1";
         public int TargetPort { get; set; } = 851;
         public int LocalPort { get; set; } = 30000;
@@ -38,7 +38,7 @@ namespace Sophon.Infrastructure
         #endregion
 
         #region 字段
-        private AdsClient _client;
+        private readonly AdsClient _client;
         private bool _isConnected;
         private readonly ILoggerManager _logger;
         private readonly static object _lock = new object(); 
