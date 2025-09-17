@@ -54,7 +54,7 @@ namespace Sophon.Infrastructure
 
         public void Connect()
         {
-            if (IsConnected)
+            if (_isConnected)
             {
                 return;
             }
@@ -84,7 +84,7 @@ namespace Sophon.Infrastructure
 
         public void Disconnect()
         {
-            if (!IsConnected)
+            if (!_isConnected)
             {
                 return;
             }
@@ -115,7 +115,7 @@ namespace Sophon.Infrastructure
             {
                 _logger.Error($"{PortName}发送数据为空：{nameof(data)}");
             }
-            if (!IsConnected)
+            if (!_isConnected)
             {
                 _logger.Error($"{PortName}未连接");
             }
@@ -137,7 +137,7 @@ namespace Sophon.Infrastructure
 
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (!IsConnected)
+            if (!_isConnected)
             {
                 return;
             }

@@ -19,6 +19,8 @@ namespace Sophon.Infrastructure
         Parity Parity { get; set; }
         int DataBits { get; set; }
         StopBits StopBits { get; set; }
+
+        byte SlaveAddress { get; set; }
         bool IsModbusTCP { get; set; }
 
 
@@ -27,7 +29,7 @@ namespace Sophon.Infrastructure
 
 
         Task<T> ReadAsync<T>(ModbusRegisterType type, ushort address);
-        Task<T> WriteAsync<T>(ModbusRegisterType type, ushort address, T value);
+        Task WriteAsync<T>(ModbusRegisterType type, ushort address, T value);
 
         Task<Dictionary<ushort, object>> ReadBatchAsync(ModbusRegisterType type, ushort startAddress, ushort length);
         Task WriteBatchAsync(ModbusRegisterType type, ushort startAddress, IEnumerable<object> values);

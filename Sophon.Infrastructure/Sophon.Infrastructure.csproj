@@ -60,6 +60,9 @@
     <Reference Include="NModbus, Version=3.0.81.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NModbus.3.0.81\lib\net46\NModbus.dll</HintPath>
     </Reference>
+    <Reference Include="NModbus.Serial, Version=3.0.81.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NModbus.Serial.3.0.81\lib\net46\NModbus.Serial.dll</HintPath>
+    </Reference>
     <Reference Include="SqlSugar, Version=5.1.4.200, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SqlSugar.5.1.4.200\lib\SqlSugar.dll</HintPath>
     </Reference>
@@ -132,16 +135,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Communication\DataReceivedEventArgs.cs" />
+    <Compile Include="Communication\Interface\IAdsProtocol.cs" />
     <Compile Include="Communication\Interface\IHttpProtocol.cs" />
-    <Compile Include="Communication\Interface\IOpcProtocol.cs" />
     <Compile Include="Communication\Interface\IModbusProtocol.cs" />
     <Compile Include="Communication\Interface\ISerialPortProtocol.cs" />
-    <Compile Include="Communication\Interface\IAdsProtocol.cs" />
     <Compile Include="Communication\Interface\ITcpIpProtocol.cs" />
     <Compile Include="Communication\Protocols\AdsProtocol.cs" />
     <Compile Include="Communication\Protocols\HttpProtocol.cs" />
     <Compile Include="Communication\Protocols\ModbusProtocol.cs" />
-    <Compile Include="Communication\Protocols\OpcProtocol.cs" />
     <Compile Include="Communication\Protocols\SerialPortProtocol.cs" />
     <Compile Include="Communication\Protocols\TcpIpProtocol.cs" />
     <Compile Include="Database\DatabaseInitializer.cs" />

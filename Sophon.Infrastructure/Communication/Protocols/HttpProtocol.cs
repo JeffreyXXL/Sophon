@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
-    public class HttpProtocol
+    public class HttpProtocol : IHttpProtocol
     {
     }
 }

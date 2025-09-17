@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TwinCAT.Ads;
 
 namespace Sophon.Infrastructure
@@ -29,7 +30,7 @@ namespace Sophon.Infrastructure
             }
         }
 
-        
+
         public string TargetNetId { get; set; } = "127.0.0.1.1.1";
         public int TargetPort { get; set; } = 851;
         public int LocalPort { get; set; } = 30000;
@@ -41,7 +42,8 @@ namespace Sophon.Infrastructure
         private readonly AdsClient _client;
         private bool _isConnected;
         private readonly ILoggerManager _logger;
-        private readonly static object _lock = new object(); 
+        private readonly static object _lock = new object();
+        private readonly SemaphoreSlim _semaphoreLock = new SemaphoreSlim(1, 1);
         #endregion
 
         #region 方法
@@ -49,7 +51,7 @@ namespace Sophon.Infrastructure
 
         public void Connect()
         {
-            if (IsConnected)
+            if (_isConnected)
             {
                 return;
             }
@@ -74,7 +76,7 @@ namespace Sophon.Infrastructure
 
         public void Disconnect()
         {
-            if (!IsConnected)
+            if (!_isConnected)
             {
                 return;
             }
@@ -101,6 +103,7 @@ namespace Sophon.Infrastructure
             {
                 throw new InvalidOperationException("ADS未连接");
             }
+            await _semaphoreLock.WaitAsync();
             try
             {
                 T value = await Task.Run(() => _client.ReadValue<T>(variableName));
@@ -110,7 +113,11 @@ namespace Sophon.Infrastructure
             catch (Exception e)
             {
                 _logger.Error($"{TargetNetId}:{TargetPort}读取变量失败 {variableName}: {e.Message}");
-                throw;
+                return default;
+            }
+            finally
+            {
+                _semaphoreLock.Release();
             }
         }
 
@@ -120,26 +127,97 @@ namespace Sophon.Infrastructure
             {
                 throw new InvalidOperationException("ADS未连接");
             }
+            await _semaphoreLock.WaitAsync();
             try
             {
-                await Task.Run(() => _client.WriteValue<T>(variableName, value));
+                await Task.Run(() => _client.WriteValue(variableName, value));
                 _logger.Info($"{TargetNetId}:{TargetPort}写入变量 {variableName}: {value}");
             }
             catch (Exception e)
             {
                 _logger.Error($"{TargetNetId}:{TargetPort}写入变量失败 {variableName}: {e.Message}");
-                throw;
+            }
+            finally
+            {
+                _semaphoreLock.Release();
             }
         }
 
-        public Task<Dictionary<string, object>> ReadVariablesAsync(IEnumerable<string> variableNames)
+        public async Task<Dictionary<string, object>> ReadVariablesAsync(IEnumerable<string> variableNames)
         {
-            throw new NotImplementedException();
+            if (!_isConnected)
+            {
+                throw new InvalidOperationException("ADS未连接");
+            }
+            await _semaphoreLock.WaitAsync();
+            try
+            {
+                var results = new Dictionary<string, object>();
+                var tasks = variableNames.Select(async vName =>
+                {
+                    try
+                    {
+                        var value = await Task.Run(() => _client.ReadValue(vName));
+                        return (vName, value, success: true);
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.Error($"{TargetNetId}:{TargetPort}读取变量失败 {vName}: {e.Message}");
+                        return (vName, value: null, success: false);
+                    }
+                });
+                var readResults = await Task.WhenAll(tasks);
+                foreach (var (vName, value, success) in readResults.Where(r => r.success))
+                {
+                    results[vName] = value;
+                }
+                return results;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"{TargetNetId}:{TargetPort}批量读取变量失败: {ex.Message}");
+                return default;
+            }
+            finally
+            {
+                _semaphoreLock.Release();
+            }
         }
 
-        public Task WriteVariablesAsync(Dictionary<string, object> values)
+        public async Task WriteVariablesAsync(Dictionary<string, object> values)
         {
-            throw new NotImplementedException();
+            if (!_isConnected)
+            {
+                throw new InvalidOperationException("ADS未连接");
+            }
+            await _semaphoreLock.WaitAsync();
+            try
+            {
+                var tasks = values.Select(async kv =>
+                {
+                    try
+                    {
+                        await Task.Run(() => _client.WriteValue(kv.Key, kv.Value));
+                        _logger.Info($"{TargetNetId}:{TargetPort}写入变量 {kv.Key}: {kv.Value}");
+                        return (kv.Key, success: true);
+                    }
+                    catch (Exception)
+                    {
+                        _logger.Info($"{TargetNetId}:{TargetPort}写入变量失败 {kv.Key}: {kv.Value}");
+                        return (kv.Key, success: false);
+                    }
+                });
+                var writeResult = await Task.WhenAll(tasks);
+                _logger.Info($"{TargetNetId}:{TargetPort}批量写入变量，成功数量：{writeResult.Count(w => w.success)}/{writeResult.Count()}");
+            }
+            catch (Exception e)
+            {
+                _logger.Error($"{TargetNetId}:{TargetPort}批量写入变量失败: {e.Message}");
+            }
+            finally
+            {
+                _semaphoreLock.Release();
+            }
         }
 
 

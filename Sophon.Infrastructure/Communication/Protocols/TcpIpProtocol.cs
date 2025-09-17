@@ -73,7 +73,7 @@ namespace Sophon.Infrastructure
 
         public void Connect()
         {
-            if (IsConnected)
+            if (_isConnected)
             {
                 return;
             }
@@ -115,7 +115,7 @@ namespace Sophon.Infrastructure
 
         public void Disconnect()
         {
-            if (!IsConnected)
+            if (!_isConnected)
             {
                 return;
             }
@@ -148,7 +148,7 @@ namespace Sophon.Infrastructure
 
         public async Task ReConnectAsync()
         {
-            if (_isReconnecting || _cts == null || _cts.IsCancellationRequested || IsConnected)
+            if (_isReconnecting || _cts == null || _cts.IsCancellationRequested || _isConnected)
             {
                 return;
             }
@@ -195,7 +195,7 @@ namespace Sophon.Infrastructure
             {
                 _logger.Error($"{LogHeader} {IP}:{Port} 发送数据为空：{nameof(data)}");
             }
-            if (!IsConnected)
+            if (!_isConnected)
             {
                 _logger.Error($"{LogHeader} {IP}:{Port} 未连接");
             }
@@ -222,7 +222,7 @@ namespace Sophon.Infrastructure
 
         private async Task ReceiveLoop(TcpClient client, CancellationToken token)
         {
-            if (!IsConnected)
+            if (!_isConnected)
             {
                 return;
             }
@@ -266,7 +266,7 @@ namespace Sophon.Infrastructure
 
         private async Task AcceptClientLoop(CancellationToken token)
         {
-            if (!IsConnected)
+            if (!_isConnected)
             {
                 return;
             }
