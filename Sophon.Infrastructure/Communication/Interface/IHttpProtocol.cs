@@ -8,5 +8,16 @@ namespace Sophon.Infrastructure
 {
     public interface IHttpProtocol
     {
+        bool IsConnected { get; }
+        string IP { get; set; }
+        int Port { get; set; }
+
+
+        void Connect();
+        void Disconnect();
+
+        Task PostAsync();
+
+        Task<T> GetAsync<T>();
     }
 }

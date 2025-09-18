@@ -47,7 +47,6 @@ namespace Sophon.Infrastructure
         #endregion
 
         #region 方法
-        public event EventHandler<DataReceivedEventArgs> DataReceived;
 
         public void Connect()
         {

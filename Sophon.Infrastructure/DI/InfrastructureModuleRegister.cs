@@ -3,6 +3,7 @@ using Common;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,30 @@ namespace Sophon.Infrastructure
             builder.RegisterType<Transaction>()
                    .As<ITransaction>()
                    .InstancePerLifetimeScope();
+
+
+            builder.RegisterType<TcpIpProtocol>()
+                   .As<ITcpIpProtocol>()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<SerialPortProtocol>()
+                   .As<ISerialPortProtocol>()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<HttpProtocol>()
+                   .As<IHttpProtocol>()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<ModbusProtocol>()
+                   .As<IModbusProtocol>()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<AdsProtocol>()
+                   .As<IAdsProtocol>()
+                   .InstancePerLifetimeScope();
+
+    
+
         }
     }
 }

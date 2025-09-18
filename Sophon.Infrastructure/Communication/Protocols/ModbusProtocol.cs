@@ -70,12 +70,10 @@ namespace Sophon.Infrastructure
         private bool _isConnected;
         private readonly ILoggerManager _logger;
         private readonly static object _lock = new object();
-        private SemaphoreSlim _semaphoreLock = new SemaphoreSlim(1, 1);
+        private readonly SemaphoreSlim _semaphoreLock = new SemaphoreSlim(1, 1);
         #endregion
 
         #region 方法
-        public event EventHandler<DataReceivedEventArgs> DataReceived;
-
         public void Connect()
         {
             if (_isConnected)
