@@ -136,12 +136,10 @@
   <ItemGroup>
     <Compile Include="Communication\DataReceivedEventArgs.cs" />
     <Compile Include="Communication\Interface\IAdsProtocol.cs" />
-    <Compile Include="Communication\Interface\IHttpProtocol.cs" />
     <Compile Include="Communication\Interface\IModbusProtocol.cs" />
     <Compile Include="Communication\Interface\ISerialPortProtocol.cs" />
     <Compile Include="Communication\Interface\ITcpIpProtocol.cs" />
     <Compile Include="Communication\Protocols\AdsProtocol.cs" />
-    <Compile Include="Communication\Protocols\HttpProtocol.cs" />
     <Compile Include="Communication\Protocols\ModbusProtocol.cs" />
     <Compile Include="Communication\Protocols\SerialPortProtocol.cs" />
     <Compile Include="Communication\Protocols\TcpIpProtocol.cs" />
