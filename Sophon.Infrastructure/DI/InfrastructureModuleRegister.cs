@@ -54,10 +54,6 @@ namespace Sophon.Infrastructure
                    .As<ISerialPortProtocol>()
                    .InstancePerLifetimeScope();
 
-            builder.RegisterType<HttpProtocol>()
-                   .As<IHttpProtocol>()
-                   .InstancePerLifetimeScope();
-
             builder.RegisterType<ModbusProtocol>()
                    .As<IModbusProtocol>()
                    .InstancePerLifetimeScope();
