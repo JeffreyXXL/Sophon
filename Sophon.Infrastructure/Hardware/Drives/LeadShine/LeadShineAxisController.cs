@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
-    public class LeadShineAxisControl : IAxisController
+    public class LeadShineAxisController : IAxisController
     {
         public bool IsInitialize { get; set; }
 
@@ -18,11 +18,11 @@ namespace Sophon.Infrastructure
         private int _axisCount;
 
 
-        public LeadShineAxisControl()
+        public LeadShineAxisController()
         {
             if (Initialize())
             {
-                
+                //todo
             }
             else
             {

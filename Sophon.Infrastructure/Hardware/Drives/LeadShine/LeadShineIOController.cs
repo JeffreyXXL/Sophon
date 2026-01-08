@@ -13,12 +13,12 @@ namespace Sophon.Infrastructure
         public int OutputCount => _outputCount;
 
 
-        public LeadShineAxisControl _leadShineAxisControl;
+        public LeadShineAxisController _leadShineAxisControl;
         private int _inputCount;
         private int _outputCount;
 
 
-        public LeadShineIOController(LeadShineAxisControl leadShineAxisControl)
+        public LeadShineIOController(LeadShineAxisController leadShineAxisControl)
         {
             _leadShineAxisControl = leadShineAxisControl;
             Initialize();

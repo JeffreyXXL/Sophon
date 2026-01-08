@@ -159,7 +159,9 @@
     <Compile Include="DI\InfrastructureModuleRegister.cs" />
     <Compile Include="Database\Entities\Production.cs" />
     <Compile Include="Database\Entities\User.cs" />
-    <Compile Include="Hardware\Drives\LeadShine\LeadShineAxisControl.cs" />
+    <Compile Include="Hardware\Drives\GoogolTech\GoogolTechAxisController.cs" />
+    <Compile Include="Hardware\Drives\GoogolTech\GoogolTechIOController.cs" />
+    <Compile Include="Hardware\Drives\LeadShine\LeadShineAxisController.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LeadShineIOController.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LTDMC.cs" />
     <Compile Include="Hardware\Interface\IAxisController.cs" />
@@ -177,12 +179,7 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Hardware\Drives\GoogolTech\" />
-    <Folder Include="Hardware\Drives\LingChen\" />
-    <Folder Include="Hardware\Drives\SoftWIn\" />
-    <Folder Include="Hardware\Drives\ZMotion\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
