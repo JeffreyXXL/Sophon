@@ -1,0 +1,59 @@
+﻿<UserControl
+    x:Class="Sophon.UI.Views.SideBarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:Sophon.UI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="200"
+    mc:Ignorable="d">
+    <StackPanel>
+        <Image Margin="10" />
+        <Grid>
+            <hc:SideMenu>
+                <hc:SideMenuItem Header="系统主页">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="设备流程">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="模组操作">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="硬件调试">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="报警状态">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="日志操作">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="数据管里">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="用户管理">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+            </hc:SideMenu>
+        </Grid>
+    </StackPanel>
+</UserControl>
