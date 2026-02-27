@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
-    public class GoogolTechIOController : IIOController
+    public class GoogolTechIoController : IIoController
     {
         public int InputCount => throw new NotImplementedException();
 

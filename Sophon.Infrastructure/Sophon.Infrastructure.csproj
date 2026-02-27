@@ -160,14 +160,15 @@
     <Compile Include="Database\Entities\Production.cs" />
     <Compile Include="Database\Entities\User.cs" />
     <Compile Include="Hardware\Drives\GoogolTech\GoogolTechAxisController.cs" />
-    <Compile Include="Hardware\Drives\GoogolTech\GoogolTechIOController.cs" />
+    <Compile Include="Hardware\Drives\GoogolTech\GoogolTechIoController.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LeadShineAxisController.cs" />
-    <Compile Include="Hardware\Drives\LeadShine\LeadShineIOController.cs" />
+    <Compile Include="Hardware\Drives\LeadShine\LeadShineIoController.cs" />
     <Compile Include="Hardware\Drives\LeadShine\LTDMC.cs" />
-    <Compile Include="Hardware\Drives\MotionCardFactory.cs" />
+    <Compile Include="Hardware\Factory\GoogolTechFactory.cs" />
+    <Compile Include="Hardware\Factory\LeadShineFactory.cs" />
     <Compile Include="Hardware\Interface\IAxisController.cs" />
-    <Compile Include="Hardware\Interface\IIOController.cs" />
-    <Compile Include="Hardware\Interface\IMotionCardFactory.cs" />
+    <Compile Include="Hardware\Interface\IHardwareFactory.cs" />
+    <Compile Include="Hardware\Interface\IIoController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

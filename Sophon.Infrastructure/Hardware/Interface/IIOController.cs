@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
-    public interface IIOController
+    public interface IIoController
     {
         bool Initialize();
 

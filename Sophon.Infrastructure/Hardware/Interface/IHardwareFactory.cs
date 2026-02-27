@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
-{ 
-    public interface IMotionCardFactory
+{
+    public interface IHardwareFactory
     {
         IAxisController CreateAxisController();
-        IIOController CreateIOController();
+        IIoController CreateIoController();
     }
 }

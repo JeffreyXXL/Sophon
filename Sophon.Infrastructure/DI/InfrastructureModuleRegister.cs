@@ -62,7 +62,29 @@ namespace Sophon.Infrastructure
                    .As<IAdsProtocol>()
                    .InstancePerLifetimeScope();
 
-    
+
+
+            builder.Register<IHardwareFactory>(c =>
+            {
+                string brand = ConfigurationManager.AppSettings["CardBrand"];
+
+                switch (brand)
+                {
+                    case "LeadShine":
+                        return new LeadShineFactory();
+                    case "GoogolTech":
+                        return new GoogolTechFactory();
+                }
+                throw new Exception("未知板卡品牌");
+            }).SingleInstance();
+
+            builder.Register(c =>
+              c.Resolve<IHardwareFactory>().CreateAxisController())
+              .As<IAxisController>().SingleInstance();
+
+            builder.Register(c =>
+              c.Resolve<IHardwareFactory>().CreateIoController())
+              .As<IIoController>().SingleInstance(); 
 
         }
     }

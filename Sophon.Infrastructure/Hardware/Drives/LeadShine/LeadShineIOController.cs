@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
-    public class LeadShineIOController : IIOController
+    public class LeadShineIoController : IIoController
     {
         public int InputCount => _inputCount;
 
         public int OutputCount => _outputCount;
 
 
-        public LeadShineAxisController _leadShineAxisControl;
+        public IAxisController _leadShineAxisControl;
         private int _inputCount;
         private int _outputCount;
 
 
-        public LeadShineIOController(LeadShineAxisController leadShineAxisControl)
+        public LeadShineIoController(IAxisController leadShineAxisControl)
         {
             _leadShineAxisControl = leadShineAxisControl;
             Initialize();
