@@ -72,6 +72,7 @@
     <Compile Include="EventBus\Interface\IEventBus.cs" />
     <Compile Include="Flow\Application_Temp\Events\SampleEvent.cs" />
     <Compile Include="Flow\Application_Temp\FlowStepBase.cs" />
+    <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_AxisHome.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_EventSubscribe.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_Loop.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_EventPublish.cs" />
@@ -106,6 +107,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{57a0909f-1e0f-4aec-a142-47d70dee3061}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sophon.Infrastructure\Sophon.Infrastructure.csproj">
+      <Project>{1d9d3c4e-6d43-4b20-b0bb-0af9d2f31b70}</Project>
+      <Name>Sophon.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
