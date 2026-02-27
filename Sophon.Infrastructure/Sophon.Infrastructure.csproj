@@ -168,7 +168,9 @@
     <Compile Include="Hardware\Factory\LeadShineFactory.cs" />
     <Compile Include="Hardware\Interface\IAxisController.cs" />
     <Compile Include="Hardware\Interface\IHardwareFactory.cs" />
+    <Compile Include="Hardware\Interface\IHardwareProvider.cs" />
     <Compile Include="Hardware\Interface\IIoController.cs" />
+    <Compile Include="Hardware\Provider\HardwareProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

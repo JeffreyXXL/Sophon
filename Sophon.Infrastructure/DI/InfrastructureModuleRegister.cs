@@ -84,8 +84,11 @@ namespace Sophon.Infrastructure
 
             builder.Register(c =>
               c.Resolve<IHardwareFactory>().CreateIoController())
-              .As<IIoController>().SingleInstance(); 
+              .As<IIoController>().SingleInstance();
 
+            builder.RegisterType<HardwareProvider>()
+                   .As<IHardwareProvider>()
+                   .SingleInstance();
         }
     }
 }
