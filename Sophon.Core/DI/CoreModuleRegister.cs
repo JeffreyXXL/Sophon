@@ -32,6 +32,10 @@ namespace Sophon.Core
             builder.RegisterType<WorkStationManager>()
                    .As<IWorkStationManager>()
                    .SingleInstance();
+
+            builder.RegisterType<UserContext>()
+                   .As<IUserContext>()
+                   .SingleInstance();
         }
     }
 }

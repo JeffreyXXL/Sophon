@@ -57,7 +57,14 @@ namespace Sophon.UI
 
 
             var regionManager = Container.Resolve<IRegionManager>();
-            regionManager.RequestNavigate("ContentRegion", "UserView");
+            regionManager.RequestNavigate("ContentRegion", "UserView", result =>
+            {
+                if (result.Error != null)
+                {
+                    // 把具体的错误弹窗显示出来
+                    MessageBox.Show($"导航失败！\n错误信息: {result.Error.Message}\n内部错误: {result.Error.InnerException?.Message}");
+                }
+            });
         }
 
         protected override void OnExit(ExitEventArgs e)

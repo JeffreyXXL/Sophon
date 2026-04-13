@@ -89,7 +89,19 @@
                                 Visibility="{Binding IsLogoutBtnVisible, Converter={StaticResource BoolToVisConverter}}" />
                         </StackPanel>
 
-                        <Grid Height="30" Margin="0,0,20,0">
+                        <Grid Height="30" Margin="20,0,20,0">
+                            <Button
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding AddUserPanelCommand}"
+                                Content="新增用户"
+                                FontSize="15"
+                                Foreground="Green"
+                                Tag="AllowOperator"
+                                Visibility="{Binding IsChangePwdVisible, Converter={StaticResource BoolToVisConverter}}" />
+
                             <Button
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"

@@ -1,0 +1,19 @@
+﻿using Sophon.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sophon.Core
+{
+    public interface IUserContext
+    {
+        string CurrentUser { get; set; }
+        UserLevel CurrentLevel { get; set; }
+        bool IsLoggedIn { get; }
+        void Login(string userName);
+        void Logout();
+
+    }
+}

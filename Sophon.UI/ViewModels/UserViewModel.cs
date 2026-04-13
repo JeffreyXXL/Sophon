@@ -2,6 +2,7 @@
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using Sophon.Core;
 using Sophon.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -78,18 +79,17 @@ namespace Sophon.UI.ViewModels
 
         #endregion
 
-        private readonly IEventAggregator _eventAggregator;
         private readonly IUserRepository _userRepository;
-
-        public UserViewModel(IEventAggregator eventAggregator, IUserRepository repository)
+        private readonly IUserContext _userContext;
+        public UserViewModel(IUserRepository userRepository, IUserContext userContext)
         {
             LoginCommand = new DelegateCommand<object>(ExecuteLogin);
             LogoutCommand = new DelegateCommand<object>(ExecuteLogout);
             ChangePwdPanelCommand = new DelegateCommand(ExecuteChangePwdPanel);
             SaveNewPwdCommand = new DelegateCommand<object>(ExecuteSaveNewPwd);
             SwitchToLoginCommand = new DelegateCommand(ExecuteSwitchToLogin);
-            _eventAggregator = eventAggregator;
-            _userRepository = repository;
+            _userRepository = userRepository;
+            _userContext = userContext;
             ExecuteSwitchToLogin();
 
             UserList = new ObservableCollection<string>();
@@ -212,16 +212,7 @@ namespace Sophon.UI.ViewModels
             //                              LoginControl.User == LoginUser.Administrator;
         }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public async void OnNavigatedFrom(NavigationContext navigationContext)
+        public async void OnNavigatedTo(NavigationContext navigationContext)
         {
             var names = await _userRepository.GetAllUserNames();
 
@@ -230,6 +221,16 @@ namespace Sophon.UI.ViewModels
             {
                 UserList.Add(name);
             }
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+
         }
     }
 }

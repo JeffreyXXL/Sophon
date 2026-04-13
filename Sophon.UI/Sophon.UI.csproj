@@ -162,6 +162,10 @@
       <Project>{54592366-d025-4196-aefe-d1cfd04fbde8}</Project>
       <Name>Sophon.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sophon.Core\Sophon.Core.csproj">
+      <Project>{463064AD-EAD3-4E9A-89DB-2E4055329F39}</Project>
+      <Name>Sophon.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sophon.Infrastructure\Sophon.Infrastructure.csproj">
       <Project>{1D9D3C4E-6D43-4B20-B0BB-0AF9D2F31B70}</Project>
       <Name>Sophon.Infrastructure</Name>
