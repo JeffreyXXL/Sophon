@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
+    [ModuleRegister]
     public class InfrastructureModuleRegister : IModuleRegister
     {
         public void Register(ContainerBuilder builder)
@@ -22,7 +23,7 @@ namespace Sophon.Infrastructure
             }).InstancePerLifetimeScope();
 
             builder.RegisterType<DatabaseInitializer>()
-                   .AsSelf()
+                   .As<IDatabaseInitializer>()
                    .SingleInstance();
 
             builder.RegisterType<LoginHistoryRepository>()
@@ -30,7 +31,7 @@ namespace Sophon.Infrastructure
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<UserRepository>()
-                   .As<IRepository<User>>()
+                   .As<IUserRepository>()
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<ProductionHistoryRepository>()

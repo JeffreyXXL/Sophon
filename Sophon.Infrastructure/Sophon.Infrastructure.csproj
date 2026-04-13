@@ -147,8 +147,10 @@
     <Compile Include="Database\DbContext.cs" />
     <Compile Include="Database\Entities\Interface\IEntity.cs" />
     <Compile Include="Database\Entities\LoginHistory.cs" />
+    <Compile Include="Database\IDatabaseInitializer.cs" />
     <Compile Include="Database\Repository\Interface\IRepository.cs" />
     <Compile Include="Database\Entities\ProductionHistory.cs" />
+    <Compile Include="Database\Repository\Interface\IUserRepository.cs" />
     <Compile Include="Database\Repository\ProductionHistoryRepository.cs" />
     <Compile Include="Database\Repository\LoginHistoryRepository.cs" />
     <Compile Include="Database\Repository\RepositoryBase.cs" />

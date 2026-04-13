@@ -1,0 +1,170 @@
+﻿<UserControl
+    x:Class="Sophon.UI.Views.UserView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:Sophon.UI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Image Source="/Resources/bg_login.png" Stretch="Fill" />
+
+        <Border
+            Width="600"
+            Height="400"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="AliceBlue"
+            CornerRadius="20">
+            <Border.Effect>
+                <DropShadowEffect
+                    BlurRadius="50"
+                    Opacity="0.6"
+                    ShadowDepth="10"
+                    Color="Black" />
+            </Border.Effect>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="350" />
+                    <ColumnDefinition Width="250" />
+                </Grid.ColumnDefinitions>
+
+                <Image Source="/Resources/bg_login.png" Stretch="Fill" />
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <Image Margin="20,0,20,10" Source="/Resources/logo.png" />
+
+                    <StackPanel Visibility="{Binding IsLoginVisible, Converter={StaticResource BoolToVisConverter}}">
+                        <ComboBox
+                            Height="35"
+                            Margin="20"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            IsEnabled="{Binding IsInputEnabled}"
+                            ItemsSource="{Binding UserList}"
+                            SelectedValue="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <PasswordBox
+                            x:Name="TxtPassword"
+                            Height="35"
+                            Margin="20,0,20,10"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            IsEnabled="{Binding IsInputEnabled}" />
+
+                        <StackPanel
+                            Margin="20,10,20,5"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Button
+                                Width="100"
+                                Height="50"
+                                Margin="0,0,10,0"
+                                hc:BorderElement.CornerRadius="10"
+                                Command="{Binding LoginCommand}"
+                                CommandParameter="{Binding ElementName=TxtPassword}"
+                                Content="登   录"
+                                FontSize="22"
+                                FontWeight="Bold"
+                                IsEnabled="{Binding IsInputEnabled}"
+                                Tag="AllowOperator" />
+                            <Button
+                                Width="100"
+                                Height="50"
+                                hc:BorderElement.CornerRadius="10"
+                                Command="{Binding LogoutCommand}"
+                                CommandParameter="{Binding ElementName=TxtPassword}"
+                                Content="注   销"
+                                FontSize="22"
+                                FontWeight="Bold"
+                                Tag="AllowOperator"
+                                Visibility="{Binding IsLogoutBtnVisible, Converter={StaticResource BoolToVisConverter}}" />
+                        </StackPanel>
+
+                        <Grid Height="30" Margin="0,0,20,0">
+                            <Button
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding ChangePwdPanelCommand}"
+                                Content="修改密码"
+                                FontSize="15"
+                                Foreground="Red"
+                                Tag="AllowOperator"
+                                Visibility="{Binding IsChangePwdVisible, Converter={StaticResource BoolToVisConverter}}" />
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Visibility="{Binding IsChangePwdPanelVisible, Converter={StaticResource BoolToVisConverter}}">
+
+                        <ComboBox
+                            Height="35"
+                            Margin="20"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            ItemsSource="{Binding UserList}"
+                            SelectedValue="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <PasswordBox
+                            x:Name="TxtNewPwd"
+                            Height="35"
+                            Margin="20,0,20,10"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            Tag="新密码"
+                            ToolTip="请输入新密码" />
+
+                        <StackPanel
+                            Margin="20,10,20,5"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Button
+                                Width="100"
+                                Height="50"
+                                Margin="0,0,10,0"
+                                hc:BorderElement.CornerRadius="10"
+                                Command="{Binding SaveNewPwdCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Content="确   认"
+                                FontSize="22"
+                                FontWeight="Bold"
+                                Tag="AllowOperator" />
+                            <Button
+                                Width="100"
+                                Height="50"
+                                hc:BorderElement.CornerRadius="10"
+                                Command="{Binding SwitchToLoginCommand}"
+                                Content="返   回"
+                                FontSize="22"
+                                FontWeight="Bold"
+                                Tag="AllowOperator" />
+                        </StackPanel>
+
+                        <Grid Height="30">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Foreground="Green"
+                                Text="请在上方选择用户后修改密码" />
+                        </Grid>
+
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

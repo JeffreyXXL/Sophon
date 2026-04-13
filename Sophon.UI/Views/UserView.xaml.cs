@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Sophon.UI.Views
 {
     /// <summary>
-    /// SideBarView.xaml 的交互逻辑
+    /// UserView.xaml 的交互逻辑
     /// </summary>
-    public partial class SideBarView : UserControl
+    public partial class UserView : UserControl
     {
-        public SideBarView()
+        public UserView()
         {
             InitializeComponent();
         }

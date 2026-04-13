@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
-    public class UserRepository : RepositoryBase<User>
+    public class UserRepository : RepositoryBase<User>, IUserRepository
     {
         #region 构造函数
         public UserRepository(DbContext dbContext) : base(dbContext)
         {
         }
+
         #endregion
 
         #region 属性
@@ -29,6 +30,10 @@ namespace Sophon.Infrastructure
             return QuerySingleAsync(u => u.UserName == name);
         }
 
+        public Task<List<string>> GetAllUserNames()
+        {
+            return QueryAllAsync().ContinueWith(t => t.Result.Select(u => u.UserName).ToList());
+        }
         #endregion
     }
 }

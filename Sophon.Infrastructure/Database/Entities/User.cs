@@ -20,12 +20,20 @@ namespace Sophon.Infrastructure
         public string Password { get; set; }
 
         [SugarColumn(IsNullable = false)]
-        public int UserLevel { get; set; }
+        public UserLevel UserLevel { get; set; }
 
         [SugarColumn(IsNullable = false)]
         public DateTime CreateTime { get; set; }
 
         [SugarColumn(IsNullable = false)]
         public DateTime LatestChangeTime { get; set; }
+    }
+
+    public enum UserLevel
+    {
+        Normal = 0,
+        Operater = 1,
+        Engineer = 2,
+        Admin = 10
     }
 }
