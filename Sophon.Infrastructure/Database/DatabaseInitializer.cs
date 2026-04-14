@@ -1,6 +1,8 @@
 ﻿using SqlSugar;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -37,7 +39,17 @@ namespace Sophon.Infrastructure
 
         public void InitDbContext()
         {
+            var connstr = ConfigurationManager.AppSettings["ConnectionString"];
+            string fullPath = connstr.Split('=')[1].Split(';')[0].Trim();
+
+            string directoryPath = Path.GetDirectoryName(fullPath);
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
             _dbContext.Db.CodeFirst.InitTables(_entityTypes);
+            _dbContext._logger.Debug($"成功创建{_entityTypes.Length}张表。");
         }
 
         public Type[] GetAllEntities()
@@ -52,7 +64,7 @@ namespace Sophon.Infrastructure
                                         x.IsDefined(typeof(SugarTable), false)).ToArray();
 
             string names = string.Join(",", _entityTypes.Select(t => t.Name));
-            _dbContext._logger.Debug($"成功创建{_entityTypes.Length}张数据表，分别为{names}。");
+            _dbContext._logger.Debug($"成功获取{_entityTypes.Length}个实体类，分别为{names}。");
             return _entityTypes;
         }
 

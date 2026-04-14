@@ -31,8 +31,8 @@ namespace Sophon.Infrastructure
 
     public enum UserLevel
     {
-        Normal = 0,
-        Operater = 1,
+        None = 0,
+        Operator = 1,
         Engineer = 2,
         Admin = 10
     }

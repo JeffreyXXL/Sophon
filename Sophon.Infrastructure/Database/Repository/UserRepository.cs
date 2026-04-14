@@ -12,12 +12,12 @@ namespace Sophon.Infrastructure
         #region 构造函数
         public UserRepository(DbContext dbContext) : base(dbContext)
         {
+
         }
 
         #endregion
 
         #region 属性
-
         #endregion
 
         #region 字段
@@ -33,6 +33,29 @@ namespace Sophon.Infrastructure
         public Task<List<string>> GetAllUserNames()
         {
             return QueryAllAsync().ContinueWith(t => t.Result.Select(u => u.UserName).ToList());
+        }
+
+        public string GetPasswordByUserName(string name)
+        {
+            return _dbContext.Db.Queryable<User>().Where(u => u.UserName == name).Select(u => u.Password).Single();
+        }
+
+        public UserLevel GetLevelByUserName(string name)
+        {
+            return _dbContext.Db.Queryable<User>().Where(u => u.UserName == name).Select(u => u.UserLevel).Single();
+        }
+
+        public bool ChangePassword(string name, string newPassword)
+        {
+            return _dbContext.Db.Updateable<User>()
+                                .SetColumns(u => u.Password == newPassword)
+                                .Where(u => u.UserName == name)
+                                .ExecuteCommand() > 0;
+        }
+
+        public bool DeleteUser(string name)
+        {
+            return _dbContext.Db.Deleteable<User>().Where(u => u.UserName == name).ExecuteCommand() > 0;
         }
         #endregion
     }

@@ -1,15 +1,12 @@
 ﻿using Prism.Commands;
-using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using Sophon.Core;
 using Sophon.Infrastructure;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Sophon.UI.ViewModels
@@ -24,11 +21,11 @@ namespace Sophon.UI.ViewModels
             set { SetProperty(ref _userName, value); }
         }
 
-        private bool _isChangePwdVisible;
-        public bool IsChangePwdVisible
+        private bool _isAdminButtonVisible;
+        public bool IsAdminButtonVisible
         {
-            get { return _isChangePwdVisible; }
-            set { SetProperty(ref _isChangePwdVisible, value); }
+            get { return _isAdminButtonVisible; }
+            set { SetProperty(ref _isAdminButtonVisible, value); }
         }
 
         private bool _isChangePwdPanelVisible;
@@ -37,6 +34,20 @@ namespace Sophon.UI.ViewModels
             get { return _isChangePwdPanelVisible; }
             set { SetProperty(ref _isChangePwdPanelVisible, value); }
         }
+
+        private bool _isAddUserPanelVisible;
+        public bool IsAddUserPanelVisible
+        {
+            get { return _isAddUserPanelVisible; }
+            set { SetProperty(ref _isAddUserPanelVisible, value); }
+        }
+        private bool _isDeleteUserPanelVisible;
+        public bool IsDeleteUserPanelVisible
+        {
+            get { return _isDeleteUserPanelVisible; }
+            set { SetProperty(ref _isDeleteUserPanelVisible, value); }
+        }
+
 
         private bool _isLoginVisible;
         public bool IsLoginVisible
@@ -67,16 +78,43 @@ namespace Sophon.UI.ViewModels
             set { SetProperty(ref _userList, value); }
         }
 
+        private string _newUserName;
+
+        public string NewUserName
+        {
+            get { return _newUserName; }
+            set { SetProperty(ref _newUserName, value); }
+        }
+        private UserLevel _selectedlevel;
+
+        public UserLevel SelectedLevel
+        {
+            get { return _selectedlevel; }
+            set { SetProperty(ref _selectedlevel, value); }
+        }
+        private ObservableCollection<string> _levelList;
+
+        public ObservableCollection<string> LevelList
+        {
+            get { return _levelList; }
+            set { SetProperty(ref _levelList, value); }
+        }
+
         #endregion
 
         #region Commands
         public DelegateCommand<object> LoginCommand { get; private set; }
-        public DelegateCommand<object> LogoutCommand { get; private set; }
+        public DelegateCommand LogoutCommand { get; private set; }
         public DelegateCommand ChangePwdPanelCommand { get; private set; }
 
         public DelegateCommand<object> SaveNewPwdCommand { get; private set; }
         public DelegateCommand SwitchToLoginCommand { get; private set; }
-
+        public DelegateCommand AddUserPanelCommand { get; private set; }
+        public DelegateCommand<object> SaveUserCommand { get; private set; }
+        public DelegateCommand CancelCommand { get; private set; }
+        public DelegateCommand DeleteUserPanelCommand { get; private set; }
+        public DelegateCommand DeleteUserCommand { get; private set; }
+        public DelegateCommand CancelDeleteCommand { get; private set; }
         #endregion
 
         private readonly IUserRepository _userRepository;
@@ -84,15 +122,27 @@ namespace Sophon.UI.ViewModels
         public UserViewModel(IUserRepository userRepository, IUserContext userContext)
         {
             LoginCommand = new DelegateCommand<object>(ExecuteLogin);
-            LogoutCommand = new DelegateCommand<object>(ExecuteLogout);
+            LogoutCommand = new DelegateCommand(ExecuteLogout);
             ChangePwdPanelCommand = new DelegateCommand(ExecuteChangePwdPanel);
             SaveNewPwdCommand = new DelegateCommand<object>(ExecuteSaveNewPwd);
             SwitchToLoginCommand = new DelegateCommand(ExecuteSwitchToLogin);
+            AddUserPanelCommand = new DelegateCommand(ExecuteAddUserPanel);
+            SaveUserCommand = new DelegateCommand<object>(ExecuteSaveUser);
+            CancelCommand = new DelegateCommand(ExecuteCancel);
+            DeleteUserPanelCommand = new DelegateCommand(ExecuteDeleteUserPanel);
+            DeleteUserCommand = new DelegateCommand(ExecuteDeleteUser);
+            CancelDeleteCommand = new DelegateCommand(ExecuteCancelDelete);
             _userRepository = userRepository;
             _userContext = userContext;
             ExecuteSwitchToLogin();
 
             UserList = new ObservableCollection<string>();
+            LevelList = new ObservableCollection<string>()
+            {
+                UserLevel.Operator.ToString(),
+                UserLevel.Engineer.ToString(),
+                UserLevel.Admin.ToString(),
+            };
         }
 
         /// <summary>
@@ -102,31 +152,17 @@ namespace Sophon.UI.ViewModels
         private void ExecuteLogin(object param)
         {
             var passwordBox = param as PasswordBox;
-            //string password = LoginControl.Instance.SecretMD5(passwordBox?.Password);
+            string password = passwordBox?.Password;
 
+            string storedPassword = _userRepository.GetPasswordByUserName(UserName);
+            UserLevel level = _userRepository.GetLevelByUserName(UserName);
+            if (password == storedPassword)
+            {
+                _userContext.CurrentUser = UserName;
+                _userContext.IsLoggedIn = true;
+                _userContext.CurrentLevel = level;
+            }
 
-            //var config = LoginControl.Instance;
-            //string currentName = UserName;
-            //if (currentName == "操作员" && config.OperatorPassword == password)
-            //{
-            //    LoginControl.User = LoginUser.Operator;
-            //}
-            //else if (currentName == "工程师" && config.EngineerPassword == password)
-            //{
-            //    LoginControl.User = LoginUser.Engineer;
-            //}
-            //else if (currentName == "管理员" && config.AdministratorPassword == password)
-            //{
-            //    LoginControl.User = LoginUser.Administrator;
-            //}
-            //else
-            //{
-            //    LoginControl.User = LoginUser.None;
-            //}
-            //if (LoginControl.User != LoginUser.None)
-            //{
-            //    _eventAggregator.GetEvent<UserLoggedInEvent>().Publish(UserName);
-            //}
             passwordBox?.Clear();
             UpdateUI();
         }
@@ -134,14 +170,11 @@ namespace Sophon.UI.ViewModels
         /// <summary>
         /// 退出登录
         /// </summary>
-        private void ExecuteLogout(object param)
+        private void ExecuteLogout()
         {
-            //LoginControl.User = LoginUser.None;
-            if (param is PasswordBox p)
-            {
-                p.Clear();
-                UserName = "未登录";
-            }
+            _userContext.IsLoggedIn = false;
+            _userContext.CurrentLevel = UserLevel.None;
+            UserName = "未登录";
 
             //_eventAggregator.GetEvent<UserLoggedInEvent>().Publish(UserName);
             IsChangePwdPanelVisible = false;
@@ -166,26 +199,17 @@ namespace Sophon.UI.ViewModels
         {
             var view = param as UserControl;
             var txtNewPwd = view.FindName("TxtNewPwd") as PasswordBox;
-            var txtLoginPwd = view.FindName("TxtPassword") as PasswordBox;
-            //string newPassword = LoginControl.Instance.SecretMD5(txtNewPwd?.Password);
-            //{
-            //    switch (UserName)
-            //    {
-            //        case "操作员":
-            //            LoginControl.Instance.OperatorPassword = newPassword;
-            //            break;
-            //        case "工程师":
-            //            LoginControl.Instance.EngineerPassword = newPassword;
-            //            break;
-            //        case "管理员":
-            //            LoginControl.Instance.AdministratorPassword = newPassword;
-            //            break;
-            //    }
-            //    LoginControl.Instance.Save();
-            //}
-            txtNewPwd?.Clear();
-            ExecuteSwitchToLogin();
-            ExecuteLogout(txtLoginPwd);
+
+            if (_userRepository.ChangePassword(UserName, txtNewPwd?.Password))
+            {
+                txtNewPwd?.Clear();
+                ExecuteSwitchToLogin();
+                ExecuteLogout();
+            }
+            else
+            {
+                MessageBox.Show("修改密码失败！");
+            }
         }
 
         /// <summary>
@@ -198,21 +222,103 @@ namespace Sophon.UI.ViewModels
             UpdateUI();
         }
 
-        private void UpdateUI()
+        private void ExecuteAddUserPanel()
         {
-            //bool isLoggedOut = LoginControl.User == LoginUser.None;
-            //bool isAdmin = LoginControl.User == LoginUser.Administrator;
+            IsAddUserPanelVisible = true;
+            IsLoginVisible = false;
+        }
+        private async Task SaveUserAsync(object param)
+        {
+            if (string.IsNullOrEmpty(NewUserName))
+            {
+                MessageBox.Show("请正确输入用户名！");
+                return;
+            }
+            var user = await _userRepository.GetUserByName(NewUserName);
+            if (user != null)
+            {
+                MessageBox.Show("用户名已经存在！");
+                return;
+            }
 
-            //IsInputEnabled = isLoggedOut;
-            //IsLogoutBtnVisible = !isLoggedOut;
-            //IsChangePwdVisible = !isLoggedOut && isAdmin;
+            var view = param as UserControl;
+            var txtPwd_1 = view.FindName("UserPwd_1") as PasswordBox;
+            var txtPwd_2 = view.FindName("UserPwd_2") as PasswordBox;
 
+            if (txtPwd_1?.Password != txtPwd_2?.Password)
+            {
+                MessageBox.Show("请确保两次密码输入一致！");
+                return;
+            }
 
-            //PermissionGuard.IsHighLevel = LoginControl.User == LoginUser.Engineer ||
-            //                              LoginControl.User == LoginUser.Administrator;
+            if (SelectedLevel == 0)
+            {
+                MessageBox.Show("请选择用户等级！");
+                return;
+            }
+
+            var newUser = new User()
+            {
+                UserName = NewUserName,
+                Password = txtPwd_1?.Password,
+                CreateTime = DateTime.Now,
+                LatestChangeTime = DateTime.Now,
+                UserLevel = SelectedLevel
+            };
+            int result = await _userRepository.InsertAsync(newUser);
+            if (result == 0)
+            {
+                MessageBox.Show("新建用户失败！");
+                return;
+            }
+            await UpdateUserListAsync();
+            ExecuteLogout();
+            ExecuteCancel();
+        }
+        private async void ExecuteSaveUser(object param)
+        {
+            await SaveUserAsync(param);
         }
 
-        public async void OnNavigatedTo(NavigationContext navigationContext)
+        private void ExecuteCancel()
+        {
+            IsAddUserPanelVisible = false;
+            IsLoginVisible = true;
+            UpdateUI();
+        }
+
+        private void ExecuteDeleteUserPanel()
+        {
+            IsDeleteUserPanelVisible = true;
+            IsLoginVisible = false;
+        }
+
+        private async void ExecuteDeleteUser()
+        {
+            _userRepository.DeleteUser(UserName);
+            await UpdateUserListAsync();
+            ExecuteLogout();
+            ExecuteCancelDelete();
+        }
+
+        private async void ExecuteCancelDelete()
+        {
+            IsDeleteUserPanelVisible = false;
+            IsLoginVisible = true;
+            UpdateUI();
+        }
+
+        private void UpdateUI()
+        {
+            bool isLoggedOut = !_userContext.IsLoggedIn;
+            bool isAdmin = _userContext.CurrentLevel == UserLevel.Admin;
+
+            IsInputEnabled = isLoggedOut;
+            IsLogoutBtnVisible = !isLoggedOut;
+            IsAdminButtonVisible = !isLoggedOut && isAdmin;
+        }
+
+        private async Task UpdateUserListAsync()
         {
             var names = await _userRepository.GetAllUserNames();
 
@@ -221,6 +327,11 @@ namespace Sophon.UI.ViewModels
             {
                 UserList.Add(name);
             }
+        }
+
+        public async void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            await UpdateUserListAsync();
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

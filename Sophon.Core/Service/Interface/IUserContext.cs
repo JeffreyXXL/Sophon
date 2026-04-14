@@ -11,7 +11,7 @@ namespace Sophon.Core
     {
         string CurrentUser { get; set; }
         UserLevel CurrentLevel { get; set; }
-        bool IsLoggedIn { get; }
+        bool IsLoggedIn { get; set; }
         void Login(string userName);
         void Logout();
 

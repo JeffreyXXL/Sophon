@@ -81,7 +81,6 @@
                                 Height="50"
                                 hc:BorderElement.CornerRadius="10"
                                 Command="{Binding LogoutCommand}"
-                                CommandParameter="{Binding ElementName=TxtPassword}"
                                 Content="注   销"
                                 FontSize="22"
                                 FontWeight="Bold"
@@ -89,7 +88,7 @@
                                 Visibility="{Binding IsLogoutBtnVisible, Converter={StaticResource BoolToVisConverter}}" />
                         </StackPanel>
 
-                        <Grid Height="30" Margin="20,0,20,0">
+                        <Grid Height="30" Margin="20,10,20,0">
                             <Button
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
@@ -97,10 +96,21 @@
                                 BorderThickness="0"
                                 Command="{Binding AddUserPanelCommand}"
                                 Content="新增用户"
-                                FontSize="15"
+                                FontSize="14"
                                 Foreground="Green"
                                 Tag="AllowOperator"
-                                Visibility="{Binding IsChangePwdVisible, Converter={StaticResource BoolToVisConverter}}" />
+                                Visibility="{Binding IsAdminButtonVisible, Converter={StaticResource BoolToVisConverter}}" />
+                            <Button
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Command="{Binding DeleteUserPanelCommand}"
+                                Content="删除用户"
+                                FontSize="14"
+                                Foreground="Red"
+                                Tag="AllowOperator"
+                                Visibility="{Binding IsAdminButtonVisible, Converter={StaticResource BoolToVisConverter}}" />
 
                             <Button
                                 HorizontalAlignment="Right"
@@ -109,10 +119,10 @@
                                 BorderThickness="0"
                                 Command="{Binding ChangePwdPanelCommand}"
                                 Content="修改密码"
-                                FontSize="15"
-                                Foreground="Red"
+                                FontSize="14"
+                                Foreground="Yellow"
                                 Tag="AllowOperator"
-                                Visibility="{Binding IsChangePwdVisible, Converter={StaticResource BoolToVisConverter}}" />
+                                Visibility="{Binding IsAdminButtonVisible, Converter={StaticResource BoolToVisConverter}}" />
                         </Grid>
                     </StackPanel>
 
@@ -174,9 +184,121 @@
 
                     </StackPanel>
 
+
+
+
+                    <StackPanel Visibility="{Binding IsAddUserPanelVisible, Converter={StaticResource BoolToVisConverter}}">
+                        <TextBox
+                            x:Name="TxtUserName"
+                            Height="35"
+                            Margin="20,0,20,10"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            Tag="用户名"
+                            Text="{Binding NewUserName}"
+                            ToolTip="请输入用户名" />
+
+                        <PasswordBox
+                            x:Name="UserPwd_1"
+                            Height="35"
+                            Margin="20,0,20,10"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            Tag="密码"
+                            ToolTip="请输入密码" />
+
+                        <PasswordBox
+                            x:Name="UserPwd_2"
+                            Height="35"
+                            Margin="20,0,20,10"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            Tag="新密码"
+                            ToolTip="请再次输入密码" />
+                        <ComboBox
+                            Height="35"
+                            Margin="20"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            ItemsSource="{Binding LevelList}"
+                            SelectedValue="{Binding SelectedLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <StackPanel
+                            Margin="20,10,20,5"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Button
+                                Width="100"
+                                Height="50"
+                                Margin="0,0,10,0"
+                                hc:BorderElement.CornerRadius="10"
+                                Command="{Binding SaveUserCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                Content="添   加"
+                                FontSize="22"
+                                FontWeight="Bold"
+                                Tag="AllowOperator" />
+                            <Button
+                                Width="100"
+                                Height="50"
+                                hc:BorderElement.CornerRadius="10"
+                                Command="{Binding CancelCommand}"
+                                Content="取   消"
+                                FontSize="22"
+                                FontWeight="Bold"
+                                Tag="AllowOperator" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Visibility="{Binding IsDeleteUserPanelVisible, Converter={StaticResource BoolToVisConverter}}">
+                        <ComboBox
+                            Height="35"
+                            Margin="20"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            FontSize="18"
+                            ItemsSource="{Binding UserList}"
+                            SelectedValue="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <StackPanel
+                            Margin="20,10,20,5"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Button
+                                Width="100"
+                                Height="50"
+                                Margin="0,0,10,0"
+                                hc:BorderElement.CornerRadius="10"
+                                Command="{Binding DeleteUserCommand}"
+                                Content="删   除"
+                                FontSize="22"
+                                FontWeight="Bold"
+                                Tag="AllowOperator" />
+                            <Button
+                                Width="100"
+                                Height="50"
+                                hc:BorderElement.CornerRadius="10"
+                                Command="{Binding CancelDeleteCommand}"
+                                Content="取   消"
+                                FontSize="22"
+                                FontWeight="Bold"
+                                Tag="AllowOperator" />
+                        </StackPanel>
+                        <Grid Height="30">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Foreground="Red"
+                                Text="请在上方选择用户后删除对应用户" />
+                        </Grid>
+
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </Border>
-
     </Grid>
 </UserControl>
