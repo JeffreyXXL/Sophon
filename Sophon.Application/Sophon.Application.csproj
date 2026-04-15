@@ -69,14 +69,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Config\Communication\communication_config.json" />
+    <None Include="Config\Protocol\protocol_config.json" />
     <Compile Include="DI\ApplicationModuleRegister.cs" />
     <Compile Include="Models\AxisConfig.cs" />
+    <Compile Include="Models\ProtocolConfig.cs" />
     <Compile Include="Models\InputConfig.cs" />
     <Compile Include="Models\OutputConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\Communication\CommunicationService.cs" />
-    <Compile Include="Service\Communication\Interface\ICommunicationService.cs" />
+    <Compile Include="Service\Protocol\ProtocolConfigConverter.cs" />
+    <Compile Include="Service\Protocol\ProtocolService.cs" />
+    <Compile Include="Service\Protocol\Interface\IProtocolService.cs" />
     <Compile Include="Service\Hardware\HardwareService.cs" />
     <Compile Include="Service\Hardware\Interface\IHardwareService.cs" />
     <Compile Include="Service\User\Interface\IUserContext.cs" />
