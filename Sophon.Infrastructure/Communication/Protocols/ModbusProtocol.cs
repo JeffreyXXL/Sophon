@@ -2,29 +2,28 @@
 using NModbus;
 using NModbus.Serial;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
-using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TwinCAT.Ads;
 
 namespace Sophon.Infrastructure
 {
     public class ModbusProtocol : IModbusProtocol, IDisposable
     {
         #region 构造函数
+
         public ModbusProtocol(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger("Modbus");
         }
-        #endregion
+
+        #endregion 构造函数
 
         #region 属性
+
         public bool IsConnected
         {
             get
@@ -40,7 +39,6 @@ namespace Sophon.Infrastructure
             }
         }
 
-
         public string IP { get; set; } = "127.0.0.1";
         public int Port { get; set; } = 8000;
 
@@ -52,6 +50,7 @@ namespace Sophon.Infrastructure
 
         public byte SlaveAddress { get; set; } = 0;
         public bool IsModbusTCP { get; set; } = true;
+
         private string LogHeader
         {
             get
@@ -60,20 +59,23 @@ namespace Sophon.Infrastructure
             }
         }
 
-        #endregion
+        #endregion 属性
 
         #region 字段
+
         private readonly ModbusFactory _factory = new ModbusFactory();
         private IModbusMaster _master;
         private TcpClient _tcpClient;
         private SerialPort _serialPort;
         private bool _isConnected;
         private readonly ILoggerManager _logger;
-        private readonly static object _lock = new object();
+        private static readonly object _lock = new object();
         private readonly SemaphoreSlim _semaphoreLock = new SemaphoreSlim(1, 1);
-        #endregion
+
+        #endregion 字段
 
         #region 方法
+
         public void Connect()
         {
             if (_isConnected)
@@ -137,7 +139,6 @@ namespace Sophon.Infrastructure
                     _logger.Error($"{LogHeader} 断开连接/关闭失败:{e}");
                     throw;
                 }
-
             }
         }
 
@@ -157,14 +158,17 @@ namespace Sophon.Infrastructure
                         bool[] coilValues = await _master.ReadCoilsAsync(SlaveAddress, address, 1);
                         value = (T)Convert.ChangeType(coilValues[0], typeof(T));
                         break;
+
                     case ModbusRegisterType.DiscreteInput:
                         bool[] discreteValues = await _master.ReadInputsAsync(SlaveAddress, address, 1);
                         value = (T)Convert.ChangeType(discreteValues[0], typeof(T));
                         break;
+
                     case ModbusRegisterType.InputRegister:
                         ushort[] inputRegisters = await _master.ReadInputRegistersAsync(SlaveAddress, address, 1);
                         value = (T)Convert.ChangeType(inputRegisters[0], typeof(T));
                         break;
+
                     case ModbusRegisterType.HoldingRegister:
                         ushort[] holdingRegisters = await _master.ReadHoldingRegistersAsync(SlaveAddress, address, 1);
                         value = (T)Convert.ChangeType(holdingRegisters[0], typeof(T));
@@ -199,6 +203,7 @@ namespace Sophon.Infrastructure
                         bool coilValue = Convert.ToBoolean(value);
                         await _master.WriteSingleCoilAsync(SlaveAddress, address, coilValue);
                         break;
+
                     case ModbusRegisterType.HoldingRegister:
                         ushort registerValue = Convert.ToUInt16(value);
                         await _master.WriteSingleRegisterAsync(SlaveAddress, address, registerValue);
@@ -235,6 +240,7 @@ namespace Sophon.Infrastructure
                             values.Add((ushort)(startAddress + i), coilValuess[i]);
                         }
                         break;
+
                     case ModbusRegisterType.DiscreteInput:
                         bool[] discreteValues = await _master.ReadInputsAsync(SlaveAddress, startAddress, length);
                         for (ushort i = 0; i < length; i++)
@@ -242,6 +248,7 @@ namespace Sophon.Infrastructure
                             values.Add((ushort)(startAddress + i), discreteValues[i]);
                         }
                         break;
+
                     case ModbusRegisterType.InputRegister:
                         ushort[] inputRegisters = await _master.ReadInputRegistersAsync(SlaveAddress, startAddress, length);
                         for (ushort i = 0; i < length; i++)
@@ -249,6 +256,7 @@ namespace Sophon.Infrastructure
                             values.Add((ushort)(startAddress + i), inputRegisters[i]);
                         }
                         break;
+
                     case ModbusRegisterType.HoldingRegister:
                         ushort[] holdingRegisters = await _master.ReadHoldingRegistersAsync(SlaveAddress, startAddress, length);
                         for (ushort i = 0; i < length; i++)
@@ -286,6 +294,7 @@ namespace Sophon.Infrastructure
                         bool[] coilValues = values.Select(v => Convert.ToBoolean(v)).ToArray();
                         await _master.WriteMultipleCoilsAsync(SlaveAddress, startAddress, coilValues);
                         break;
+
                     case ModbusRegisterType.HoldingRegister:
                         ushort[] registerValues = values.Select(v => Convert.ToUInt16(v)).ToArray();
                         await _master.WriteMultipleRegistersAsync(SlaveAddress, startAddress, registerValues);
@@ -303,7 +312,6 @@ namespace Sophon.Infrastructure
             }
         }
 
-
         public void Dispose()
         {
             Disconnect();
@@ -312,6 +320,7 @@ namespace Sophon.Infrastructure
             _master?.Dispose();
             _semaphoreLock?.Dispose();
         }
-        #endregion
+
+        #endregion 方法
     }
 }

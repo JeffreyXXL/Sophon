@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sophon.Core
+﻿namespace Sophon.Core
 {
     public class WorkStationManager : IWorkStationManager
     {
         #region 构造函数
+
         public WorkStationManager(IWorkStationFactory workStationFactory)
         {
             _workStationFactory = workStationFactory;
         }
 
-        #endregion
-
-        #region 属性
-
-        #endregion
+        #endregion 构造函数
 
         #region 字段
+
         private readonly IWorkStationFactory _workStationFactory;
-        #endregion
+
+        #endregion 字段
 
         #region 方法
 
@@ -90,7 +82,7 @@ namespace Sophon.Core
                 station.Stop();
             }
         }
-        #endregion
 
+        #endregion 方法
     }
 }

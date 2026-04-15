@@ -1,7 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using Sophon.Core;
+using Sophon.Application;
 using Sophon.Infrastructure;
 using System;
 using System.Collections.ObjectModel;
@@ -14,7 +14,9 @@ namespace Sophon.UI.ViewModels
     public class UserViewModel : BindableBase, INavigationAware
     {
         #region Properties
+
         private string _userName;
+
         public string UserName
         {
             get { return _userName; }
@@ -22,6 +24,7 @@ namespace Sophon.UI.ViewModels
         }
 
         private bool _isAdminButtonVisible;
+
         public bool IsAdminButtonVisible
         {
             get { return _isAdminButtonVisible; }
@@ -29,6 +32,7 @@ namespace Sophon.UI.ViewModels
         }
 
         private bool _isChangePwdPanelVisible;
+
         public bool IsChangePwdPanelVisible
         {
             get { return _isChangePwdPanelVisible; }
@@ -36,20 +40,23 @@ namespace Sophon.UI.ViewModels
         }
 
         private bool _isAddUserPanelVisible;
+
         public bool IsAddUserPanelVisible
         {
             get { return _isAddUserPanelVisible; }
             set { SetProperty(ref _isAddUserPanelVisible, value); }
         }
+
         private bool _isDeleteUserPanelVisible;
+
         public bool IsDeleteUserPanelVisible
         {
             get { return _isDeleteUserPanelVisible; }
             set { SetProperty(ref _isDeleteUserPanelVisible, value); }
         }
 
-
         private bool _isLoginVisible;
+
         public bool IsLoginVisible
         {
             get { return _isLoginVisible; }
@@ -57,6 +64,7 @@ namespace Sophon.UI.ViewModels
         }
 
         private bool _isLogoutBtnVisible;
+
         public bool IsLogoutBtnVisible
         {
             get { return _isLogoutBtnVisible; }
@@ -64,6 +72,7 @@ namespace Sophon.UI.ViewModels
         }
 
         private bool _isInputEnabled;
+
         public bool IsInputEnabled
         {
             get { return _isInputEnabled; }
@@ -85,6 +94,7 @@ namespace Sophon.UI.ViewModels
             get { return _newUserName; }
             set { SetProperty(ref _newUserName, value); }
         }
+
         private UserLevel _selectedlevel;
 
         public UserLevel SelectedLevel
@@ -92,6 +102,7 @@ namespace Sophon.UI.ViewModels
             get { return _selectedlevel; }
             set { SetProperty(ref _selectedlevel, value); }
         }
+
         private ObservableCollection<string> _levelList;
 
         public ObservableCollection<string> LevelList
@@ -100,9 +111,10 @@ namespace Sophon.UI.ViewModels
             set { SetProperty(ref _levelList, value); }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Commands
+
         public DelegateCommand<object> LoginCommand { get; private set; }
         public DelegateCommand LogoutCommand { get; private set; }
         public DelegateCommand ChangePwdPanelCommand { get; private set; }
@@ -115,10 +127,12 @@ namespace Sophon.UI.ViewModels
         public DelegateCommand DeleteUserPanelCommand { get; private set; }
         public DelegateCommand DeleteUserCommand { get; private set; }
         public DelegateCommand CancelDeleteCommand { get; private set; }
-        #endregion
+
+        #endregion Commands
 
         private readonly IUserRepository _userRepository;
         private readonly IUserContext _userContext;
+
         public UserViewModel(IUserRepository userRepository, IUserContext userContext)
         {
             LoginCommand = new DelegateCommand<object>(ExecuteLogin);
@@ -227,6 +241,7 @@ namespace Sophon.UI.ViewModels
             IsAddUserPanelVisible = true;
             IsLoginVisible = false;
         }
+
         private async Task SaveUserAsync(object param)
         {
             if (string.IsNullOrEmpty(NewUserName))
@@ -275,6 +290,7 @@ namespace Sophon.UI.ViewModels
             ExecuteLogout();
             ExecuteCancel();
         }
+
         private async void ExecuteSaveUser(object param)
         {
             await SaveUserAsync(param);
@@ -341,7 +357,6 @@ namespace Sophon.UI.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-
         }
     }
 }

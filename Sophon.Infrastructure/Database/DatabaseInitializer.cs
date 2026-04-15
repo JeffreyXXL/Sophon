@@ -1,35 +1,31 @@
 ﻿using SqlSugar;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
     public class DatabaseInitializer : IDatabaseInitializer
     {
         #region 构造函数
+
         public DatabaseInitializer(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        #endregion
 
-        #region 属性
-
-        #endregion
+        #endregion 构造函数
 
         #region 字段
+
         private readonly DbContext _dbContext;
         private Type[] _entityTypes;
-        #endregion
 
+        #endregion 字段
 
         #region 方法
+
         public void Initialize()
         {
             GetAllEntities();
@@ -68,7 +64,6 @@ namespace Sophon.Infrastructure
             return _entityTypes;
         }
 
-
         private void SetDefaultData()
         {
             bool hasAnyUser = _dbContext.Db.Queryable<User>().Any();
@@ -87,6 +82,7 @@ namespace Sophon.Infrastructure
                 _dbContext.Db.Insertable(adminUser).ExecuteCommand();
             }
         }
-        #endregion
+
+        #endregion 方法
     }
 }

@@ -1,16 +1,12 @@
 ﻿using Common;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Sophon.Core
 {
     public class FlowContext : IFlowContext
     {
         #region 构造函数
+
         public FlowContext(string flowName, ILoggerFactory loggerFactory)
         {
             FlowName = flowName;
@@ -18,22 +14,28 @@ namespace Sophon.Core
             Logger = _loggerFactory.CreateLogger(flowName);
             _data = new Dictionary<string, object>();
         }
-        #endregion
+
+        #endregion 构造函数
 
         #region 属性
+
         public string FlowName { get; }
         public int NextStepIndex { get; set; }
         public int TotalSteps { get; set; }
         public Dictionary<string, object> Data => _data;
         public ILoggerManager Logger { get; }
-        #endregion
+
+        #endregion 属性
 
         #region 字段
+
         private readonly Dictionary<string, object> _data;
         private readonly ILoggerFactory _loggerFactory;
-        #endregion
+
+        #endregion 字段
 
         #region 方法
+
         public T GetData<T>(string key)
         {
             return _data.TryGetValue(key, out var value) ? (T)value : default;
@@ -55,6 +57,7 @@ namespace Sophon.Core
             dataField?.SetValue(cloned, this._data);
             return cloned;
         }
-        #endregion
+
+        #endregion 方法
     }
 }

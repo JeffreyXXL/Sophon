@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Common;
 using DryIoc;
 using Prism.DryIoc;
 using Prism.Ioc;
@@ -6,7 +7,6 @@ using Prism.Regions;
 using Sophon.Infrastructure;
 using Sophon.UI.Views;
 using System.Windows;
-using Common;
 
 namespace Sophon.UI
 {
@@ -29,11 +29,10 @@ namespace Sophon.UI
         {
             return Container.Resolve<MainWindow>();
         }
+
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<UserView>("UserView");
-
-
         }
 
         protected override Rules CreateContainerRules()
@@ -55,7 +54,6 @@ namespace Sophon.UI
 
             var dbInitializer = Container.Resolve<IDatabaseInitializer>();
             dbInitializer.Initialize();
-
 
             var regionManager = Container.Resolve<IRegionManager>();
             regionManager.RequestNavigate("ContentRegion", "UserView");

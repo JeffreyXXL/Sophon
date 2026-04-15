@@ -1,19 +1,16 @@
 ﻿using Common;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO.Ports;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TwinCAT.PlcOpen;
 
 namespace Sophon.Infrastructure
 {
     public class SerialPortProtocol : ISerialPortProtocol, IDisposable
     {
         #region 构造函数
+
         public SerialPortProtocol(ILoggerFactory loggerFactory)
         {
             _serialPort = new SerialPort();
@@ -21,9 +18,10 @@ namespace Sophon.Infrastructure
             _serialPort.DataReceived += SerialPort_DataReceived;
         }
 
-        #endregion
+        #endregion 构造函数
 
         #region 属性
+
         public bool IsConnected
         {
             get
@@ -39,17 +37,20 @@ namespace Sophon.Infrastructure
         public StopBits StopBits { get; set; } = StopBits.One;
         public Handshake Handshake { get; set; } = Handshake.None;
 
-        #endregion
+        #endregion 属性
 
         #region 字段
+
         private readonly SerialPort _serialPort;
         private bool _isConnected;
         private readonly ILoggerManager _logger;
-        private readonly static object _lock = new object();
+        private static readonly object _lock = new object();
         private readonly SemaphoreSlim _sendLock = new SemaphoreSlim(1, 1);
-        #endregion
+
+        #endregion 字段
 
         #region 方法
+
         public event EventHandler<DataReceivedEventArgs> DataReceived;
 
         public void Connect()
@@ -171,7 +172,6 @@ namespace Sophon.Infrastructure
             _sendLock?.Dispose();
         }
 
-        #endregion
+        #endregion 方法
     }
-
 }

@@ -1,10 +1,5 @@
-﻿using Microsoft.SqlServer.Server;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common
 {
@@ -61,7 +56,6 @@ namespace Common
                 try
                 {
                     File.WriteAllText(_path, _serializer.Serialize(config));
-
                 }
                 catch (Exception)
                 {
@@ -69,8 +63,6 @@ namespace Common
                 }
             }
         }
-
-   
     }
 
     public enum ConfigType

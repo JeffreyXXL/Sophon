@@ -1,9 +1,6 @@
 ﻿using Sophon.Core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,21 +9,21 @@ namespace Sophon.Application
     public class FlowStep_Loop : FlowStepBase
     {
         #region 构造函数
+
         public FlowStep_Loop(string stepName, List<IFlowStep> loopBranch, int totalLoops) : base(stepName)
         {
             _loopBranch = loopBranch ?? throw new ArgumentNullException(nameof(loopBranch));
             _totalLoops = totalLoops;
         }
-        #endregion
 
-        #region 属性
-
-        #endregion
+        #endregion 构造函数
 
         #region 字段
+
         private readonly List<IFlowStep> _loopBranch;
         private readonly int _totalLoops;
-        #endregion
+
+        #endregion 字段
 
         #region 方法
 
@@ -45,6 +42,7 @@ namespace Sophon.Application
         {
             context.NextStepIndex++;
         }
-        #endregion
+
+        #endregion 方法
     }
 }

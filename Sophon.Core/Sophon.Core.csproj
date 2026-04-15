@@ -92,9 +92,7 @@
     <Compile Include="Flow\Interface\IFlowStep.cs" />
     <Compile Include="Flow\StepResult.cs" />
     <Compile Include="Flow\StepStatus.cs" />
-    <Compile Include="Service\Interface\IUserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\UserContext.cs" />
     <Compile Include="StateMachine\Interface\IStateMachine.cs" />
     <Compile Include="StateMachine\StateMachine.cs" />
     <Compile Include="StateMachine\WorkStationState.cs" />

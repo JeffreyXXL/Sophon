@@ -1,19 +1,15 @@
 ﻿using Sophon.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Sophon.Core
+namespace Sophon.Application
 {
     public interface IUserContext
     {
         string CurrentUser { get; set; }
         UserLevel CurrentLevel { get; set; }
         bool IsLoggedIn { get; set; }
-        void Login(string userName);
-        void Logout();
 
+        void Login(string userName);
+
+        void Logout();
     }
 }

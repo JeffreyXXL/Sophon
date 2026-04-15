@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
@@ -19,9 +15,11 @@ namespace Sophon.Infrastructure
         Handshake Handshake { get; set; }
 
         void Connect();
+
         void Disconnect();
 
         Task Send(byte[] data);
+
         Task SendAsync(byte[] data);
 
         event EventHandler<DataReceivedEventArgs> DataReceived;

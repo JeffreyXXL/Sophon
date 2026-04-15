@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
@@ -10,20 +6,15 @@ namespace Sophon.Infrastructure
     public class ProductionRepository : RepositoryBase<Production>
     {
         #region 构造函数
+
         public ProductionRepository(DbContext dbContext) : base(dbContext)
         {
         }
-        #endregion
 
-        #region 属性
-
-        #endregion
-
-        #region 字段
-
-        #endregion
+        #endregion 构造函数
 
         #region 方法
+
         public Task<List<Production>> GetProductByBarcode(string barcode)
         {
             return QueryAsync(p => p.SerialNo == barcode);
@@ -38,6 +29,7 @@ namespace Sophon.Infrastructure
         {
             return QueryAsync(p => p.Result == result);
         }
-        #endregion
+
+        #endregion 方法
     }
 }

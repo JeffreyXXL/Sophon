@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
@@ -10,21 +7,15 @@ namespace Sophon.Infrastructure
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
         #region 构造函数
+
         public UserRepository(DbContext dbContext) : base(dbContext)
         {
-
         }
 
-        #endregion
-
-        #region 属性
-        #endregion
-
-        #region 字段
-
-        #endregion
+        #endregion 构造函数
 
         #region 方法
+
         public Task<User> GetUserByName(string name)
         {
             return QuerySingleAsync(u => u.UserName == name);
@@ -57,6 +48,7 @@ namespace Sophon.Infrastructure
         {
             return _dbContext.Db.Deleteable<User>().Where(u => u.UserName == name).ExecuteCommand() > 0;
         }
-        #endregion
+
+        #endregion 方法
     }
 }

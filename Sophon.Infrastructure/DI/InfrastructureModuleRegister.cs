@@ -1,12 +1,7 @@
 ﻿using Autofac;
 using Common;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
@@ -46,7 +41,6 @@ namespace Sophon.Infrastructure
                    .As<ITransaction>()
                    .InstancePerLifetimeScope();
 
-
             builder.RegisterType<TcpIpProtocol>()
                    .As<ITcpIpProtocol>()
                    .InstancePerLifetimeScope();
@@ -63,8 +57,6 @@ namespace Sophon.Infrastructure
                    .As<IAdsProtocol>()
                    .InstancePerLifetimeScope();
 
-
-
             builder.Register<IHardwareFactory>(c =>
             {
                 string brand = ConfigurationManager.AppSettings["CardBrand"];
@@ -73,6 +65,7 @@ namespace Sophon.Infrastructure
                 {
                     case "LeadShine":
                         return new LeadShineFactory();
+
                     case "GoogolTech":
                         return new GoogolTechFactory();
                 }

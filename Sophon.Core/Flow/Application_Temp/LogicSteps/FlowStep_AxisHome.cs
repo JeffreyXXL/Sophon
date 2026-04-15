@@ -1,9 +1,5 @@
 ﻿using Sophon.Core;
 using Sophon.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,6 +17,7 @@ namespace Sophon.Application
         private readonly IHardwareProvider _hw;
         private readonly int _cardNo;
         private readonly int _AxisNo;
+
         protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
             _hw.Axis.Home(_cardNo, _AxisNo);

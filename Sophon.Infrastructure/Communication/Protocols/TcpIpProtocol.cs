@@ -13,13 +13,16 @@ namespace Sophon.Infrastructure
     public class TcpIpProtocol : ITcpIpProtocol, IDisposable
     {
         #region 构造函数
+
         public TcpIpProtocol(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger("TCPIP");
         }
-        #endregion
+
+        #endregion 构造函数
 
         #region 属性
+
         public bool IsConnected
         {
             get
@@ -49,25 +52,31 @@ namespace Sophon.Infrastructure
             }
         }
 
-        #endregion
+        #endregion 属性
 
         #region 字段
+
         private bool _isConnected;
         private readonly ILoggerManager _logger;
-        private readonly static object _lock = new object();
+        private static readonly object _lock = new object();
         private readonly SemaphoreSlim _sendLock = new SemaphoreSlim(1, 1);
         private CancellationTokenSource _cts;
 
         //客户端参数
         private TcpClient _client;
+
         private int _reconnectCount = 0;
         private bool _isReconnecting = false;
+
         //服务端参数
         private TcpListener _listener;
+
         private readonly ConcurrentDictionary<string, TcpClient> ConnectedClients = new ConcurrentDictionary<string, TcpClient>();
-        #endregion
+
+        #endregion 字段
 
         #region 方法
+
         public event EventHandler<DataReceivedEventArgs> DataReceived;
 
         public void Connect()
@@ -189,7 +198,7 @@ namespace Sophon.Infrastructure
         }
 
         public async Task SendAsync(byte[] data)
-        {         
+        {
             if (data == null || data.Length == 0)
             {
                 _logger.Error($"{LogHeader} {IP}:{Port} 发送数据为空：{nameof(data)}");
@@ -288,7 +297,6 @@ namespace Sophon.Infrastructure
             {
                 _logger.Error($"{LogHeader} {IP}:{Port} 监听失败: {e}");
             }
-
         }
 
         public void Dispose()
@@ -305,6 +313,6 @@ namespace Sophon.Infrastructure
             ConnectedClients.Clear();
         }
 
-        #endregion
+        #endregion 方法
     }
 }

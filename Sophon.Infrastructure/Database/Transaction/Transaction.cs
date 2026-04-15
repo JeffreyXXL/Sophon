@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
@@ -9,22 +6,21 @@ namespace Sophon.Infrastructure
     public class Transaction : ITransaction
     {
         #region 构造函数
+
         public Transaction(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        #endregion
-
-        #region 属性
-
-        #endregion
+        #endregion 构造函数
 
         #region 字段
+
         private readonly DbContext _dbContext;
         private bool _disposed;
         private bool _completed;
-        #endregion
+
+        #endregion 字段
 
         #region 方法
 
@@ -74,6 +70,6 @@ namespace Sophon.Infrastructure
             }
         }
 
-        #endregion
+        #endregion 方法
     }
 }
