@@ -15,6 +15,10 @@ namespace Sophon.Application
             builder.RegisterType<HardwareService>()
                    .As<IHardwareService>()
                    .SingleInstance();
+
+            builder.RegisterType<ProtocolService>()
+                   .As<IProtocolService>()
+                   .SingleInstance();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,35 +12,32 @@ namespace Sophon.Application
         public List<InputConfig> InputConfigs { get; private set; }
         public List<OutputConfig> OutputConfigs { get; private set; }
 
-        private readonly string _axisConfigPath = "Config/Hardware/axis_config.json";
-        private readonly string _inputConfigPath = "Config/Hardware/input_config.json";
-        private readonly string _outputConfigPath = "Config/Hardware/output_config.json";
+        private readonly IConfigManager _configManager_axis;
+        private readonly IConfigManager _configManager_input;
+        private readonly IConfigManager _configManager_output;
+
+        public HardwareService(IConfigManagerFactory configManagerFactory)
+        {
+            _configManager_axis = configManagerFactory.CreateConfigManager(ConfigType.json, "axis_config", "Hardware");
+            _configManager_input = configManagerFactory.CreateConfigManager(ConfigType.json, "input_config", "Hardware");
+            _configManager_output = configManagerFactory.CreateConfigManager(ConfigType.json, "output_config", "Hardware");
+
+            AxisConfigs = new List<AxisConfig>();
+            InputConfigs = new List<InputConfig>();
+            OutputConfigs = new List<OutputConfig>();
+        }
 
         public void LoadAllConfigs()
         {
-            AxisConfigs = SafeLoad<AxisConfig>(_axisConfigPath);
-            InputConfigs = SafeLoad<InputConfig>(_inputConfigPath);
-            OutputConfigs = SafeLoad<OutputConfig>(_outputConfigPath);
-        }
-
-        private List<T> SafeLoad<T>(string filePath)
-        {
-            if (!File.Exists(filePath))
-            {
-                return new List<T>();
-            }
             try
             {
-                string json = File.ReadAllText(filePath);
-                if (string.IsNullOrWhiteSpace(json))
-                {
-                    return new List<T>();
-                }
-                return JsonConvert.DeserializeObject<List<T>>(json) ?? new List<T>();
+                AxisConfigs = _configManager_axis.LoadConfig<List<AxisConfig>>() ?? new List<AxisConfig>();
+                InputConfigs = _configManager_input.LoadConfig<List<InputConfig>>() ?? new List<InputConfig>();
+                OutputConfigs = _configManager_output.LoadConfig<List<OutputConfig>>() ?? new List<OutputConfig>();
             }
             catch (Exception)
             {
-                return new List<T>();
+                throw;
             }
         }
 
@@ -52,20 +50,47 @@ namespace Sophon.Application
 
         public void SaveAxisConfigs()
         {
-            string json = JsonConvert.SerializeObject(AxisConfigs, Formatting.Indented);
-            File.WriteAllText(_axisConfigPath, json);
+            try
+            {
+                if (AxisConfigs != null)
+                {
+                    _configManager_axis.SaveConfig(AxisConfigs);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void SaveInputConfigs()
         {
-            string json = JsonConvert.SerializeObject(InputConfigs, Formatting.Indented);
-            File.WriteAllText(_inputConfigPath, json);
+            try
+            {
+                if (InputConfigs != null)
+                {
+                    _configManager_input.SaveConfig(InputConfigs);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void SaveOutputConfigs()
         {
-            string json = JsonConvert.SerializeObject(OutputConfigs, Formatting.Indented);
-            File.WriteAllText(_outputConfigPath, json);
+            try
+            {
+                if (OutputConfigs != null)
+                {
+                    _configManager_output.SaveConfig(OutputConfigs);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

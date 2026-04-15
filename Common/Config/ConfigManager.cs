@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Common
@@ -35,7 +36,12 @@ namespace Common
                     {
                         return default;
                     }
-                    return _serializer.Deserialize<T>(File.ReadAllText(_path));
+                    string str = File.ReadAllText(_path);
+                    if (string.IsNullOrWhiteSpace(str))
+                    {
+                        return default;
+                    }
+                    return _serializer.Deserialize<T>(str);
                 }
                 catch (Exception)
                 {

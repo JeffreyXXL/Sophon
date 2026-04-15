@@ -1,5 +1,8 @@
-﻿namespace Sophon.Application
+﻿using Newtonsoft.Json;
+
+namespace Sophon.Application
 {
+    [JsonConverter(typeof(ProtocolConfigConverter))]
     public abstract class ProtocolConfig
     {
         public string Name { get; set; }

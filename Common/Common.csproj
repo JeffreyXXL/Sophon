@@ -96,6 +96,7 @@
     <Compile Include="DI\Attribute\ModuleRegisterAttribute.cs" />
     <Compile Include="DI\RegisterAllModule.cs" />
     <Compile Include="Config\Exception\ConfigDeserializeException.cs" />
+    <Compile Include="Helper\PathResolver.cs" />
     <Compile Include="Logger\Interface\ILoggerManager.cs" />
     <Compile Include="Logger\Interface\ILoggerFactory.cs" />
     <Compile Include="Logger\LoggerFactory.cs" />

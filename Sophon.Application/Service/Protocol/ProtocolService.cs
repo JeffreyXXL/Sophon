@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Common;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -8,24 +10,39 @@ namespace Sophon.Application
     {
         public List<ProtocolConfig> ProtocolConfigs { get; private set; }
 
-        private readonly string _configPath = "Config/Protocol/protocol_config.json";
+        private readonly IConfigManager _configManager;
+
+        public ProtocolService(IConfigManagerFactory configManagerFactory)
+        {
+            _configManager = configManagerFactory.CreateConfigManager(ConfigType.json, "protocol_config", "Protocol");
+            ProtocolConfigs = new List<ProtocolConfig>();
+        }
 
         public void LoadAllConfigs()
         {
-            if (!File.Exists(_configPath)) return;
-
-            string json = File.ReadAllText(_configPath);
-            if (string.IsNullOrWhiteSpace(json)) return;
-
-            ProtocolConfigs = JsonConvert
-                .DeserializeObject<List<ProtocolConfig>>(json, new ProtocolConfigConverter())
-                ?? new List<ProtocolConfig>();
+            try
+            {
+                ProtocolConfigs = _configManager.LoadConfig<List<ProtocolConfig>>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void SaveAllConfigs()
         {
-            string json = JsonConvert.SerializeObject(ProtocolConfigs, Formatting.Indented);
-            File.WriteAllText(_configPath, json);
+            try
+            {
+                if (ProtocolConfigs != null)
+                {
+                    _configManager.SaveConfig(ProtocolConfigs);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
