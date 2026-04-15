@@ -8,23 +8,13 @@ namespace Sophon.Infrastructure
 {
     public class DatabaseInitializer : IDatabaseInitializer
     {
-        #region 构造函数
-
         public DatabaseInitializer(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        #endregion 构造函数
-
-        #region 字段
-
         private readonly DbContext _dbContext;
         private Type[] _entityTypes;
-
-        #endregion 字段
-
-        #region 方法
 
         public void Initialize()
         {
@@ -82,7 +72,5 @@ namespace Sophon.Infrastructure
                 _dbContext.Db.Insertable(adminUser).ExecuteCommand();
             }
         }
-
-        #endregion 方法
     }
 }

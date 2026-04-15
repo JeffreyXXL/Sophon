@@ -6,8 +6,6 @@ namespace Sophon.Core
 {
     public class WorkStation : IWorkStation
     {
-        #region 构造函数
-
         public WorkStation(string workStationName, IFlowEngineFactory flowEngineFactory, IFlowContextFactory flowContextFactory, IStateMachine stateMachine)
         {
             WorkStationName = workStationName;
@@ -18,26 +16,14 @@ namespace Sophon.Core
             _stateMachine.StateChangeAction += OnStateChange;
         }
 
-        #endregion 构造函数
-
-        #region 属性
-
         public string WorkStationName { get; }
         public CancellationTokenSource Cts => _cts;
-
-        #endregion 属性
-
-        #region 字段
 
         private readonly IFlowEngine _flowEngine;
         private readonly IFlowContext _flowcontext;
         private readonly IStateMachine _stateMachine;
         private readonly IFlowController _flowController;
         private CancellationTokenSource _cts;
-
-        #endregion 字段
-
-        #region 方法
 
         public void Start()
         {
@@ -96,7 +82,5 @@ namespace Sophon.Core
         {
             _flowcontext.Logger.Info($"工站{WorkStationName}状态切换：{state}");
         }
-
-        #endregion 方法
     }
 }

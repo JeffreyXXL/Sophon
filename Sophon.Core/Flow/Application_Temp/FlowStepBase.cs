@@ -8,22 +8,12 @@ namespace Sophon.Application
 {
     public abstract class FlowStepBase : IFlowStep
     {
-        #region 构造函数
-
         protected FlowStepBase(string stepName)
         {
             StepName = stepName;
         }
 
-        #endregion 构造函数
-
-        #region 属性
-
         public string StepName { get; }
-
-        #endregion 属性
-
-        #region 方法
 
         /// <summary>
         /// 执行该步骤的可等待方法，此方法可重写
@@ -95,7 +85,5 @@ namespace Sophon.Application
             context.Logger.Info($"步骤{StepName}分支{branchIndex}执行完成");
             return StepResult.Success();
         }
-
-        #endregion 方法
     }
 }

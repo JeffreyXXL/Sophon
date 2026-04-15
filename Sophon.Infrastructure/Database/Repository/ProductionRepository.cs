@@ -5,15 +5,9 @@ namespace Sophon.Infrastructure
 {
     public class ProductionRepository : RepositoryBase<Production>
     {
-        #region 构造函数
-
         public ProductionRepository(DbContext dbContext) : base(dbContext)
         {
         }
-
-        #endregion 构造函数
-
-        #region 方法
 
         public Task<List<Production>> GetProductByBarcode(string barcode)
         {
@@ -29,7 +23,5 @@ namespace Sophon.Infrastructure
         {
             return QueryAsync(p => p.Result == result);
         }
-
-        #endregion 方法
     }
 }

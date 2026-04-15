@@ -7,22 +7,12 @@ namespace Sophon.Infrastructure
 {
     public class RepositoryBase<T> : IRepository<T> where T : class, IEntity, new()
     {
-        #region 构造函数
-
         public RepositoryBase(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        #endregion 构造函数
-
-        #region 字段
-
         protected readonly DbContext _dbContext;
-
-        #endregion 字段
-
-        #region 方法
 
         public virtual Task<T> QueryByIdAsync(int id)
         {
@@ -58,7 +48,5 @@ namespace Sophon.Infrastructure
         {
             return _dbContext.Db.Queryable<T>().Where(expression).SingleAsync();
         }
-
-        #endregion 方法
     }
 }

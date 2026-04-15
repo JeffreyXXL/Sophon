@@ -10,17 +10,11 @@ namespace Sophon.Infrastructure
 {
     public class AdsProtocol : IAdsProtocol, IDisposable
     {
-        #region 构造函数
-
         public AdsProtocol(ILoggerFactory loggerFactory)
         {
             _client = new AdsClient();
             _logger = loggerFactory.CreateLogger("ADS");
         }
-
-        #endregion 构造函数
-
-        #region 属性
 
         public bool IsConnected
         {
@@ -35,19 +29,11 @@ namespace Sophon.Infrastructure
         public int LocalPort { get; set; } = 30000;
         public int Timeout { get; set; } = 5000;
 
-        #endregion 属性
-
-        #region 字段
-
         private readonly AdsClient _client;
         private bool _isConnected;
         private readonly ILoggerManager _logger;
         private static readonly object _lock = new object();
         private readonly SemaphoreSlim _semaphoreLock = new SemaphoreSlim(1, 1);
-
-        #endregion 字段
-
-        #region 方法
 
         public void Connect()
         {
@@ -224,7 +210,5 @@ namespace Sophon.Infrastructure
             Disconnect();
             _client?.Dispose();
         }
-
-        #endregion 方法
     }
 }

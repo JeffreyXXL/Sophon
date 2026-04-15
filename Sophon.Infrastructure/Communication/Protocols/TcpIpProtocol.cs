@@ -12,16 +12,10 @@ namespace Sophon.Infrastructure
 {
     public class TcpIpProtocol : ITcpIpProtocol, IDisposable
     {
-        #region 构造函数
-
         public TcpIpProtocol(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger("TCPIP");
         }
-
-        #endregion 构造函数
-
-        #region 属性
 
         public bool IsConnected
         {
@@ -52,10 +46,6 @@ namespace Sophon.Infrastructure
             }
         }
 
-        #endregion 属性
-
-        #region 字段
-
         private bool _isConnected;
         private readonly ILoggerManager _logger;
         private static readonly object _lock = new object();
@@ -72,10 +62,6 @@ namespace Sophon.Infrastructure
         private TcpListener _listener;
 
         private readonly ConcurrentDictionary<string, TcpClient> ConnectedClients = new ConcurrentDictionary<string, TcpClient>();
-
-        #endregion 字段
-
-        #region 方法
 
         public event EventHandler<DataReceivedEventArgs> DataReceived;
 
@@ -312,7 +298,5 @@ namespace Sophon.Infrastructure
             }
             ConnectedClients.Clear();
         }
-
-        #endregion 方法
     }
 }

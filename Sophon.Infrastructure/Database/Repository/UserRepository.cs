@@ -6,15 +6,9 @@ namespace Sophon.Infrastructure
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
-        #region 构造函数
-
         public UserRepository(DbContext dbContext) : base(dbContext)
         {
         }
-
-        #endregion 构造函数
-
-        #region 方法
 
         public Task<User> GetUserByName(string name)
         {
@@ -48,7 +42,5 @@ namespace Sophon.Infrastructure
         {
             return _dbContext.Db.Deleteable<User>().Where(u => u.UserName == name).ExecuteCommand() > 0;
         }
-
-        #endregion 方法
     }
 }

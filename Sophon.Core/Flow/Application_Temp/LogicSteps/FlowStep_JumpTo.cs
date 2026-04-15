@@ -9,22 +9,12 @@ namespace Sophon.Application
     /// </summary>
     public class FlowStep_JumpTo : FlowStepBase
     {
-        #region 构造函数
-
         public FlowStep_JumpTo(string stepName, int jumpToStepIndex) : base(stepName)
         {
             _jumpToStepIndex = jumpToStepIndex;
         }
 
-        #endregion 构造函数
-
-        #region 字段
-
         private readonly int _jumpToStepIndex;
-
-        #endregion 字段
-
-        #region 方法
 
         protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
@@ -45,7 +35,5 @@ namespace Sophon.Application
         {
             context.NextStepIndex = _jumpToStepIndex;
         }
-
-        #endregion 方法
     }
 }

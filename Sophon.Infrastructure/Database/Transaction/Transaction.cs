@@ -5,24 +5,14 @@ namespace Sophon.Infrastructure
 {
     public class Transaction : ITransaction
     {
-        #region 构造函数
-
         public Transaction(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        #endregion 构造函数
-
-        #region 字段
-
         private readonly DbContext _dbContext;
         private bool _disposed;
         private bool _completed;
-
-        #endregion 字段
-
-        #region 方法
 
         /// <summary>
         /// 事务执行
@@ -69,7 +59,5 @@ namespace Sophon.Infrastructure
                 _disposed = true;
             }
         }
-
-        #endregion 方法
     }
 }

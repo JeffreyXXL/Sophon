@@ -12,8 +12,6 @@ namespace Sophon.Application
     /// </summary>
     public class FlowStep_Parallel : FlowStepBase
     {
-        #region 构造函数
-
         public FlowStep_Parallel(string stepName, List<List<IFlowStep>> branches, bool waitAll = true)
             : base(stepName)
         {
@@ -21,16 +19,8 @@ namespace Sophon.Application
             _waitAll = waitAll;
         }
 
-        #endregion 构造函数
-
-        #region 字段
-
         private readonly List<List<IFlowStep>> _parallelBranches;
         private readonly bool _waitAll;
-
-        #endregion 字段
-
-        #region 方法
 
         protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
@@ -62,7 +52,5 @@ namespace Sophon.Application
         {
             context.NextStepIndex++;
         }
-
-        #endregion 方法
     }
 }

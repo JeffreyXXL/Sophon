@@ -6,8 +6,6 @@ namespace Sophon.Core
 {
     public class EventBus : IEventBus
     {
-        #region 构造函数
-
         private EventBus()
         { }
 
@@ -26,19 +24,11 @@ namespace Sophon.Core
             return _instance;
         }
 
-        #endregion 构造函数
-
-        #region 字段
-
         private readonly ConcurrentDictionary<Type, List<Delegate>> _subscribers
             = new ConcurrentDictionary<Type, List<Delegate>>();
 
         private static EventBus _instance;
         private static readonly object _lock = new object();
-
-        #endregion 字段
-
-        #region 方法
 
         public void Subscribe<T>(Action<T> handler)
         {
@@ -76,7 +66,5 @@ namespace Sophon.Core
                 }
             }
         }
-
-        #endregion 方法
     }
 }

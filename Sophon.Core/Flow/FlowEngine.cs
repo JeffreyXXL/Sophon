@@ -8,8 +8,6 @@ namespace Sophon.Core
 {
     public class FlowEngine : IFlowEngine, IFlowController
     {
-        #region 构造函数
-
         public FlowEngine(string flowName, IConfigManagerFactory configFactory)
         {
             FlowName = flowName;
@@ -18,19 +16,11 @@ namespace Sophon.Core
             _steps = _configManager.LoadConfig<List<IFlowStep>>();
         }
 
-        #endregion 构造函数
-
-        #region 属性
-
         public string FlowName { get; }
         public bool IsPaused => _isPaused;
         public bool IsStopped => _isStopped;
         public bool IsRunning => _isRunning;
         public int CurrentIndex => _currentIndex;
-
-        #endregion 属性
-
-        #region 字段
 
         private bool _isPaused;
         private bool _isStopped;
@@ -42,10 +32,6 @@ namespace Sophon.Core
         private CancellationTokenSource _cts;
         private readonly object _lock = new object();
         private IFlowStep _currentStep;
-
-        #endregion 字段
-
-        #region 方法
 
         public virtual async Task AsyncExecuteFlow(IFlowContext context, CancellationTokenSource cts)
         {
@@ -156,7 +142,5 @@ namespace Sophon.Core
                 _isStopped = true;
             }
         }
-
-        #endregion 方法
     }
 }

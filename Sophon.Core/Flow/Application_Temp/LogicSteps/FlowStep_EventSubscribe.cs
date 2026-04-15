@@ -10,26 +10,16 @@ namespace Sophon.Application
     /// </summary>
     public class FlowStep_EventSubscribe<T> : FlowStepBase
     {
-        #region 构造函数
-
         public FlowStep_EventSubscribe(string stepName, IEventBus eventBus, Action<T> handler) : base(stepName)
         {
             _eventBus = eventBus;
             _handler = handler;
         }
 
-        #endregion 构造函数
-
-        #region 字段
-
         private readonly IEventBus _eventBus;
         private readonly Action<T> _handler;
         private readonly ManualResetEventSlim _signal = new ManualResetEventSlim(false);
         private T _receivedEvent;
-
-        #endregion 字段
-
-        #region 方法
 
         protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
@@ -55,7 +45,5 @@ namespace Sophon.Application
             _eventBus.Unsubscribe((Action<T>)EventHandler);
             _signal.Set();
         }
-
-        #endregion 方法
     }
 }

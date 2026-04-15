@@ -13,8 +13,6 @@ namespace Sophon.UI.ViewModels
 {
     public class UserViewModel : BindableBase, INavigationAware
     {
-        #region Properties
-
         private string _userName;
 
         public string UserName
@@ -111,10 +109,6 @@ namespace Sophon.UI.ViewModels
             set { SetProperty(ref _levelList, value); }
         }
 
-        #endregion Properties
-
-        #region Commands
-
         public DelegateCommand<object> LoginCommand { get; private set; }
         public DelegateCommand LogoutCommand { get; private set; }
         public DelegateCommand ChangePwdPanelCommand { get; private set; }
@@ -127,8 +121,6 @@ namespace Sophon.UI.ViewModels
         public DelegateCommand DeleteUserPanelCommand { get; private set; }
         public DelegateCommand DeleteUserCommand { get; private set; }
         public DelegateCommand CancelDeleteCommand { get; private set; }
-
-        #endregion Commands
 
         private readonly IUserRepository _userRepository;
         private readonly IUserContext _userContext;

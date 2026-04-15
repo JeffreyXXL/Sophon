@@ -13,16 +13,10 @@ namespace Sophon.Infrastructure
 {
     public class ModbusProtocol : IModbusProtocol, IDisposable
     {
-        #region 构造函数
-
         public ModbusProtocol(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger("Modbus");
         }
-
-        #endregion 构造函数
-
-        #region 属性
 
         public bool IsConnected
         {
@@ -59,10 +53,6 @@ namespace Sophon.Infrastructure
             }
         }
 
-        #endregion 属性
-
-        #region 字段
-
         private readonly ModbusFactory _factory = new ModbusFactory();
         private IModbusMaster _master;
         private TcpClient _tcpClient;
@@ -71,10 +61,6 @@ namespace Sophon.Infrastructure
         private readonly ILoggerManager _logger;
         private static readonly object _lock = new object();
         private readonly SemaphoreSlim _semaphoreLock = new SemaphoreSlim(1, 1);
-
-        #endregion 字段
-
-        #region 方法
 
         public void Connect()
         {
@@ -320,7 +306,5 @@ namespace Sophon.Infrastructure
             _master?.Dispose();
             _semaphoreLock?.Dispose();
         }
-
-        #endregion 方法
     }
 }

@@ -2,22 +2,12 @@
 {
     public class WorkStationManager : IWorkStationManager
     {
-        #region 构造函数
-
         public WorkStationManager(IWorkStationFactory workStationFactory)
         {
             _workStationFactory = workStationFactory;
         }
 
-        #endregion 构造函数
-
-        #region 字段
-
         private readonly IWorkStationFactory _workStationFactory;
-
-        #endregion 字段
-
-        #region 方法
 
         public void Start(string stationName)
         {
@@ -82,7 +72,5 @@
                 station.Stop();
             }
         }
-
-        #endregion 方法
     }
 }
