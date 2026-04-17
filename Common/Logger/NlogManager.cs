@@ -1,9 +1,4 @@
 ﻿using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common
 {
@@ -21,10 +16,15 @@ namespace Common
         }
 
         public void Trace(string msg) => _logger.Trace(msg);
+
         public void Debug(string msg) => _logger.Debug(msg);
+
         public void Info(string msg) => _logger.Info(msg);
+
         public void Warn(string msg) => _logger.Warn(msg);
+
         public void Error(string msg) => _logger.Error(msg);
+
         public void Fatal(string msg) => _logger.Fatal(msg);
     }
 }

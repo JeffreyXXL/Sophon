@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sophon.UI", "Sophon.UI\Sophon.UI.csproj", "{B1C5CFDF-BFFA-40F1-9841-5E4F7626DA3A}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sophon.Infrastructure", "Sophon.Infrastructure\Sophon.Infrastructure.csproj", "{1D9D3C4E-6D43-4B20-B0BB-0AF9D2F31B70}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{57A0909F-1E0F-4AEC-A142-47D70DEE3061}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sophon.Tests", "Sophon.Tests\Sophon.Tests.csproj", "{F669FB67-49C4-4870-AA0D-8F68C0C15223}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{57A0909F-1E0F-4AEC-A142-47D70DEE3061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57A0909F-1E0F-4AEC-A142-47D70DEE3061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57A0909F-1E0F-4AEC-A142-47D70DEE3061}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F669FB67-49C4-4870-AA0D-8F68C0C15223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F669FB67-49C4-4870-AA0D-8F68C0C15223}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F669FB67-49C4-4870-AA0D-8F68C0C15223}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F669FB67-49C4-4870-AA0D-8F68C0C15223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

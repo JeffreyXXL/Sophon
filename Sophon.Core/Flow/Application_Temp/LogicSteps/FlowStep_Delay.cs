@@ -1,8 +1,4 @@
 ﻿using Sophon.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +9,6 @@ namespace Sophon.Application
     /// </summary>
     public class FlowStep_Delay : FlowStepBase
     {
-        #region 构造函数
         /// <summary>
         /// 延时步骤构造函数
         /// </summary>
@@ -23,17 +18,9 @@ namespace Sophon.Application
         {
             _delayTime_ms = delayTime_ms;
         }
-        #endregion
 
-        #region 属性
-
-        #endregion
-
-        #region 字段
         private readonly int _delayTime_ms;
-        #endregion
 
-        #region 方法
         protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
             await Task.Delay(_delayTime_ms, token);
@@ -44,6 +31,5 @@ namespace Sophon.Application
         {
             context.NextStepIndex++;
         }
-        #endregion
     }
 }

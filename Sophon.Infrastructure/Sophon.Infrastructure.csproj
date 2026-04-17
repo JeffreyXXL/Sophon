@@ -134,21 +134,23 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communication\DataReceivedEventArgs.cs" />
-    <Compile Include="Communication\Interface\IAdsProtocol.cs" />
-    <Compile Include="Communication\Interface\IModbusProtocol.cs" />
-    <Compile Include="Communication\Interface\ISerialPortProtocol.cs" />
-    <Compile Include="Communication\Interface\ITcpIpProtocol.cs" />
-    <Compile Include="Communication\Protocols\AdsProtocol.cs" />
-    <Compile Include="Communication\Protocols\ModbusProtocol.cs" />
-    <Compile Include="Communication\Protocols\SerialPortProtocol.cs" />
-    <Compile Include="Communication\Protocols\TcpIpProtocol.cs" />
+    <Compile Include="Protocol\DataReceivedEventArgs.cs" />
+    <Compile Include="Protocol\Interface\IAdsProtocol.cs" />
+    <Compile Include="Protocol\Interface\IModbusProtocol.cs" />
+    <Compile Include="Protocol\Interface\ISerialPortProtocol.cs" />
+    <Compile Include="Protocol\Interface\ITcpIpProtocol.cs" />
+    <Compile Include="Protocol\Protocols\AdsProtocol.cs" />
+    <Compile Include="Protocol\Protocols\ModbusProtocol.cs" />
+    <Compile Include="Protocol\Protocols\SerialPortProtocol.cs" />
+    <Compile Include="Protocol\Protocols\TcpIpProtocol.cs" />
     <Compile Include="Database\DatabaseInitializer.cs" />
     <Compile Include="Database\DbContext.cs" />
     <Compile Include="Database\Entities\Interface\IEntity.cs" />
     <Compile Include="Database\Entities\LoginHistory.cs" />
+    <Compile Include="Database\IDatabaseInitializer.cs" />
     <Compile Include="Database\Repository\Interface\IRepository.cs" />
     <Compile Include="Database\Entities\ProductionHistory.cs" />
+    <Compile Include="Database\Repository\Interface\IUserRepository.cs" />
     <Compile Include="Database\Repository\ProductionHistoryRepository.cs" />
     <Compile Include="Database\Repository\LoginHistoryRepository.cs" />
     <Compile Include="Database\Repository\RepositoryBase.cs" />

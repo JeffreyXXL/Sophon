@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +6,6 @@ namespace Sophon.Core
 {
     public class WorkStation : IWorkStation
     {
-        #region 构造函数
         public WorkStation(string workStationName, IFlowEngineFactory flowEngineFactory, IFlowContextFactory flowContextFactory, IStateMachine stateMachine)
         {
             WorkStationName = workStationName;
@@ -19,22 +15,16 @@ namespace Sophon.Core
             _stateMachine = stateMachine;
             _stateMachine.StateChangeAction += OnStateChange;
         }
-        #endregion
 
-        #region 属性
         public string WorkStationName { get; }
         public CancellationTokenSource Cts => _cts;
-        #endregion
 
-        #region 字段
         private readonly IFlowEngine _flowEngine;
         private readonly IFlowContext _flowcontext;
         private readonly IStateMachine _stateMachine;
         private readonly IFlowController _flowController;
         private CancellationTokenSource _cts;
-        #endregion
 
-        #region 方法
         public void Start()
         {
             if (_stateMachine.CurrentState == WorkStationState.Running)
@@ -92,6 +82,5 @@ namespace Sophon.Core
         {
             _flowcontext.Logger.Info($"工站{WorkStationName}状态切换：{state}");
         }
-        #endregion
     }
 }

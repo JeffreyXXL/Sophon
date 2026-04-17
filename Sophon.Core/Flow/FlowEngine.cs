@@ -1,19 +1,13 @@
 ﻿using Common;
-using Sophon.Application;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 
 namespace Sophon.Core
 {
     public class FlowEngine : IFlowEngine, IFlowController
     {
-        #region 构造函数
         public FlowEngine(string flowName, IConfigManagerFactory configFactory)
         {
             FlowName = flowName;
@@ -21,17 +15,13 @@ namespace Sophon.Core
             _configManager = configFactory.CreateConfigManager(ConfigType.json, FlowName, "FlowData");
             _steps = _configManager.LoadConfig<List<IFlowStep>>();
         }
-        #endregion
 
-        #region 属性
         public string FlowName { get; }
         public bool IsPaused => _isPaused;
         public bool IsStopped => _isStopped;
         public bool IsRunning => _isRunning;
         public int CurrentIndex => _currentIndex;
-        #endregion
 
-        #region 字段
         private bool _isPaused;
         private bool _isStopped;
         private bool _isRunning;
@@ -42,9 +32,7 @@ namespace Sophon.Core
         private CancellationTokenSource _cts;
         private readonly object _lock = new object();
         private IFlowStep _currentStep;
-        #endregion
 
-        #region 方法
         public virtual async Task AsyncExecuteFlow(IFlowContext context, CancellationTokenSource cts)
         {
             _logger = context.Logger;
@@ -154,6 +142,5 @@ namespace Sophon.Core
                 _isStopped = true;
             }
         }
-        #endregion
     }
 }

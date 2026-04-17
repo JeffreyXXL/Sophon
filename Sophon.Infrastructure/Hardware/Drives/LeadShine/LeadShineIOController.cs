@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sophon.Infrastructure
+﻿namespace Sophon.Infrastructure
 {
     public class LeadShineIoController : IIoController
     {
@@ -12,17 +6,14 @@ namespace Sophon.Infrastructure
 
         public int OutputCount => _outputCount;
 
-
         public IAxisController _leadShineAxisControl;
         private int _inputCount;
         private int _outputCount;
-
 
         public LeadShineIoController(IAxisController leadShineAxisControl)
         {
             _leadShineAxisControl = leadShineAxisControl;
             Initialize();
-
         }
 
         public bool Initialize()
@@ -57,6 +48,5 @@ namespace Sophon.Infrastructure
         {
             return LTDMC.dmc_read_outbit((ushort)cardNo, (ushort)ioNo) == 0;
         }
-
     }
 }

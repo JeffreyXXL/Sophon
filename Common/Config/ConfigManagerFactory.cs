@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common
 {
@@ -20,7 +15,10 @@ namespace Common
         public IConfigManager CreateConfigManager(ConfigType type, string filename, string secondPath = "")
         {
             _configSerializer = CreateSerializer(type);
-            return configManagercache.GetOrAdd(filename, new ConfigManager(_configSerializer, Path.Combine(_configPath, secondPath, filename + "." + type)));
+
+            string path = PathResolver.GetAbsolutePath(_configPath);
+
+            return configManagercache.GetOrAdd(filename, new ConfigManager(_configSerializer, Path.Combine(path, secondPath, filename + "." + type)));
         }
 
         public IConfigSerializer CreateSerializer(ConfigType type)
@@ -29,10 +27,13 @@ namespace Common
             {
                 case ConfigType.json:
                     return new JsonConfigSerializer();
+
                 case ConfigType.xml:
                     return new XmlConfigSerializer();
+
                 case ConfigType.ini:
                     return new IniConfigSerializer();
+
                 default:
                     throw new NotSupportedException($"暂未支持{type}格式");
             }

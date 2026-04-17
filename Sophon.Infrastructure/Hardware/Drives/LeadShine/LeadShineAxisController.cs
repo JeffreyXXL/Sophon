@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
@@ -16,7 +12,6 @@ namespace Sophon.Infrastructure
 
         private int _cardCount;
         private int _axisCount;
-
 
         public LeadShineAxisController()
         {

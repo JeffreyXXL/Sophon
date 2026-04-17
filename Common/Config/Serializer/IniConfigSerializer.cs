@@ -4,17 +4,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common
 {
     public class IniConfigSerializer : IConfigSerializer
     {
-        IniData _iniData = new IniData();
-        FileIniDataParser _parser = new FileIniDataParser();
+        private IniData _iniData = new IniData();
+        private FileIniDataParser _parser = new FileIniDataParser();
 
         public string Serialize<T>(T config)
         {
@@ -39,7 +36,6 @@ namespace Common
             }
             return _iniData.ToString();
         }
-
 
         public T Deserialize<T>(string content)
         {
@@ -123,6 +119,7 @@ namespace Common
 
             return Convert.ChangeType(value, targetType);
         }
+
         /// <summary>
         /// 将object写入inidata
         /// </summary>

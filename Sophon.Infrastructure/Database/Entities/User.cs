@@ -1,9 +1,5 @@
 ﻿using SqlSugar;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
@@ -20,12 +16,20 @@ namespace Sophon.Infrastructure
         public string Password { get; set; }
 
         [SugarColumn(IsNullable = false)]
-        public int UserLevel { get; set; }
+        public UserLevel UserLevel { get; set; }
 
         [SugarColumn(IsNullable = false)]
         public DateTime CreateTime { get; set; }
 
         [SugarColumn(IsNullable = false)]
         public DateTime LatestChangeTime { get; set; }
+    }
+
+    public enum UserLevel
+    {
+        None = 0,
+        Operator = 1,
+        Engineer = 2,
+        Admin = 10
     }
 }

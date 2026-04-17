@@ -1,15 +1,11 @@
 ﻿using Autofac;
 using Common;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
+    [ModuleRegister]
     public class InfrastructureModuleRegister : IModuleRegister
     {
         public void Register(ContainerBuilder builder)
@@ -17,12 +13,13 @@ namespace Sophon.Infrastructure
             builder.Register(c =>
             {
                 var factory = c.Resolve<ILoggerFactory>();
-                var connstr = ConfigurationManager.AppSettings["ConnectionString"];
+                var path = ConfigurationManager.AppSettings["DatebaseFilePath"];
+                string connstr = "Data Source = " + PathResolver.GetAbsolutePath(path) + ";";
                 return new DbContext(connstr, factory); ;
             }).InstancePerLifetimeScope();
 
             builder.RegisterType<DatabaseInitializer>()
-                   .AsSelf()
+                   .As<IDatabaseInitializer>()
                    .SingleInstance();
 
             builder.RegisterType<LoginHistoryRepository>()
@@ -30,7 +27,7 @@ namespace Sophon.Infrastructure
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<UserRepository>()
-                   .As<IRepository<User>>()
+                   .As<IUserRepository>()
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<ProductionHistoryRepository>()
@@ -44,7 +41,6 @@ namespace Sophon.Infrastructure
             builder.RegisterType<Transaction>()
                    .As<ITransaction>()
                    .InstancePerLifetimeScope();
-
 
             builder.RegisterType<TcpIpProtocol>()
                    .As<ITcpIpProtocol>()
@@ -62,8 +58,6 @@ namespace Sophon.Infrastructure
                    .As<IAdsProtocol>()
                    .InstancePerLifetimeScope();
 
-
-
             builder.Register<IHardwareFactory>(c =>
             {
                 string brand = ConfigurationManager.AppSettings["CardBrand"];
@@ -72,6 +66,7 @@ namespace Sophon.Infrastructure
                 {
                     case "LeadShine":
                         return new LeadShineFactory();
+
                     case "GoogolTech":
                         return new GoogolTechFactory();
                 }

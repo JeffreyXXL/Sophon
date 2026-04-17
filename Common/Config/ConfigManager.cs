@@ -1,10 +1,6 @@
-﻿using Microsoft.SqlServer.Server;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common
 {
@@ -40,7 +36,12 @@ namespace Common
                     {
                         return default;
                     }
-                    return _serializer.Deserialize<T>(File.ReadAllText(_path));
+                    string str = File.ReadAllText(_path);
+                    if (string.IsNullOrWhiteSpace(str))
+                    {
+                        return default;
+                    }
+                    return _serializer.Deserialize<T>(str);
                 }
                 catch (Exception)
                 {
@@ -61,7 +62,6 @@ namespace Common
                 try
                 {
                     File.WriteAllText(_path, _serializer.Serialize(config));
-
                 }
                 catch (Exception)
                 {
@@ -69,8 +69,6 @@ namespace Common
                 }
             }
         }
-
-   
     }
 
     public enum ConfigType

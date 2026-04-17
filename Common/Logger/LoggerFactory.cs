@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common
 {
@@ -15,8 +9,6 @@ namespace Common
         /// 传入名称，返回ILoggerFactory
         /// </summary>
         private readonly Func<string, ILoggerManager> _loggerCreator;
-
-        private readonly string _path = ConfigurationManager.AppSettings["LoggerPath"];
 
         /// <summary>
         /// 存储所有日志缓存
@@ -40,11 +32,6 @@ namespace Common
         /// <returns></returns>
         public ILoggerManager CreateLogger(string loggername)
         {
-            string path = $"{_path}/{loggername}/";
-            string path_debug = $"{_path}_debug/{loggername}/";
-            Directory.CreateDirectory(path);
-            Directory.CreateDirectory(path_debug);
-
             return _loggercache.GetOrAdd(loggername, _loggerCreator);
         }
     }
