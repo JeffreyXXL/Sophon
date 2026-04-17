@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using Common;
+using SqlSugar;
 using System;
 using System.Configuration;
 using System.IO;
@@ -25,7 +26,10 @@ namespace Sophon.Infrastructure
 
         public void InitDbContext()
         {
-            var connstr = ConfigurationManager.AppSettings["ConnectionString"];
+            var path = ConfigurationManager.AppSettings["DatebaseFilePath"];
+
+            string connstr = "Data Source = " + PathResolver.GetAbsolutePath(path) + ";";
+
             string fullPath = connstr.Split('=')[1].Split(';')[0].Trim();
 
             string directoryPath = Path.GetDirectoryName(fullPath);

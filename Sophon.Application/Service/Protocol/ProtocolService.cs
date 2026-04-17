@@ -2,27 +2,33 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace Sophon.Application
 {
     public class ProtocolService : IProtocolService
     {
-        public List<ProtocolConfig> ProtocolConfigs { get; private set; }
+        public ObservableCollection<ProtocolConfig> ProtocolConfigs { get; private set; }
 
         private readonly IConfigManager _configManager;
 
         public ProtocolService(IConfigManagerFactory configManagerFactory)
         {
             _configManager = configManagerFactory.CreateConfigManager(ConfigType.json, "protocol_config", "Protocol");
-            ProtocolConfigs = new List<ProtocolConfig>();
+            ProtocolConfigs = new ObservableCollection<ProtocolConfig>();
         }
 
         public void LoadAllConfigs()
         {
             try
             {
-                ProtocolConfigs = _configManager.LoadConfig<List<ProtocolConfig>>();
+                var loadedProtocols = _configManager.LoadConfig<List<ProtocolConfig>>() ?? new List<ProtocolConfig>();
+                ProtocolConfigs.Clear();
+                foreach (var item in loadedProtocols)
+                {
+                    ProtocolConfigs.Add(item);
+                }
             }
             catch (Exception)
             {

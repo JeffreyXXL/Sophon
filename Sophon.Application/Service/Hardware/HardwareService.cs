@@ -2,38 +2,56 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace Sophon.Application
 {
     public class HardwareService : IHardwareService
     {
-        public List<AxisConfig> AxisConfigs { get; private set; }
-        public List<InputConfig> InputConfigs { get; private set; }
-        public List<OutputConfig> OutputConfigs { get; private set; }
+        public ObservableCollection<AxisConfig> AxisConfigs { get; private set; }
+        public ObservableCollection<InputConfig> InputConfigs { get; private set; }
+        public ObservableCollection<OutputConfig> OutputConfigs { get; private set; }
 
-        private readonly IConfigManager _configManager_axis;
-        private readonly IConfigManager _configManager_input;
-        private readonly IConfigManager _configManager_output;
+        private readonly IConfigManager _axisConfigManager;
+        private readonly IConfigManager _inputConfigManager;
+        private readonly IConfigManager _outputConfigManager;
 
         public HardwareService(IConfigManagerFactory configManagerFactory)
         {
-            _configManager_axis = configManagerFactory.CreateConfigManager(ConfigType.json, "axis_config", "Hardware");
-            _configManager_input = configManagerFactory.CreateConfigManager(ConfigType.json, "input_config", "Hardware");
-            _configManager_output = configManagerFactory.CreateConfigManager(ConfigType.json, "output_config", "Hardware");
+            _axisConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "axis_config", "Hardware");
+            _inputConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "input_config", "Hardware");
+            _outputConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "output_config", "Hardware");
 
-            AxisConfigs = new List<AxisConfig>();
-            InputConfigs = new List<InputConfig>();
-            OutputConfigs = new List<OutputConfig>();
+            AxisConfigs = new ObservableCollection<AxisConfig>();
+            InputConfigs = new ObservableCollection<InputConfig>();
+            OutputConfigs = new ObservableCollection<OutputConfig>();
         }
 
         public void LoadAllConfigs()
         {
             try
             {
-                AxisConfigs = _configManager_axis.LoadConfig<List<AxisConfig>>() ?? new List<AxisConfig>();
-                InputConfigs = _configManager_input.LoadConfig<List<InputConfig>>() ?? new List<InputConfig>();
-                OutputConfigs = _configManager_output.LoadConfig<List<OutputConfig>>() ?? new List<OutputConfig>();
+                var loadedAxes = _axisConfigManager.LoadConfig<List<AxisConfig>>() ?? new List<AxisConfig>();
+                AxisConfigs.Clear();
+                foreach (var item in loadedAxes)
+                {
+                    AxisConfigs.Add(item);
+                }
+
+                var loadedInputs = _inputConfigManager.LoadConfig<List<InputConfig>>() ?? new List<InputConfig>();
+                InputConfigs.Clear();
+                foreach (var item in loadedInputs)
+                {
+                    InputConfigs.Add(item);
+                }
+
+                var loadedOutputs = _outputConfigManager.LoadConfig<List<OutputConfig>>() ?? new List<OutputConfig>();
+                OutputConfigs.Clear();
+                foreach (var item in loadedOutputs)
+                {
+                    OutputConfigs.Add(item);
+                }
             }
             catch (Exception)
             {
@@ -54,7 +72,7 @@ namespace Sophon.Application
             {
                 if (AxisConfigs != null)
                 {
-                    _configManager_axis.SaveConfig(AxisConfigs);
+                    _axisConfigManager.SaveConfig(AxisConfigs);
                 }
             }
             catch (Exception)
@@ -69,7 +87,7 @@ namespace Sophon.Application
             {
                 if (InputConfigs != null)
                 {
-                    _configManager_input.SaveConfig(InputConfigs);
+                    _inputConfigManager.SaveConfig(InputConfigs);
                 }
             }
             catch (Exception)
@@ -84,7 +102,7 @@ namespace Sophon.Application
             {
                 if (OutputConfigs != null)
                 {
-                    _configManager_output.SaveConfig(OutputConfigs);
+                    _outputConfigManager.SaveConfig(OutputConfigs);
                 }
             }
             catch (Exception)

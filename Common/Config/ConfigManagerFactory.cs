@@ -15,7 +15,10 @@ namespace Common
         public IConfigManager CreateConfigManager(ConfigType type, string filename, string secondPath = "")
         {
             _configSerializer = CreateSerializer(type);
-            return configManagercache.GetOrAdd(filename, new ConfigManager(_configSerializer, Path.Combine(_configPath, secondPath, filename + "." + type)));
+
+            string path = PathResolver.GetAbsolutePath(_configPath);
+
+            return configManagercache.GetOrAdd(filename, new ConfigManager(_configSerializer, Path.Combine(path, secondPath, filename + "." + type)));
         }
 
         public IConfigSerializer CreateSerializer(ConfigType type)

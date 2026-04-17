@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Sophon.Application
 {
     public interface IProtocolService
     {
-        List<ProtocolConfig> ProtocolConfigs { get; }
+        ObservableCollection<ProtocolConfig> ProtocolConfigs { get; }
 
         void LoadAllConfigs();
 

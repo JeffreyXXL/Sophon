@@ -4,6 +4,7 @@ using DryIoc;
 using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Regions;
+using Sophon.Application;
 using Sophon.Infrastructure;
 using Sophon.UI.Views;
 using System.Windows;
@@ -54,6 +55,12 @@ namespace Sophon.UI
 
             var dbInitializer = Container.Resolve<IDatabaseInitializer>();
             dbInitializer.Initialize();
+
+            var hardwareService = Container.Resolve<IHardwareService>();
+            var protocolService = Container.Resolve<IProtocolService>();
+
+            hardwareService.LoadAllConfigs();
+            protocolService.LoadAllConfigs();
 
             var regionManager = Container.Resolve<IRegionManager>();
             regionManager.RequestNavigate("ContentRegion", "UserView");

@@ -39,6 +39,13 @@
             </hc:SideMenu>
         </Grid>
 
-        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="ContentRegion" />
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion" />
+        </Grid>
     </Grid>
 </Window>

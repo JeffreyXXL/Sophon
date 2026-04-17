@@ -13,7 +13,8 @@ namespace Sophon.Infrastructure
             builder.Register(c =>
             {
                 var factory = c.Resolve<ILoggerFactory>();
-                var connstr = ConfigurationManager.AppSettings["ConnectionString"];
+                var path = ConfigurationManager.AppSettings["DatebaseFilePath"];
+                string connstr = "Data Source = " + PathResolver.GetAbsolutePath(path) + ";";
                 return new DbContext(connstr, factory); ;
             }).InstancePerLifetimeScope();
 

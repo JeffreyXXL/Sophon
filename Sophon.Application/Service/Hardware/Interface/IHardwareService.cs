@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Sophon.Application
 {
     public interface IHardwareService
     {
-        List<AxisConfig> AxisConfigs { get; }
-        List<InputConfig> InputConfigs { get; }
-        List<OutputConfig> OutputConfigs { get; }
+        ObservableCollection<AxisConfig> AxisConfigs { get; }
+        ObservableCollection<InputConfig> InputConfigs { get; }
+        ObservableCollection<OutputConfig> OutputConfigs { get; }
 
         void LoadAllConfigs();
 
