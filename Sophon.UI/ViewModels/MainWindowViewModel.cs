@@ -5,7 +5,7 @@ namespace Sophon.UI.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private IRegionManager _regionManager;
+        private readonly IRegionManager _regionManager;
 
         public MainWindowViewModel(IRegionManager regionManager)
         {

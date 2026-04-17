@@ -107,13 +107,30 @@
     <Compile Include="ViewModels\InfrastructureViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="Views\AxisOpView.xaml.cs">
+      <DependentUpon>AxisOpView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InfrastructureView.xaml.cs">
       <DependentUpon>InfrastructureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IoOpView.xaml.cs">
+      <DependentUpon>IoOpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProtocolOpView.xaml.cs">
+      <DependentUpon>ProtocolOpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AxisOpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InfrastructureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IoOpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +146,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ProtocolOpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
