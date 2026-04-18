@@ -106,6 +106,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\InfrastructureViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ParamViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\AxisOpView.xaml.cs">
       <DependentUpon>AxisOpView.xaml</DependentUpon>
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="Views\IoOpView.xaml.cs">
       <DependentUpon>IoOpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParamView.xaml.cs">
+      <DependentUpon>ParamView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProtocolOpView.xaml.cs">
       <DependentUpon>ProtocolOpView.xaml</DependentUpon>
@@ -146,6 +150,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ParamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProtocolOpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
