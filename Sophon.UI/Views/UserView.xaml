@@ -17,7 +17,7 @@
             Height="400"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Background="AliceBlue"
+            Background="#BBFFFFFF"
             CornerRadius="20">
             <Border.Effect>
                 <DropShadowEffect
@@ -36,7 +36,7 @@
                 <Image Source="/Resources/bg_login.png" Stretch="Fill" />
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <Image Margin="20,0,20,10" Source="/Resources/logo.png" />
+                    <Image Margin="20,0,20,10" Source="/Resources/Logo.png" />
 
                     <StackPanel Visibility="{Binding IsLoginVisible, Converter={StaticResource BoolToVisConverter}}">
                         <ComboBox

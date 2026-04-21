@@ -7,6 +7,7 @@ using Prism.Regions;
 using Sophon.Application;
 using Sophon.Infrastructure;
 using Sophon.UI.Views;
+using Sophon.UI.Views.SubViews;
 using System.Windows;
 
 namespace Sophon.UI
@@ -20,7 +21,6 @@ namespace Sophon.UI
 
         public App()
         {
-            //桥接DryIoc和Autofac
             var builder = new ContainerBuilder();
             builder.RegisterAllModuleExt();
             _autofacContainer = builder.Build();
@@ -34,10 +34,15 @@ namespace Sophon.UI
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<UserView>("UserView");
+            containerRegistry.RegisterForNavigation<InfrastructureView>("InfrastructureView");
+            containerRegistry.RegisterForNavigation<ParamView>("ParamView");
+
+            containerRegistry.RegisterDialog<AddParamView, AddParamViewModel>();
         }
 
         protected override Rules CreateContainerRules()
         {
+            //桥接DryIoc和Autofac
             return base.CreateContainerRules().WithUnknownServiceResolvers(request =>
             {
                 if (_autofacContainer != null && _autofacContainer.IsRegistered(request.ServiceType))
@@ -53,15 +58,19 @@ namespace Sophon.UI
         {
             base.OnInitialized();
 
+            // 初始化数据库
             var dbInitializer = Container.Resolve<IDatabaseInitializer>();
             dbInitializer.Initialize();
 
+            // 加载配置
             var hardwareService = Container.Resolve<IHardwareService>();
             var protocolService = Container.Resolve<IProtocolService>();
-
+            var paramService = Container.Resolve<IParamService>();
             hardwareService.LoadAllConfigs();
             protocolService.LoadAllConfigs();
+            paramService.LoadAllConfigs();
 
+            // 导航到用户界面
             var regionManager = Container.Resolve<IRegionManager>();
             regionManager.RequestNavigate("ContentRegion", "UserView");
         }

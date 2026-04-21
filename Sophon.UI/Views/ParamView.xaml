@@ -8,5 +8,48 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10,0" Orientation="Horizontal">
+            <TextBlock
+                Margin="10,0"
+                VerticalAlignment="Center"
+                FontSize="16"
+                Text="选择参数分类：" />
+            <ComboBox
+                Width="200"
+                Height="30"
+                FontSize="14"
+                ItemsSource="{Binding AvailableCategorys}"
+                SelectedItem="{Binding SelectedCategory}" />
+            <Button
+                Margin="20,0"
+                Command="{Binding AddParamCommand}"
+                Content="添加参数"
+                Style="{StaticResource ButtonDashedSuccess}" />
+            <Button
+                Command="{Binding DeleteParamCommand}"
+                Content="删除参数"
+                Style="{StaticResource ButtonDashedDanger}" />
+            <Button
+                Margin="20,0"
+                Command="{Binding SaveParamCommand}"
+                Content="保存参数"
+                Style="{StaticResource ButtonDashedInfo}" />
+        </StackPanel>
+        <DataGrid
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding FilteredParamConfigs}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="参数名称" />
+                <DataGridTextColumn Binding="{Binding Value}" Header="参数值" />
+                <DataGridTextColumn Binding="{Binding Unit}" Header="单位" />
+                <DataGridTextColumn Binding="{Binding Description}" Header="参数描述" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
 </UserControl>

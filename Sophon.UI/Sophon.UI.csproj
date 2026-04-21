@@ -107,26 +107,45 @@
     <Compile Include="ViewModels\InfrastructureViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ParamViewModel.cs" />
+    <Compile Include="ViewModels\SubViewModels\SideViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="Views\AxisOpView.xaml.cs">
+    <Compile Include="ViewModels\SubViewModels\AddParamViewModel.cs" />
+    <Compile Include="Views\SubViews\AddParamView.xaml.cs">
+      <DependentUpon>AddParamView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\HeaderView.xaml.cs">
+      <DependentUpon>HeaderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\AxisOpView.xaml.cs">
       <DependentUpon>AxisOpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InfrastructureView.xaml.cs">
       <DependentUpon>InfrastructureView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\IoOpView.xaml.cs">
+    <Compile Include="Views\SubViews\SideView.xaml.cs">
+      <DependentUpon>SideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\IoOpView.xaml.cs">
       <DependentUpon>IoOpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ParamView.xaml.cs">
       <DependentUpon>ParamView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProtocolOpView.xaml.cs">
+    <Compile Include="Views\SubViews\ProtocolOpView.xaml.cs">
       <DependentUpon>ProtocolOpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AxisOpView.xaml">
+    <Page Include="Views\SubViews\AddParamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\HeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\AxisOpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,7 +153,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\IoOpView.xaml">
+    <Page Include="Views\SubViews\SideView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\IoOpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,7 +177,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProtocolOpView.xaml">
+    <Page Include="Views\SubViews\ProtocolOpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,13 +232,23 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\bg_login.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Infra.png" />
+    <Resource Include="Resources\Param.png" />
+    <Resource Include="Resources\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Alarm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Close.png" />
+    <Resource Include="Resources\Max.png" />
+    <Resource Include="Resources\Min.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />

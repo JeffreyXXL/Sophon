@@ -6,6 +6,7 @@
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:views="clr-namespace:Sophon.UI.Views"
     Title="Sophon"
     Width="1440"
     Height="850"
@@ -19,25 +20,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Image Source="/Resources/logo.png" />
-            <hc:SideMenu Grid.Row="1">
-
-                <hc:SideMenuItem
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="HomeView"
-                    FontSize="20"
-                    Header="     系统主页">
-                    <hc:SideMenuItem.Icon>
-                        <Image Margin="5" Source="/Resources/Home.png" />
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-            </hc:SideMenu>
-        </Grid>
+        <views:SideView />
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -45,6 +28,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
+            <views:HeaderView />
             <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion" />
         </Grid>
     </Grid>

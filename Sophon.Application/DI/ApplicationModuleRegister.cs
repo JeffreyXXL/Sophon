@@ -19,6 +19,10 @@ namespace Sophon.Application
             builder.RegisterType<ProtocolService>()
                    .As<IProtocolService>()
                    .SingleInstance();
+
+            builder.RegisterType<ParamService>()
+                   .As<IParamService>()
+                   .SingleInstance();
         }
     }
 }

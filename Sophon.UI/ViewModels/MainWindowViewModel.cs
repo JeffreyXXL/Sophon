@@ -1,22 +1,11 @@
-﻿using Prism.Mvvm;
+﻿using DryIoc;
+using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Regions;
 
 namespace Sophon.UI.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        private readonly IRegionManager _regionManager;
-
-        public MainWindowViewModel(IRegionManager regionManager)
-        {
-            _regionManager = regionManager;
-        }
-
-        public void ExcuteNavigate(string param)
-        {
-            string viewName = param;
-
-            _regionManager.RequestNavigate("ContentRegion", viewName);
-        }
     }
 }
