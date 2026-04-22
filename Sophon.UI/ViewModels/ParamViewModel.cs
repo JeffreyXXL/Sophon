@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Sophon.Application;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -37,6 +38,20 @@ namespace Sophon.UI.ViewModels
             set { SetProperty(ref _availableCategorys, value); }
         }
 
+        private ParamConfig _selectedParam;
+
+        public ParamConfig SelectedParam
+        {
+            get { return _selectedParam; }
+            set { SetProperty(ref _selectedParam, value); }
+        }
+        private bool _categoryVisibility;
+
+        public bool CategoryVisibility
+        {
+            get { return _categoryVisibility; }
+            set { SetProperty(ref _categoryVisibility, value); }
+        }
         public DelegateCommand AddParamCommand { get; private set; }
         public DelegateCommand DeleteParamCommand { get; private set; }
         public DelegateCommand SaveParamCommand { get; private set; }
@@ -65,8 +80,10 @@ namespace Sophon.UI.ViewModels
             {
                 if (string.IsNullOrEmpty(SelectedCategory) || SelectedCategory == "所有参数")
                 {
+                    CategoryVisibility = true;
                     return true;
                 }
+                CategoryVisibility = false;
                 return config.Category == SelectedCategory;
             }
             return false;
@@ -114,6 +131,8 @@ namespace Sophon.UI.ViewModels
                         };
 
                         AllParamConfigs.Add(paramItem);
+                        _paramService.SaveParamConfigs();
+                        InitializeCategories();
                     }
                 }
             });
@@ -121,10 +140,28 @@ namespace Sophon.UI.ViewModels
 
         private void ExcuteDeleteParam()
         {
+            if (SelectedParam != null)
+            {
+                if (MessageBox.Show($"是否确认删除【{SelectedCategory}】【{SelectedParam.Name}】？",
+                    "删除确认", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    AllParamConfigs.Remove(SelectedParam);
+                    _paramService.SaveParamConfigs();
+                    InitializeCategories();
+                }
+            }
         }
 
         private void ExcuteSaveParam()
         {
+            try
+            {
+                _paramService.SaveParamConfigs();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("保存失败：" + e);
+            }
         }
     }
 }

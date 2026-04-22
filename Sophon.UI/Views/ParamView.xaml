@@ -43,12 +43,27 @@
         <DataGrid
             Grid.Row="1"
             AutoGenerateColumns="False"
-            ItemsSource="{Binding FilteredParamConfigs}">
+            ItemsSource="{Binding FilteredParamConfigs}"
+            SelectedItem="{Binding SelectedParam}"
+            Style="{StaticResource DataGridCommonStyle}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="参数名称" />
-                <DataGridTextColumn Binding="{Binding Value}" Header="参数值" />
-                <DataGridTextColumn Binding="{Binding Unit}" Header="单位" />
-                <DataGridTextColumn Binding="{Binding Description}" Header="参数描述" />
+                <DataGridTextColumn
+                    Width="200"
+                    Binding="{Binding Name}"
+                    Header="参数名称"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Width="200"
+                    Binding="{Binding Value}"
+                    Header="参数值" />
+                <DataGridTextColumn
+                    Width="200"
+                    Binding="{Binding Unit}"
+                    Header="单位" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Description}"
+                    Header="参数描述" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

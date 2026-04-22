@@ -55,8 +55,9 @@
                 <ComboBox
                     Grid.Row="0"
                     Grid.Column="1"
+                    IsEditable="True"
                     ItemsSource="{Binding AvailableCategorys}"
-                    SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" />
+                    Text="{Binding SelectedCategory, Mode=TwoWay}" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0">
                     <Run Text="参数名称" /><Run Foreground="Red" Text=" *" />
@@ -66,10 +67,9 @@
                     Grid.Column="1"
                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Text="参数值" />
+                <TextBlock Grid.Row="2" Grid.Column="0">
+                    <Run Text="参数值" /><Run Foreground="Red" Text=" *" />
+                </TextBlock>
                 <TextBox
                     Grid.Row="2"
                     Grid.Column="1"

@@ -61,6 +61,12 @@ namespace Common
             {
                 try
                 {
+                    string directory = Path.GetDirectoryName(_path);
+                    if (!Directory.Exists(directory))
+                    {
+                        Directory.CreateDirectory(directory);
+                    }
+
                     File.WriteAllText(_path, _serializer.Serialize(config));
                 }
                 catch (Exception)
