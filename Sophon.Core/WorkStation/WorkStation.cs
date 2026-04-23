@@ -44,7 +44,7 @@ namespace Sophon.Core
             catch (Exception e)
             {
                 _flowcontext.Logger.Error($"工站{WorkStationName}运行异常：{e}");
-                _stateMachine.SetState(WorkStationState.Error);
+                _stateMachine.SetState(WorkStationState.Alarm);
             }
         }
 

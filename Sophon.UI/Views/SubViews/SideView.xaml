@@ -31,6 +31,15 @@
             </hc:SideMenuItem>
             <hc:SideMenuItem
                 Command="{Binding NavigateCommand}"
+                CommandParameter="StationView"
+                FontSize="20"
+                Header="     工站流程">
+                <hc:SideMenuItem.Icon>
+                    <Image Margin="5" Source="/Resources/Station.png" />
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+            <hc:SideMenuItem
+                Command="{Binding NavigateCommand}"
                 CommandParameter="InfrastructureView"
                 FontSize="20"
                 Header="     硬件操作">

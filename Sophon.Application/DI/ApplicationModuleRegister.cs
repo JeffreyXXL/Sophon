@@ -23,6 +23,10 @@ namespace Sophon.Application
             builder.RegisterType<ParamService>()
                    .As<IParamService>()
                    .SingleInstance();
+
+            builder.RegisterType<AlarmService>()
+                   .As<IAlarmService>()
+                   .SingleInstance();
         }
     }
 }
