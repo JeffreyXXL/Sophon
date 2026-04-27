@@ -1,11 +1,10 @@
 ﻿using Common;
+using Prism.Events;
 using Sophon.Core;
+using Sophon.Core.Event;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sophon.Application
 {
@@ -18,10 +17,12 @@ namespace Sophon.Application
         public ObservableCollection<AlarmItem> HistoryAlarms { get; private set; }
 
         private readonly IConfigManager _alarmConfigManager;
+        private readonly IEventAggregator _eventAggregator;
 
-        public AlarmService(IConfigManagerFactory configManagerFactory)
+        public AlarmService(IConfigManagerFactory configManagerFactory, IEventAggregator eventAggregator)
         {
             _alarmConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "alarm_config", "Alarm");
+            _eventAggregator = eventAggregator;
 
             RegisteredAlarms = new ObservableCollection<AlarmItem>();
             ActuralAlarmList = new ObservableCollection<AlarmItem>();

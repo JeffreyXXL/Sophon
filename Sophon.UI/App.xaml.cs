@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Common;
 using DryIoc;
+using Newtonsoft.Json;
 using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Regions;
@@ -8,6 +9,7 @@ using Sophon.Application;
 using Sophon.Infrastructure;
 using Sophon.UI.Views;
 using Sophon.UI.Views.SubViews;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace Sophon.UI
@@ -81,6 +83,18 @@ namespace Sophon.UI
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                Converters = new List<JsonConverter>
+                {
+                    new ProtocolConfigConverter()
+                }
+            };
         }
     }
 }

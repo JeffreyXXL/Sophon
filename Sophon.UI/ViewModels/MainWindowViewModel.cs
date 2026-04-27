@@ -1,7 +1,4 @@
-﻿using DryIoc;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
+﻿using Prism.Mvvm;
 
 namespace Sophon.UI.ViewModels
 {

@@ -40,6 +40,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Prism, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.8.1.97\lib\net47\Prism.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -75,6 +78,7 @@
     <Compile Include="Service\Alarm\AlarmService.cs" />
     <Compile Include="Service\Param\Interface\IParamService.cs" />
     <Compile Include="Service\Param\ParamService.cs" />
+    <Compile Include="Service\Protocol\ProtocolConfigConverter.cs" />
     <Compile Include="Service\Protocol\ProtocolService.cs" />
     <Compile Include="Service\Protocol\Interface\IProtocolService.cs" />
     <Compile Include="Service\Hardware\HardwareService.cs" />

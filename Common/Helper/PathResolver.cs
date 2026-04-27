@@ -13,7 +13,7 @@ namespace Common
             if (Path.IsPathRooted(relativeOrAbsolutePath))
                 return relativeOrAbsolutePath;
 
-            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace(@"bin\Debug\", "").Replace(@"bin\Release\", "").Replace(@"Sophon.UI\",""), relativeOrAbsolutePath);
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory.Replace(@"bin\Debug\", "").Replace(@"bin\Release\", "").Replace(@"Sophon.UI\", ""), relativeOrAbsolutePath);
         }
     }
 }
