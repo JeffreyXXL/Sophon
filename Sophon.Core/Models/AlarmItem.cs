@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Sophon.Application
+﻿namespace Sophon.Core
 {
     public class AlarmItem
     {

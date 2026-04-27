@@ -1,4 +1,5 @@
 ﻿using Common;
+using Sophon.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,9 +52,9 @@ namespace Sophon.Application
                     OutputConfigs.Add(item);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
@@ -73,9 +74,9 @@ namespace Sophon.Application
                     _axisConfigManager.SaveConfig(AxisConfigs);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
@@ -88,9 +89,9 @@ namespace Sophon.Application
                     _inputConfigManager.SaveConfig(InputConfigs);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
@@ -103,9 +104,9 @@ namespace Sophon.Application
                     _outputConfigManager.SaveConfig(OutputConfigs);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
     }

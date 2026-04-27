@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Sophon.Application;
+using Sophon.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Sophon.Core;
+using System.Collections.ObjectModel;
 
 namespace Sophon.Application
 {
@@ -12,8 +13,10 @@ namespace Sophon.Application
 
         void Alarm(string alarmCode);
 
-        void AckAlarm(string alarmCode);
+        void Clearlarm(string alarmCode);
 
         void RegisterAlarm(AlarmItem alarmItem);
+
+        void RemoveAlarm(AlarmItem alarmItem);
     }
 }

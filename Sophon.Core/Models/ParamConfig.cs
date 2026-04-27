@@ -1,4 +1,4 @@
-﻿namespace Sophon.Application
+﻿namespace Sophon.Core
 {
     public class ParamConfig
     {

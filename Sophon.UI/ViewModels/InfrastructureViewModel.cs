@@ -1,5 +1,6 @@
 ﻿using Prism.Mvvm;
 using Sophon.Application;
+using Sophon.Core;
 using System.Collections.ObjectModel;
 
 namespace Sophon.UI.ViewModels

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Sophon.Core;
+using System.Collections.ObjectModel;
 
 namespace Sophon.Application
 {

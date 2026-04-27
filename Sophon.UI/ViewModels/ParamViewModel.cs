@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Sophon.Application;
+using Sophon.Core;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -45,6 +46,7 @@ namespace Sophon.UI.ViewModels
             get { return _selectedParam; }
             set { SetProperty(ref _selectedParam, value); }
         }
+
         private bool _categoryVisibility;
 
         public bool CategoryVisibility
@@ -52,6 +54,7 @@ namespace Sophon.UI.ViewModels
             get { return _categoryVisibility; }
             set { SetProperty(ref _categoryVisibility, value); }
         }
+
         public DelegateCommand AddParamCommand { get; private set; }
         public DelegateCommand DeleteParamCommand { get; private set; }
         public DelegateCommand SaveParamCommand { get; private set; }
