@@ -1,21 +1,18 @@
-﻿using Autofac;
-using NLog;
+﻿using DryIoc;
+using Prism.Ioc;
 
 namespace Common
 {
-    [ModuleRegister]
-    public class CommonModuleRegister : IModuleRegister
+    public static class CommonModuleRegister
     {
-        public void Register(ContainerBuilder builder)
+        public static void RegisterCommon(this IContainerRegistry containerRegistry)
         {
-            //注册日志工厂
-            builder.Register(c => new LoggerFactory(name => new NlogManager(name)))
-                   .As<ILoggerFactory>()
-                   .SingleInstance();
-            //注册配置器工厂
-            builder.RegisterType<ConfigManagerFactory>()
-                   .As<IConfigManagerFactory>()
-                   .SingleInstance();
+            var container = ((IContainerExtension<IContainer>)containerRegistry).Instance;
+
+            container.RegisterDelegate<ILoggerFactory>(c =>
+                new LoggerFactory(name => new NlogManager(name)), Reuse.Singleton);
+
+            containerRegistry.RegisterSingleton<IConfigManagerFactory, ConfigManagerFactory>();
         }
     }
 }

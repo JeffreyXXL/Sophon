@@ -1,32 +1,20 @@
-﻿using Autofac;
-using Common;
+﻿using DryIoc;
+using Prism.Ioc;
 
 namespace Sophon.Application
 {
-    [ModuleRegister]
-    public class ApplicationModuleRegister : IModuleRegister
+    public static class ApplicationModuleRegister
     {
-        public void Register(ContainerBuilder builder)
+        public static void RegisterApplication(this IContainerRegistry containerRegistry)
         {
-            builder.RegisterType<UserContext>()
-                   .As<IUserContext>()
-                   .SingleInstance();
+            var container = ((IContainerExtension<IContainer>)containerRegistry).Instance;
 
-            builder.RegisterType<HardwareService>()
-                   .As<IHardwareService>()
-                   .SingleInstance();
+            var assembly = typeof(ApplicationModuleRegister).Assembly;
 
-            builder.RegisterType<ProtocolService>()
-                   .As<IProtocolService>()
-                   .SingleInstance();
+            container.RegisterMany(new[] { assembly },
+                type => type.IsClass && type.Name.EndsWith("Service"), Reuse.Singleton);
 
-            builder.RegisterType<ParamService>()
-                   .As<IParamService>()
-                   .SingleInstance();
-
-            builder.RegisterType<AlarmService>()
-                   .As<IAlarmService>()
-                   .SingleInstance();
+            containerRegistry.RegisterSingleton<IUserContext, UserContext>();
         }
     }
 }

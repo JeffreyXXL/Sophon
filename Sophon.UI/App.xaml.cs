@@ -1,5 +1,4 @@
-﻿using Autofac;
-using Common;
+﻿using Common;
 using DryIoc;
 using Newtonsoft.Json;
 using Prism.DryIoc;
@@ -7,6 +6,7 @@ using Prism.Ioc;
 using Prism.Regions;
 using Sophon.Application;
 using Sophon.Infrastructure;
+using Sophon.Core;
 using Sophon.UI.Views;
 using Sophon.UI.Views.SubViews;
 using System.Collections.Generic;
@@ -19,15 +19,6 @@ namespace Sophon.UI
     /// </summary>
     public partial class App : PrismApplication
     {
-        private Autofac.IContainer _autofacContainer;
-
-        public App()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterAllModuleExt();
-            _autofacContainer = builder.Build();
-        }
-
         protected override Window CreateShell()
         {
             return Container.Resolve<MainWindow>();
@@ -35,6 +26,11 @@ namespace Sophon.UI
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterCommon();
+            containerRegistry.RegisterInfrastructure();
+            containerRegistry.RegisterCore();
+            containerRegistry.RegisterApplication();
+
             containerRegistry.RegisterForNavigation<UserView>("UserView");
             containerRegistry.RegisterForNavigation<InfrastructureView>("InfrastructureView");
             containerRegistry.RegisterForNavigation<ParamView>("ParamView");
@@ -43,20 +39,6 @@ namespace Sophon.UI
             containerRegistry.RegisterForNavigation<AlarmView>("AlarmView");
 
             containerRegistry.RegisterDialog<AddParamView, AddParamViewModel>();
-        }
-
-        protected override Rules CreateContainerRules()
-        {
-            //桥接DryIoc和Autofac
-            return base.CreateContainerRules().WithUnknownServiceResolvers(request =>
-            {
-                if (_autofacContainer != null && _autofacContainer.IsRegistered(request.ServiceType))
-                {
-                    var serviceType = request.ServiceType;
-                    return new DelegateFactory(_ => _autofacContainer.Resolve(serviceType));
-                }
-                return null;
-            });
         }
 
         protected override async void OnInitialized()

@@ -1,64 +1,31 @@
-﻿using Autofac;
-using Common;
+﻿using Common;
+using DryIoc;
+using Prism.Ioc;
 using System;
 using System.Configuration;
 
 namespace Sophon.Infrastructure
 {
-    [ModuleRegister]
-    public class InfrastructureModuleRegister : IModuleRegister
+    public static class InfrastructureModuleRegister
     {
-        public void Register(ContainerBuilder builder)
+        public static void RegisterInfrastructure(this IContainerRegistry containerRegistry)
         {
-            builder.Register(c =>
+            var container = ((IContainerExtension<IContainer>)containerRegistry).Instance;
+            var assembly = typeof(InfrastructureModuleRegister).Assembly;
+
+            container.RegisterMany(new[] { assembly },
+                type => type.IsClass && (type.Name.EndsWith("Repository") || type.Name.EndsWith("Protocol")),
+                Reuse.Scoped);
+
+            container.RegisterDelegate<DbContext>(c =>
             {
                 var factory = c.Resolve<ILoggerFactory>();
                 var path = ConfigurationManager.AppSettings["DatebaseFilePath"];
                 string connstr = "Data Source = " + PathResolver.GetAbsolutePath(path) + ";";
-                return new DbContext(connstr, factory); ;
-            }).InstancePerLifetimeScope();
+                return new DbContext(connstr, factory);
+            }, Reuse.Scoped);
 
-            builder.RegisterType<DatabaseInitializer>()
-                   .As<IDatabaseInitializer>()
-                   .SingleInstance();
-
-            builder.RegisterType<LoginHistoryRepository>()
-                   .As<IRepository<LoginHistory>>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<UserRepository>()
-                   .As<IUserRepository>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<ProductionHistoryRepository>()
-                   .As<IRepository<ProductionHistory>>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<ProductionRepository>()
-                   .As<IRepository<Production>>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<Transaction>()
-                   .As<ITransaction>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<TcpIpProtocol>()
-                   .As<ITcpIpProtocol>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<SerialPortProtocol>()
-                   .As<ISerialPortProtocol>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<ModbusProtocol>()
-                   .As<IModbusProtocol>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<AdsProtocol>()
-                   .As<IAdsProtocol>()
-                   .InstancePerLifetimeScope();
-
-            builder.Register<IHardwareFactory>(c =>
+            container.RegisterDelegate<IHardwareFactory>(c =>
             {
                 string brand = ConfigurationManager.AppSettings["CardBrand"];
 
@@ -71,19 +38,16 @@ namespace Sophon.Infrastructure
                         return new GoogolTechFactory();
                 }
                 throw new Exception("未知板卡品牌");
-            }).SingleInstance();
+            }, Reuse.Singleton);
 
-            builder.Register(c =>
-              c.Resolve<IHardwareFactory>().CreateAxisController())
-              .As<IAxisController>().SingleInstance();
+            container.RegisterDelegate<IAxisController>(c =>
+              c.Resolve<IHardwareFactory>().CreateAxisController(), Reuse.Singleton);
+            container.RegisterDelegate<IIoController>(c =>
+              c.Resolve<IHardwareFactory>().CreateIoController(), Reuse.Singleton);
 
-            builder.Register(c =>
-              c.Resolve<IHardwareFactory>().CreateIoController())
-              .As<IIoController>().SingleInstance();
-
-            builder.RegisterType<HardwareProvider>()
-                   .As<IHardwareProvider>()
-                   .SingleInstance();
+            containerRegistry.RegisterSingleton<IHardwareProvider, HardwareProvider>();
+            containerRegistry.RegisterSingleton<IDatabaseInitializer, DatabaseInitializer>();
+            containerRegistry.RegisterScoped<ITransaction, Transaction>();
         }
     }
 }

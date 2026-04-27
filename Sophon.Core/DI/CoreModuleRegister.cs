@@ -1,32 +1,20 @@
-﻿using Autofac;
-using Common;
+﻿using DryIoc;
+using Prism.Ioc;
 
 namespace Sophon.Core
 {
-    [ModuleRegister]
-    public class CoreModuleRegister : IModuleRegister
+    public static class CoreModuleRegister
     {
-        public void Register(ContainerBuilder builder)
+        public static void RegisterCore(this IContainerRegistry containerRegistry)
         {
-            builder.RegisterType<FlowEngineFactory>()
-                   .As<IFlowEngineFactory>()
-                   .SingleInstance();
+            var container = ((IContainerExtension<IContainer>)containerRegistry).Instance;
+            var assembly = typeof(CoreModuleRegister).Assembly;
 
-            builder.RegisterType<FlowContextFactory>()
-                   .As<IFlowContextFactory>()
-                   .SingleInstance();
+            container.RegisterMany(new[] { assembly },
+                type => type.IsClass && type.Name.EndsWith("Factory"), Reuse.Singleton);
 
-            builder.RegisterType<StateMachine>()
-                   .As<IStateMachine>()
-                   .InstancePerDependency();
-
-            builder.RegisterType<WorkStationFactory>()
-                   .As<IWorkStationFactory>()
-                   .SingleInstance();
-
-            builder.RegisterType<WorkStationManager>()
-                   .As<IWorkStationManager>()
-                   .SingleInstance();
+            containerRegistry.RegisterSingleton<IStateMachine, StateMachine>();
+            containerRegistry.RegisterSingleton<IWorkStationManager, WorkStationManager>();
         }
     }
 }
