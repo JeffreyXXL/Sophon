@@ -3,6 +3,7 @@ using DryIoc;
 using Prism.Ioc;
 using System;
 using System.Configuration;
+using System.Linq;
 
 namespace Sophon.Infrastructure
 {
@@ -12,10 +13,11 @@ namespace Sophon.Infrastructure
         {
             var container = ((IContainerExtension<IContainer>)containerRegistry).Instance;
             var assembly = typeof(InfrastructureModuleRegister).Assembly;
+            var serviceTypes = assembly.GetTypes()
+                .Where(t => t.IsClass && !t.IsAbstract &&
+                (t.Name.EndsWith("Repository") || t.Name.EndsWith("Protocol")));
 
-            container.RegisterMany(new[] { assembly },
-                type => type.IsClass && (type.Name.EndsWith("Repository") || type.Name.EndsWith("Protocol")),
-                Reuse.Scoped);
+            container.RegisterMany(serviceTypes, Reuse.Singleton);
 
             container.RegisterDelegate<DbContext>(c =>
             {
@@ -23,7 +25,7 @@ namespace Sophon.Infrastructure
                 var path = ConfigurationManager.AppSettings["DatebaseFilePath"];
                 string connstr = "Data Source = " + PathResolver.GetAbsolutePath(path) + ";";
                 return new DbContext(connstr, factory);
-            }, Reuse.Scoped);
+            }, Reuse.Singleton);
 
             container.RegisterDelegate<IHardwareFactory>(c =>
             {
