@@ -1,7 +1,9 @@
-﻿using System.Collections.Concurrent;
+﻿using Sophon.Common;
+using System.Collections.Concurrent;
 
 namespace Sophon.Core
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class WorkStationFactory : IWorkStationFactory
     {
         public WorkStationFactory(IFlowEngineFactory flowEngineFactory, IFlowContextFactory flowContextFactory, IStateMachine stateMachine)

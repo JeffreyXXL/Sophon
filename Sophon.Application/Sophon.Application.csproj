@@ -74,17 +74,17 @@
   <ItemGroup>
     <Compile Include="DI\ApplicationModuleRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\Alarm\Interface\IAlarmService.cs" />
-    <Compile Include="Service\Alarm\AlarmService.cs" />
-    <Compile Include="Service\Param\Interface\IParamService.cs" />
-    <Compile Include="Service\Param\ParamService.cs" />
-    <Compile Include="Service\Protocol\ProtocolConfigConverter.cs" />
-    <Compile Include="Service\Protocol\ProtocolService.cs" />
-    <Compile Include="Service\Protocol\Interface\IProtocolService.cs" />
-    <Compile Include="Service\Hardware\HardwareService.cs" />
-    <Compile Include="Service\Hardware\Interface\IHardwareService.cs" />
-    <Compile Include="Service\User\Interface\IUserContext.cs" />
-    <Compile Include="Service\User\UserContext.cs" />
+    <Compile Include="Repository\Alarm\Interface\IAlarmRepository.cs" />
+    <Compile Include="Repository\Alarm\AlarmRepository.cs" />
+    <Compile Include="Repository\Param\Interface\IParamRepository.cs" />
+    <Compile Include="Repository\Param\ParamRepository.cs" />
+    <Compile Include="Repository\Protocol\ProtocolConfigConverter.cs" />
+    <Compile Include="Repository\Protocol\ProtocolRepository.cs" />
+    <Compile Include="Repository\Protocol\Interface\IProtocolRepository.cs" />
+    <Compile Include="Repository\Motion\MotionRepository.cs" />
+    <Compile Include="Repository\Motion\Interface\IMotionRepository.cs" />
+    <Compile Include="Repository\User\Interface\IUserContext.cs" />
+    <Compile Include="Repository\User\UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

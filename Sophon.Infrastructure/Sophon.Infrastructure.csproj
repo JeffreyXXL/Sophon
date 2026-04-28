@@ -146,11 +146,11 @@
     <Compile Include="Protocol\Protocols\ModbusProtocol.cs" />
     <Compile Include="Protocol\Protocols\SerialPortProtocol.cs" />
     <Compile Include="Protocol\Protocols\TcpIpProtocol.cs" />
-    <Compile Include="Database\DatabaseInitializer.cs" />
+    <Compile Include="Database\Iniltializer\DatabaseInitializer.cs" />
     <Compile Include="Database\DbContext.cs" />
     <Compile Include="Database\Entities\Interface\IEntity.cs" />
     <Compile Include="Database\Entities\LoginHistory.cs" />
-    <Compile Include="Database\IDatabaseInitializer.cs" />
+    <Compile Include="Database\Iniltializer\Interface\IDatabaseInitializer.cs" />
     <Compile Include="Database\Repository\Interface\IRepository.cs" />
     <Compile Include="Database\Entities\ProductionHistory.cs" />
     <Compile Include="Database\Repository\Interface\IUserRepository.cs" />
@@ -164,18 +164,18 @@
     <Compile Include="DI\InfrastructureModuleRegister.cs" />
     <Compile Include="Database\Entities\Production.cs" />
     <Compile Include="Database\Entities\User.cs" />
-    <Compile Include="Hardware\Drives\GoogolTech\GoogolTechAxisController.cs" />
-    <Compile Include="Hardware\Drives\GoogolTech\GoogolTechIoController.cs" />
-    <Compile Include="Hardware\Drives\LeadShine\LeadShineAxisController.cs" />
-    <Compile Include="Hardware\Drives\LeadShine\LeadShineIoController.cs" />
-    <Compile Include="Hardware\Drives\LeadShine\LTDMC.cs" />
-    <Compile Include="Hardware\Factory\GoogolTechFactory.cs" />
-    <Compile Include="Hardware\Factory\LeadShineFactory.cs" />
-    <Compile Include="Hardware\Interface\IAxisController.cs" />
-    <Compile Include="Hardware\Interface\IHardwareFactory.cs" />
-    <Compile Include="Hardware\Interface\IHardwareProvider.cs" />
-    <Compile Include="Hardware\Interface\IIoController.cs" />
-    <Compile Include="Hardware\Provider\HardwareProvider.cs" />
+    <Compile Include="Motion\Drives\GoogolTech\GoogolTechAxisController.cs" />
+    <Compile Include="Motion\Drives\GoogolTech\GoogolTechIoController.cs" />
+    <Compile Include="Motion\Drives\LeadShine\LeadShineAxisController.cs" />
+    <Compile Include="Motion\Drives\LeadShine\LeadShineIoController.cs" />
+    <Compile Include="Motion\Drives\LeadShine\LTDMC.cs" />
+    <Compile Include="Motion\Factory\GoogolTechFactory.cs" />
+    <Compile Include="Motion\Factory\LeadShineFactory.cs" />
+    <Compile Include="Motion\Drives\Interface\IAxisController.cs" />
+    <Compile Include="Motion\Factory\Interface\IMotionFactory.cs" />
+    <Compile Include="Provider\Interface\IMotionProvider.cs" />
+    <Compile Include="Motion\Drives\Interface\IIoController.cs" />
+    <Compile Include="Provider\MotionProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,7 +186,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

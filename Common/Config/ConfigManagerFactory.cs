@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Sophon.Common;
+using System;
 using System.Collections.Concurrent;
 using System.Configuration;
 using System.IO;
 
 namespace Common
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class ConfigManagerFactory : IConfigManagerFactory
     {
         private readonly ConcurrentDictionary<string, IConfigManager> configManagercache = new ConcurrentDictionary<string, IConfigManager>();

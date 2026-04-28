@@ -1,5 +1,8 @@
-﻿namespace Sophon.Core
+﻿using Sophon.Common;
+
+namespace Sophon.Core
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class WorkStationManager : IWorkStationManager
     {
         public WorkStationManager(IWorkStationFactory workStationFactory)

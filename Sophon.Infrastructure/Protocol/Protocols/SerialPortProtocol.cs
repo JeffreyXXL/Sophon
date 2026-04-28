@@ -1,4 +1,5 @@
 ﻿using Common;
+using Sophon.Common;
 using System;
 using System.IO.Ports;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class SerialPortProtocol : ISerialPortProtocol, IDisposable
     {
         public SerialPortProtocol(ILoggerFactory loggerFactory)

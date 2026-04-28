@@ -1,8 +1,10 @@
 ﻿using Common;
+using Sophon.Common;
 using System.Collections.Concurrent;
 
 namespace Sophon.Core
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class FlowEngineFactory : IFlowEngineFactory
     {
         public FlowEngineFactory(IConfigManagerFactory configFactory)

@@ -1,4 +1,5 @@
 ﻿using Common;
+using Sophon.Common;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class TcpIpProtocol : ITcpIpProtocol, IDisposable
     {
         public TcpIpProtocol(ILoggerFactory loggerFactory)

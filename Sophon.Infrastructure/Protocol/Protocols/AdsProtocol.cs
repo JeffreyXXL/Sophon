@@ -1,4 +1,5 @@
 ﻿using Common;
+using Sophon.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using TwinCAT.Ads;
 
 namespace Sophon.Infrastructure
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class AdsProtocol : IAdsProtocol, IDisposable
     {
         public AdsProtocol(ILoggerFactory loggerFactory)

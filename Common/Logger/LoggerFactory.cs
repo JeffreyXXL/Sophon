@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Sophon.Common;
+using System;
 using System.Collections.Concurrent;
 
 namespace Common
 {
+    [InjectableAttribute(DependencyLifetime.Delegate)]
     public class LoggerFactory : ILoggerFactory
     {
         /// <summary>

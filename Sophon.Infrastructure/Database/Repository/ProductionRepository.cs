@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Sophon.Common;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class ProductionRepository : RepositoryBase<Production>
     {
         public ProductionRepository(DbContext dbContext) : base(dbContext)

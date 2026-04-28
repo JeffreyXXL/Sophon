@@ -1,6 +1,7 @@
 ﻿using Common;
 using NModbus;
 using NModbus.Serial;
+using Sophon.Common;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class ModbusProtocol : IModbusProtocol, IDisposable
     {
         public ModbusProtocol(ILoggerFactory loggerFactory)

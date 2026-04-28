@@ -50,10 +50,10 @@ namespace Sophon.UI
             dbInitializer.Initialize();
 
             // 加载配置
-            var hardwareService = Container.Resolve<IHardwareService>();
-            var protocolService = Container.Resolve<IProtocolService>();
-            var paramService = Container.Resolve<IParamService>();
-            hardwareService.LoadAllConfigs();
+            var motionService = Container.Resolve<IMotionRepository>();
+            var protocolService = Container.Resolve<IProtocolRepository>();
+            var paramService = Container.Resolve<IParamRepository>();
+            motionService.LoadAllConfigs();
             protocolService.LoadAllConfigs();
             paramService.LoadAllConfigs();
 

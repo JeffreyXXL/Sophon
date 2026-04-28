@@ -7,20 +7,20 @@ namespace Sophon.Application
 {
     public class FlowStep_AxisHome : FlowStepBase
     {
-        public FlowStep_AxisHome(string stepName, IHardwareProvider hw, int cardNo, int AxisNo) : base(stepName)
+        public FlowStep_AxisHome(string stepName, IMotionProvider imp, int cardNo, int AxisNo) : base(stepName)
         {
-            _hw = hw;
+            _imp = imp;
             _cardNo = cardNo;
             _AxisNo = AxisNo;
         }
 
-        private readonly IHardwareProvider _hw;
+        private readonly IMotionProvider _imp;
         private readonly int _cardNo;
         private readonly int _AxisNo;
 
         protected override async Task AsyncExecuteCore(IFlowContext context, CancellationToken token)
         {
-            _hw.Axis.Home(_cardNo, _AxisNo);
+            _imp.Axis.Home(_cardNo, _AxisNo);
             SetNextStepIndex(context);
         }
 

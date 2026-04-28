@@ -39,17 +39,17 @@ namespace Sophon.UI.ViewModels
             set { SetProperty(ref _protocolConfigs, value); }
         }
 
-        private readonly IHardwareService _hardwareService;
-        private readonly IProtocolService _protocolService;
+        private readonly IMotionRepository _motionService;
+        private readonly IProtocolRepository _protocolService;
 
-        public InfrastructureViewModel(IHardwareService hardwareService, IProtocolService protocolService)
+        public InfrastructureViewModel(IMotionRepository motionService, IProtocolRepository protocolService)
         {
-            _hardwareService = hardwareService;
+            _motionService = motionService;
             _protocolService = protocolService;
 
-            AxisConfigs = _hardwareService.AxisConfigs;
-            InputConfigs = _hardwareService.InputConfigs;
-            OutputConfigs = _hardwareService.OutputConfigs;
+            AxisConfigs = _motionService.AxisConfigs;
+            InputConfigs = _motionService.InputConfigs;
+            OutputConfigs = _motionService.OutputConfigs;
             ProtocolConfigs = _protocolService.ProtocolConfigs;
         }
     }

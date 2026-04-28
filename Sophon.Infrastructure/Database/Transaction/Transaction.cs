@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Sophon.Common;
+using System;
 using System.Threading.Tasks;
 
 namespace Sophon.Infrastructure
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class Transaction : ITransaction
     {
         public Transaction(DbContext dbContext)

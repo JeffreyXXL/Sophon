@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Sophon.Common;
+using System;
 
 namespace Sophon.Core
 {
+    [InjectableAttribute(DependencyLifetime.Singleton)]
     public class StateMachine : IStateMachine
     {
         public WorkStationState CurrentState => _currentState;

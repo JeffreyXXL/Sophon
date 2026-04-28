@@ -103,6 +103,7 @@
     <Compile Include="Config\Serializer\IniConfigSerializer.cs" />
     <Compile Include="Config\Serializer\JsonConfigSerializer.cs" />
     <Compile Include="Config\Serializer\XmlConfigSerializer.cs" />
+    <Compile Include="DI\Attribute\InjectableAttribute.cs" />
     <Compile Include="DI\CommonModuleRegister.cs" />
     <Compile Include="Config\Exception\ConfigDeserializeException.cs" />
     <Compile Include="Helper\PathResolver.cs" />
@@ -118,7 +119,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="CommonClassDiagram.cd" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -1,6 +1,8 @@
 ﻿using DryIoc;
 using Prism.Ioc;
+using Sophon.Common;
 using System.Linq;
+using System.Reflection;
 
 namespace Sophon.Application
 {
@@ -9,15 +11,13 @@ namespace Sophon.Application
         public static void RegisterApplication(this IContainerRegistry containerRegistry)
         {
             var container = ((IContainerExtension<IContainer>)containerRegistry).Instance;
-
             var assembly = typeof(ApplicationModuleRegister).Assembly;
+            var types = assembly.GetTypes()
+                   .Where(t => t.IsClass && !t.IsAbstract && t.IsDefined(typeof(InjectableAttribute), false));
+            var SingletonTypes = types
+                .Where(t => t.GetCustomAttribute<InjectableAttribute>().Lifetime == DependencyLifetime.Singleton).ToList();
 
-            var serviceTypes = assembly.GetTypes()
-                .Where(t => t.IsClass && !t.IsAbstract && t.Name.EndsWith("Service"));
-
-            container.RegisterMany(serviceTypes, Reuse.Singleton);
-            
-            containerRegistry.RegisterSingleton<IUserContext, UserContext>();
+            container.RegisterMany(SingletonTypes, Reuse.Singleton);
         }
     }
 }

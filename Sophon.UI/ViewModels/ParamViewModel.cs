@@ -59,10 +59,10 @@ namespace Sophon.UI.ViewModels
         public DelegateCommand DeleteParamCommand { get; private set; }
         public DelegateCommand SaveParamCommand { get; private set; }
 
-        private readonly IParamService _paramService;
+        private readonly IParamRepository _paramService;
         private readonly IDialogService _dialogService;
 
-        public ParamViewModel(IParamService paramService, IDialogService dialogService)
+        public ParamViewModel(IParamRepository paramService, IDialogService dialogService)
         {
             _paramService = paramService;
             _dialogService = dialogService;

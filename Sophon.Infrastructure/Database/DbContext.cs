@@ -1,8 +1,10 @@
 ﻿using Common;
+using Sophon.Common;
 using SqlSugar;
 
 namespace Sophon.Infrastructure
 {
+    [InjectableAttribute(DependencyLifetime.Delegate)]
     public class DbContext
     {
         public SqlSugarClient Db { get; }
