@@ -23,8 +23,9 @@ namespace Sophon.Application
 
         private readonly IConfigManager _alarmConfigManager;
         private readonly IEventAggregator _eventAggregator;
+        private readonly ILoggerManager _logger;
 
-        public AlarmRepository(IConfigManagerFactory configManagerFactory, IEventAggregator eventAggregator)
+        public AlarmRepository(IConfigManagerFactory configManagerFactory, IEventAggregator eventAggregator, ILoggerFactory loggerFactory)
         {
             _alarmConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "alarm_config", "Alarm");
             _eventAggregator = eventAggregator;

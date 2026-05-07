@@ -1,4 +1,7 @@
 ﻿using Sophon.Infrastructure;
+using Sophon.Common;
+using Prism.Events;
+using Sophon.Core.Event;
 
 namespace Sophon.Application
 {
