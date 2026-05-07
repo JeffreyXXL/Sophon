@@ -4,8 +4,11 @@ using Sophon.Common;
 using Sophon.Core;
 using Sophon.Core.Event;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
+using System.Text;
 
 namespace Sophon.Application
 {
@@ -25,56 +28,68 @@ namespace Sophon.Application
         {
             _alarmConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "alarm_config", "Alarm");
             _eventAggregator = eventAggregator;
+            _logger = loggerFactory.CreateLogger("Alarms");
 
-            RegisteredAlarms = new ObservableCollection<AlarmItem>();
             ActuralAlarmList = new ObservableCollection<AlarmItem>();
             HistoryAlarms = new ObservableCollection<AlarmItem>();
+            Restore();
         }
 
-        public void Clearlarm(string alarmCode)
+        public void ClearAlarm(string alarmCode)
         {
             foreach (var item in ActuralAlarmList)
             {
                 HistoryAlarms.Add(item);
             }
             ActuralAlarmList.Clear();
+            _eventAggregator.GetEvent<AlarmClearedEvent>().Publish();
         }
 
         public void Alarm(string alarmCode)
         {
-            var alarmitem = RegisteredAlarms.Where(x => x.AlarmCode == alarmCode).ToList();
-            if (alarmitem.Count() == 1)
+            AlarmItem alarmItem;
+            var now = DateTime.Now;
+            var alarmitems = RegisteredAlarms.Where(x => x.AlarmCode == alarmCode).ToList();
+            if (alarmitems.Count() >= 1)
             {
-                if (!ActuralAlarmList.Contains(alarmitem[0]))
+                var config = alarmitems[0];
+                alarmItem = new AlarmItem()
                 {
-                    ActuralAlarmList.Add(alarmitem[0]);
-                }
+                    AlarmCode = config.AlarmCode,
+                    Content = config.Content,
+                    Time = now
+                };
             }
             else
             {
-                AlarmItem newAlarmItem = new AlarmItem() { AlarmCode = alarmCode, Content = "非手动注册报警，请确认代码后修改本内容！", Level = AlarmLevel.Info };
-                RegisterAlarm(newAlarmItem);
-                ActuralAlarmList.Add(newAlarmItem);
+                alarmItem = new AlarmItem()
+                {
+                    AlarmCode = alarmCode,
+                    Content = "非手动注册报警，请确认代码，或者前往报警注册界面修改本内容！",
+                    Time = now
+                };
+                RegisterAlarm();
+                RegisteredAlarms.Add(alarmItem);
             }
+
+            if (!ActuralAlarmList.Contains(alarmItem))
+            {
+                ActuralAlarmList.Insert(0, alarmItem);
+                string logMsg = $"- {alarmCode} - {alarmItem.Content}";
+                _logger.Warn(logMsg);
+            }
+
+            _eventAggregator.GetEvent<AlarmOccurredEvent>().Publish(alarmCode);
         }
 
-        public void RegisterAlarm(AlarmItem alarmItem)
+        public void RegisterAlarm()
         {
-            RegisteredAlarms.Add(alarmItem);
             _alarmConfigManager.SaveConfig(RegisteredAlarms);
         }
 
-        public void RemoveAlarm(AlarmItem alarmItem)
+        public void Restore()
         {
-            try
-            {
-                RegisteredAlarms.Remove(alarmItem);
-                _alarmConfigManager.SaveConfig(RegisteredAlarms);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            RegisteredAlarms = new ObservableCollection<AlarmItem>(_alarmConfigManager.LoadConfig<List<AlarmItem>>());
         }
     }
 }

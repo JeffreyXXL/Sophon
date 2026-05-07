@@ -7,9 +7,5 @@ namespace Sophon.Application
         string CurrentUser { get; set; }
         UserLevel CurrentLevel { get; set; }
         bool IsLoggedIn { get; set; }
-
-        void Login(string userName);
-
-        void Logout();
     }
 }

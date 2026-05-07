@@ -2,7 +2,7 @@
 
 namespace Sophon.Core.Event
 {
-    public class AlarmOccurredEvent : PubSubEvent<string>
+    public class UserChangeEvent: PubSubEvent<string>
     {
     }
 }

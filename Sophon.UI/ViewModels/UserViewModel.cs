@@ -1,7 +1,9 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using Sophon.Application;
+using Sophon.Core.Event;
 using Sophon.Infrastructure;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +15,7 @@ namespace Sophon.UI.ViewModels
 {
     public class UserViewModel : BindableBase, INavigationAware
     {
-        private string _userName;
+        private string _userName = "未登录";
 
         public string UserName
         {
@@ -124,8 +126,9 @@ namespace Sophon.UI.ViewModels
 
         private readonly IUserRepository _userRepository;
         private readonly IUserContext _userContext;
+        private readonly IEventAggregator _eventAggregator;
 
-        public UserViewModel(IUserRepository userRepository, IUserContext userContext)
+        public UserViewModel(IUserRepository userRepository, IUserContext userContext ,IEventAggregator eventAggregator)
         {
             LoginCommand = new DelegateCommand<object>(ExecuteLogin);
             LogoutCommand = new DelegateCommand(ExecuteLogout);
@@ -140,6 +143,7 @@ namespace Sophon.UI.ViewModels
             CancelDeleteCommand = new DelegateCommand(ExecuteCancelDelete);
             _userRepository = userRepository;
             _userContext = userContext;
+            _eventAggregator = eventAggregator;
             ExecuteSwitchToLogin();
 
             UserList = new ObservableCollection<string>();
@@ -149,6 +153,8 @@ namespace Sophon.UI.ViewModels
                 UserLevel.Engineer.ToString(),
                 UserLevel.Admin.ToString(),
             };
+
+            _eventAggregator.GetEvent<UserChangeEvent>().Publish(UserName);
         }
 
         /// <summary>
@@ -164,9 +170,7 @@ namespace Sophon.UI.ViewModels
             UserLevel level = _userRepository.GetLevelByUserName(UserName);
             if (password == storedPassword)
             {
-                _userContext.CurrentUser = UserName;
-                _userContext.IsLoggedIn = true;
-                _userContext.CurrentLevel = level;
+                _eventAggregator.GetEvent<UserChangeEvent>().Publish(UserName);
             }
 
             passwordBox?.Clear();
@@ -178,11 +182,8 @@ namespace Sophon.UI.ViewModels
         /// </summary>
         private void ExecuteLogout()
         {
-            _userContext.IsLoggedIn = false;
-            _userContext.CurrentLevel = UserLevel.None;
             UserName = "未登录";
-
-            //_eventAggregator.GetEvent<UserLoggedInEvent>().Publish(UserName);
+            _eventAggregator.GetEvent<UserChangeEvent>().Publish(UserName);
             IsChangePwdPanelVisible = false;
             IsLoginVisible = true;
             UpdateUI();

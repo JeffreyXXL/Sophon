@@ -13,10 +13,10 @@ namespace Sophon.Application
 
         void Alarm(string alarmCode);
 
-        void Clearlarm(string alarmCode);
+        void ClearAlarm(string alarmCode);
 
-        void RegisterAlarm(AlarmItem alarmItem);
+        void RegisterAlarm();
 
-        void RemoveAlarm(AlarmItem alarmItem);
+        void Restore();
     }
 }
