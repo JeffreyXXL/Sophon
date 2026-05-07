@@ -25,10 +25,12 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
             <views:HeaderView />
             <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion" />
+            <views:BottomView Grid.Row="2" VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </Window>

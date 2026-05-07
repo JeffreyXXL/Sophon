@@ -1,8 +1,8 @@
 ﻿<UserControl
     x:Class="Sophon.UI.Views.ParamView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -42,6 +42,7 @@
         <DataGrid
             Grid.Row="1"
             AutoGenerateColumns="False"
+            IsReadOnly="True"
             ItemsSource="{Binding FilteredParamConfigs}"
             SelectedItem="{Binding SelectedParam}"
             Style="{StaticResource DataGridCommonStyle}">
@@ -49,8 +50,7 @@
                 <DataGridTextColumn
                     Width="200"
                     Binding="{Binding Name}"
-                    Header="参数名称"
-                    IsReadOnly="True" />
+                    Header="参数名称" />
                 <DataGridTextColumn
                     Width="200"
                     Binding="{Binding Value}"

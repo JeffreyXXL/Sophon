@@ -107,7 +107,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\BindingProxy.cs" />
     <Compile Include="ViewModels\AlarmViewModel.cs" />
+    <Compile Include="ViewModels\SubViewModels\BottomViewModel.cs" />
     <Compile Include="ViewModels\InfrastructureViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ParamViewModel.cs" />
@@ -125,6 +127,9 @@
     </Compile>
     <Compile Include="Views\SubViews\AddParamView.xaml.cs">
       <DependentUpon>AddParamView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\BottomView.xaml.cs">
+      <DependentUpon>BottomView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SubViews\HeaderView.xaml.cs">
       <DependentUpon>HeaderView.xaml</DependentUpon>
@@ -163,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SubViews\AddParamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\BottomView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

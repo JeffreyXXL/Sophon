@@ -17,7 +17,7 @@
                 x:Key="DataGridCommonStyle"
                 BasedOn="{StaticResource DataGridBaseStyle}"
                 TargetType="DataGrid">
-                <Setter Property="Margin" Value="10" />
+                <Setter Property="Margin" Value="10,0" />
                 <Setter Property="RowHeight" Value="40" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="Background" Value="White" />

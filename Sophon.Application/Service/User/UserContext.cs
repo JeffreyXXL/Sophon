@@ -1,4 +1,6 @@
-﻿using Sophon.Infrastructure;
+﻿using Sophon.Common;
+using Sophon.Core.Event;
+using Sophon.Infrastructure;
 
 namespace Sophon.Application
 {
@@ -9,14 +11,20 @@ namespace Sophon.Application
 
         public bool IsLoggedIn { get; set; } = false;
 
-        public void Login(string userName)
-        {
-            CurrentUser = userName;
-        }
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IUserRepository _userRepository;
 
-        public void Logout()
+        public UserContext(IEventAggregator eventAggregator, IUserRepository userRepository)
         {
-            CurrentUser = string.Empty;
+            _eventAggregator = eventAggregator;
+            _userRepository = userRepository;
+            _eventAggregator.GetEvent<UserChangeEvent>().Subscribe(async userName =>
+            {
+                CurrentUser = userName;
+                User user = await _userRepository.GetUserByName(CurrentUser);
+                CurrentLevel = user == null ? UserLevel.None : _userRepository.GetLevelByUserName(CurrentUser);
+                IsLoggedIn = user != null;
+            });
         }
     }
 }

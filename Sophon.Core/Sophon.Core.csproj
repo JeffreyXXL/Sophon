@@ -84,7 +84,9 @@
     <Compile Include="DI\CoreModuleRegister.cs" />
     <Compile Include="EventBus\EventBus.cs" />
     <Compile Include="EventBus\Interface\IEventBus.cs" />
+    <Compile Include="Event\AlarmClearedEvent.cs" />
     <Compile Include="Event\AlarmOccurredEvent.cs" />
+    <Compile Include="Event\UserChangeEvent.cs" />
     <Compile Include="Flow\Application_Temp\Events\SampleEvent.cs" />
     <Compile Include="Flow\Application_Temp\FlowStepBase.cs" />
     <Compile Include="Flow\Application_Temp\LogicSteps\FlowStep_AxisHome.cs" />
