@@ -18,13 +18,13 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <Image Source="/Resources/Logo.png" />
+        <Image Margin="0,5,0,0" Source="/Resources/Logo.png" />
         <hc:SideMenu Grid.Row="1">
             <hc:SideMenuItem
                 Command="{Binding NavigateCommand}"
                 CommandParameter="HomeView"
-                FontSize="20"
-                Header="     系统主页">
+                FontSize="18"
+                Header="  系统主页">
                 <hc:SideMenuItem.Icon>
                     <Image Margin="5" Source="/Resources/Home.png" />
                 </hc:SideMenuItem.Icon>
@@ -32,8 +32,8 @@
             <hc:SideMenuItem
                 Command="{Binding NavigateCommand}"
                 CommandParameter="StationView"
-                FontSize="20"
-                Header="     工站流程">
+                FontSize="18"
+                Header="  工站流程">
                 <hc:SideMenuItem.Icon>
                     <Image Margin="5" Source="/Resources/Station.png" />
                 </hc:SideMenuItem.Icon>
@@ -41,8 +41,8 @@
             <hc:SideMenuItem
                 Command="{Binding NavigateCommand}"
                 CommandParameter="InfrastructureView"
-                FontSize="20"
-                Header="     硬件操作">
+                FontSize="18"
+                Header="  硬件操作">
                 <hc:SideMenuItem.Icon>
                     <Image Margin="5" Source="/Resources/Infra.png" />
                 </hc:SideMenuItem.Icon>
@@ -50,26 +50,43 @@
             <hc:SideMenuItem
                 Command="{Binding NavigateCommand}"
                 CommandParameter="ParamView"
-                FontSize="20"
-                Header="     参数设置">
+                FontSize="18"
+                Header="  参数设置">
                 <hc:SideMenuItem.Icon>
                     <Image Margin="5" Source="/Resources/Param.png" />
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
             <hc:SideMenuItem
-                Command="{Binding NavigateCommand}"
                 CommandParameter="AlarmView"
-                FontSize="20"
-                Header="     报警显示">
+                FontSize="18"
+                Header="  报警显示">
                 <hc:SideMenuItem.Icon>
                     <Image Margin="5" Source="/Resources/Alarm.png" />
                 </hc:SideMenuItem.Icon>
+                <hc:SideMenuItem
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AlarmHistoryView"
+                    FontSize="15"
+                    Header="    历史报警">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" Source="/Resources/History.png" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AlarmRegisterView"
+                    FontSize="15"
+                    Header="    报警注册">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" Source="/Resources/Register.png" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
             </hc:SideMenuItem>
             <hc:SideMenuItem
                 Command="{Binding NavigateCommand}"
                 CommandParameter="UserView"
-                FontSize="20"
-                Header="     用户管理">
+                FontSize="18"
+                Header="  用户管理">
                 <hc:SideMenuItem.Icon>
                     <Image Margin="5" Source="/Resources/User.png" />
                 </hc:SideMenuItem.Icon>

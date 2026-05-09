@@ -36,7 +36,7 @@
                 <Image Source="/Resources/bg_login.png" Stretch="Fill" />
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <Image Margin="20,0,20,10" Source="/Resources/Logo.png" />
+                    <Image Margin="20,0,20,10" Source="/Resources/Logo_W.png" />
 
                     <StackPanel Visibility="{Binding IsLoginVisible, Converter={StaticResource BoolToVisConverter}}">
                         <ComboBox

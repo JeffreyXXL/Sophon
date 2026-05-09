@@ -80,7 +80,7 @@ namespace Sophon.Application
                 _logger.Warn(logMsg);
             }
 
-            _eventAggregator.GetEvent<AlarmOccurredEvent>().Publish(alarmCode);
+            _eventAggregator.GetEvent<AlarmOccurredEvent>().Publish(alarmItem);
         }
 
         public void RegisterAlarm()

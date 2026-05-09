@@ -36,7 +36,8 @@ namespace Sophon.UI
             containerRegistry.RegisterForNavigation<ParamView>("ParamView");
             containerRegistry.RegisterForNavigation<HomeView>("HomeView");
             containerRegistry.RegisterForNavigation<StationView>("StationView");
-            containerRegistry.RegisterForNavigation<AlarmView>("AlarmView");
+            containerRegistry.RegisterForNavigation<AlarmRegisterView>("AlarmRegisterView");
+            containerRegistry.RegisterForNavigation<AlarmHistoryView>("AlarmHistoryView");
 
             containerRegistry.RegisterDialog<AddParamView, AddParamViewModel>();
         }

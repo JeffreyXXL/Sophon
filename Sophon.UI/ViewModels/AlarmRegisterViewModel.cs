@@ -1,7 +1,9 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Sophon.Application;
 using Sophon.Core;
+using Sophon.Core.Event;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,15 +11,8 @@ using System.Security.Claims;
 
 namespace Sophon.UI.ViewModels
 {
-    public class AlarmViewModel : BindableBase
+    public class AlarmRegisterViewModel : BindableBase
     {
-        private ObservableCollection<AlarmItem> _acturalAlarmList;
-
-        public ObservableCollection<AlarmItem> ActuralAlarmList
-        {
-            get { return _acturalAlarmList; }
-            set { SetProperty(ref _acturalAlarmList, value); }
-        }
         private ObservableCollection<AlarmItem> _registeredAlarms;
 
         public ObservableCollection<AlarmItem> RegisteredAlarms
@@ -32,43 +27,30 @@ namespace Sophon.UI.ViewModels
             get { return _selectedAlarm; }
             set { SetProperty(ref _selectedAlarm, value); }
         }
-        private bool _isFiltered;
-
-        public bool IsFiltered
-        {
-            get { return _isFiltered; }
-            set { SetProperty(ref _isFiltered, value); }
-        }
-
 
         public DelegateCommand AddAlarmCommand { get; private set; }
         public DelegateCommand DeleteAlarmCommand { get; private set; }
         public DelegateCommand SaveCommand { get; private set; }
-        public DelegateCommand FilterCommand { get; private set; }
+        public DelegateCommand RestoreCommand { get; private set; }
         public DelegateCommand ImportCommand { get; private set; }
         public DelegateCommand ExportCommand { get; private set; }
 
-        public DelegateCommand RestoreCommand { get; private set; }
 
         private readonly IAlarmRepository _alarmRepository;
-        public AlarmViewModel(IAlarmRepository alarmRepository)
+
+
+        public AlarmRegisterViewModel(IAlarmRepository alarmRepository)
         {
             _alarmRepository = alarmRepository;
-
-            ActuralAlarmList = _alarmRepository.ActuralAlarmList;
             RegisteredAlarms = _alarmRepository.RegisteredAlarms;
 
             AddAlarmCommand = new DelegateCommand(ExcuteAddAlarm);
             DeleteAlarmCommand = new DelegateCommand(ExcuteDeleteAlarm);
             SaveCommand = new DelegateCommand(ExcuteSave);
             RestoreCommand = new DelegateCommand(ExcuteRestore);
-            FilterCommand = new DelegateCommand(ExcuteFilter);
             ImportCommand = new DelegateCommand(ExcuteImport);
             ExportCommand = new DelegateCommand(ExcuteExport);
-            for (int i = 15; i < 20; i++)
-            {
-                _alarmRepository.Alarm(i.ToString());
-            }
+
         }
 
         private void ExcuteAddAlarm()
@@ -101,12 +83,6 @@ namespace Sophon.UI.ViewModels
             RegisteredAlarms = _alarmRepository.RegisteredAlarms;
         }
 
-        private void ExcuteFilter()
-        {
-            //todo 筛选逻辑未完成
-
-            IsFiltered = !IsFiltered;
-        }
 
         public void ExcuteImport()
         {

@@ -105,7 +105,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helper\BindingProxy.cs" />
-    <Compile Include="ViewModels\AlarmViewModel.cs" />
+    <Compile Include="ViewModels\AlarmRegisterViewModel.cs" />
+    <Compile Include="ViewModels\AlarmHistoryViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\BottomViewModel.cs" />
     <Compile Include="ViewModels\InfrastructureViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -113,8 +114,11 @@
     <Compile Include="ViewModels\SubViewModels\SideViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\AddParamViewModel.cs" />
-    <Compile Include="Views\AlarmView.xaml.cs">
-      <DependentUpon>AlarmView.xaml</DependentUpon>
+    <Compile Include="Views\AlarmRegisterView.xaml.cs">
+      <DependentUpon>AlarmRegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AlarmHistoryView.xaml.cs">
+      <DependentUpon>AlarmHistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -152,7 +156,11 @@
     <Compile Include="Views\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AlarmView.xaml">
+    <Page Include="Views\AlarmRegisterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AlarmHistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,6 +291,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Station.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logo.png" />
+    <Resource Include="Resources\Logo_T.png" />
+    <Resource Include="Resources\Logo_W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\History.png" />
+    <Resource Include="Resources\Register.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />

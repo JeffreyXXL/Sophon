@@ -43,7 +43,7 @@ namespace Sophon.UI.ViewModels
                 CurrentUser = userName;
                 User user = await _userRepository.GetUserByName(CurrentUser);
                 IsNotLogin = user == null;
-            });
+            }, ThreadOption.UIThread);
             StartTimer();
         }
         

@@ -13,6 +13,21 @@
 
             <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
 
+            <Style x:Key="CardBorderStyle" TargetType="Border">
+                <Setter Property="Background" Value="White" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect
+                            BlurRadius="10"
+                            Opacity="0.2"
+                            ShadowDepth="1"
+                            Color="Black" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style
                 x:Key="DataGridCommonStyle"
                 BasedOn="{StaticResource DataGridBaseStyle}"

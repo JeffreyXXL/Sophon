@@ -14,7 +14,15 @@
 
     <Grid Background="#F3F6F9" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
         <StackPanel Margin="30,0,0,0" VerticalAlignment="Center">
-            <TextBlock FontSize="30" Text="自动化软件框架" />
+            <TextBlock FontSize="30" Text="自动化软件框架">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        BlurRadius="10"
+                        Opacity="0.3"
+                        ShadowDepth="8"
+                        Color="Gray" />
+                </TextBlock.Effect>
+            </TextBlock>
         </StackPanel>
 
         <StackPanel
