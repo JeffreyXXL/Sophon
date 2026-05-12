@@ -104,6 +104,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\StatusLamp.xaml.cs">
+      <DependentUpon>StatusLamp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper\BindingProxy.cs" />
     <Compile Include="ViewModels\AlarmRegisterViewModel.cs" />
     <Compile Include="ViewModels\AlarmHistoryViewModel.cs" />
@@ -156,6 +159,10 @@
     <Compile Include="Views\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\StatusLamp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AlarmRegisterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

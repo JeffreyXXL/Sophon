@@ -26,9 +26,13 @@
                         Text="选择起始时间筛选：" />
                     <hc:DateTimePicker
                         Width="220"
+                        Height="20"
                         Margin="10,0"
                         SelectedDateTime="{Binding StartTime}" />
-                    <hc:DateTimePicker Width="220" SelectedDateTime="{Binding EndTime}" />
+                    <hc:DateTimePicker
+                        Width="220"
+                        Height="20"
+                        SelectedDateTime="{Binding EndTime}" />
                     <Button Margin="10,0" Command="{Binding FilterCommand}">
                         <Button.Style>
                             <Style BasedOn="{StaticResource ButtonDashedSuccess}" TargetType="Button">

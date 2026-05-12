@@ -45,7 +45,6 @@
         <Border Grid.Row="1" Style="{StaticResource CardBorderStyle}">
             <DataGrid
                 AutoGenerateColumns="False"
-                IsReadOnly="True"
                 ItemsSource="{Binding FilteredParamConfigs}"
                 SelectedItem="{Binding SelectedParam}"
                 Style="{StaticResource DataGridCommonStyle}">
@@ -53,7 +52,8 @@
                     <DataGridTextColumn
                         Width="200"
                         Binding="{Binding Name}"
-                        Header="参数名称" />
+                        Header="参数名称"
+                        IsReadOnly="True" />
                     <DataGridTextColumn
                         Width="200"
                         Binding="{Binding Value}"
