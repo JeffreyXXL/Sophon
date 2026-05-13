@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 namespace Sophon.Application
 {
     [InjectableAttribute(DependencyLifetime.Singleton)]
-    public class MotionRepository : IMotionRepository
+    public class AxisRepository : IAxisRepository
     {
         public ObservableCollection<AxisConfig> AxisConfigs { get; private set; }
         public ObservableCollection<InputConfig> InputConfigs { get; private set; }
@@ -18,11 +18,11 @@ namespace Sophon.Application
         private readonly IConfigManager _inputConfigManager;
         private readonly IConfigManager _outputConfigManager;
 
-        public MotionRepository(IConfigManagerFactory configManagerFactory)
+        public AxisRepository(IConfigManagerFactory configManagerFactory)
         {
-            _axisConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "axis_config", "Motion");
-            _inputConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "input_config", "Motion");
-            _outputConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "output_config", "Motion");
+            _axisConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "axis_config", "Card");
+            _inputConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "input_config", "Card");
+            _outputConfigManager = configManagerFactory.CreateConfigManager(ConfigType.json, "output_config", "Card");
 
             AxisConfigs = new ObservableCollection<AxisConfig>();
             InputConfigs = new ObservableCollection<InputConfig>();

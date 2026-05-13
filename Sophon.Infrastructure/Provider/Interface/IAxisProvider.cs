@@ -1,6 +1,6 @@
 ﻿namespace Sophon.Infrastructure
 {
-    public interface IMotionProvider
+    public interface IAxisProvider
     {
         IAxisController Axis { get; }
         IIoController Io { get; }

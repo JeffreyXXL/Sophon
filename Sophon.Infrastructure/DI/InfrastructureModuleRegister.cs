@@ -30,7 +30,7 @@ namespace Sophon.Infrastructure
                 return new DbContext(connstr, factory);
             }, Reuse.Singleton);
 
-            container.RegisterDelegate<IMotionFactory>(c =>
+            container.RegisterDelegate<ICardFactory>(c =>
             {
                 string brand = ConfigurationManager.AppSettings["CardBrand"];
 
@@ -46,9 +46,9 @@ namespace Sophon.Infrastructure
             }, Reuse.Singleton);
 
             container.RegisterDelegate<IAxisController>(c =>
-              c.Resolve<IMotionFactory>().CreateAxisController(), Reuse.Singleton);
+              c.Resolve<ICardFactory>().CreateAxisController(), Reuse.Singleton);
             container.RegisterDelegate<IIoController>(c =>
-              c.Resolve<IMotionFactory>().CreateIoController(), Reuse.Singleton);
+              c.Resolve<ICardFactory>().CreateIoController(), Reuse.Singleton);
         }
     }
 }

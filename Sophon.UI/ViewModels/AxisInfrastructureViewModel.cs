@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Sophon.UI.ViewModels
 {
-    public class InfrastructureViewModel : BindableBase
+    public class AxisInfrastructureViewModel : BindableBase
     {
         private ObservableCollection<AxisConfig> _axisConfigs;
 
@@ -39,17 +39,17 @@ namespace Sophon.UI.ViewModels
             set { SetProperty(ref _protocolConfigs, value); }
         }
 
-        private readonly IMotionRepository _motionService;
+        private readonly IAxisRepository _axisService;
         private readonly IProtocolRepository _protocolService;
 
-        public InfrastructureViewModel(IMotionRepository motionService, IProtocolRepository protocolService)
+        public AxisInfrastructureViewModel(IAxisRepository axisService, IProtocolRepository protocolService)
         {
-            _motionService = motionService;
+            _axisService = axisService;
             _protocolService = protocolService;
 
-            AxisConfigs = _motionService.AxisConfigs;
-            InputConfigs = _motionService.InputConfigs;
-            OutputConfigs = _motionService.OutputConfigs;
+            AxisConfigs = _axisService.AxisConfigs;
+            InputConfigs = _axisService.InputConfigs;
+            OutputConfigs = _axisService.OutputConfigs;
             ProtocolConfigs = _protocolService.ProtocolConfigs;
         }
     }

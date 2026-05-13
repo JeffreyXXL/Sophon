@@ -164,18 +164,18 @@
     <Compile Include="DI\InfrastructureModuleRegister.cs" />
     <Compile Include="Database\Entities\Production.cs" />
     <Compile Include="Database\Entities\User.cs" />
-    <Compile Include="Motion\Drives\GoogolTech\GoogolTechAxisController.cs" />
-    <Compile Include="Motion\Drives\GoogolTech\GoogolTechIoController.cs" />
-    <Compile Include="Motion\Drives\LeadShine\LeadShineAxisController.cs" />
-    <Compile Include="Motion\Drives\LeadShine\LeadShineIoController.cs" />
-    <Compile Include="Motion\Drives\LeadShine\LTDMC.cs" />
-    <Compile Include="Motion\Factory\GoogolTechFactory.cs" />
-    <Compile Include="Motion\Factory\LeadShineFactory.cs" />
-    <Compile Include="Motion\Drives\Interface\IAxisController.cs" />
-    <Compile Include="Motion\Factory\Interface\IMotionFactory.cs" />
-    <Compile Include="Provider\Interface\IMotionProvider.cs" />
-    <Compile Include="Motion\Drives\Interface\IIoController.cs" />
-    <Compile Include="Provider\MotionProvider.cs" />
+    <Compile Include="Card\Drives\GoogolTech\GoogolTechAxisController.cs" />
+    <Compile Include="Card\Drives\GoogolTech\GoogolTechIoController.cs" />
+    <Compile Include="Card\Drives\LeadShine\LeadShineAxisController.cs" />
+    <Compile Include="Card\Drives\LeadShine\LeadShineIoController.cs" />
+    <Compile Include="Card\Drives\LeadShine\LTDMC.cs" />
+    <Compile Include="Card\Factory\GoogolTechFactory.cs" />
+    <Compile Include="Card\Factory\LeadShineFactory.cs" />
+    <Compile Include="Card\Drives\Interface\IAxisController.cs" />
+    <Compile Include="Card\Factory\Interface\ICardFactory.cs" />
+    <Compile Include="Provider\Interface\IAxisProvider.cs" />
+    <Compile Include="Card\Drives\Interface\IIoController.cs" />
+    <Compile Include="Provider\AxisProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

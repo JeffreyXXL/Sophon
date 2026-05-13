@@ -3,12 +3,12 @@
 namespace Sophon.Infrastructure
 {
     [InjectableAttribute(DependencyLifetime.Singleton)]
-    public class MotionProvider : IMotionProvider
+    public class AxisProvider : IAxisProvider
     {
         public IAxisController Axis { get; }
         public IIoController Io { get; }
 
-        public MotionProvider(IAxisController axis, IIoController io)
+        public AxisProvider(IAxisController axis, IIoController io)
         {
             Axis = axis;
             Io = io;

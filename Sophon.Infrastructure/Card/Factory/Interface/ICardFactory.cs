@@ -1,6 +1,6 @@
 ﻿namespace Sophon.Infrastructure
 {
-    public interface IMotionFactory
+    public interface ICardFactory
     {
         IAxisController CreateAxisController();
 

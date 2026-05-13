@@ -24,11 +24,11 @@
 
         bool MoveInPos(int cardNo, int axisNo);
 
-        bool Jog(int cardNo, int axisno, bool direction);
+        bool Jog(int cardNo, int axisNo, bool direction);
 
-        bool Stop(int cardNo, int axisno);
+        bool Stop(int cardNo, int axisNo);
 
-        bool ResetAxis(int cardNo, int axisno);
+        bool ResetAxis(int cardNo, int axisNo);
 
         bool ResetAll();
 

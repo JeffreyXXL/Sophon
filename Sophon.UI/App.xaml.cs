@@ -32,7 +32,9 @@ namespace Sophon.UI
             containerRegistry.RegisterApplication();
 
             containerRegistry.RegisterForNavigation<UserView>("UserView");
-            containerRegistry.RegisterForNavigation<InfrastructureView>("InfrastructureView");
+            containerRegistry.RegisterForNavigation<AxisInfrastructureView>("AxisInfrastructureView");
+            containerRegistry.RegisterForNavigation<IOInfrastructureView>("IOInfrastructureView");
+            containerRegistry.RegisterForNavigation<ProtocolInfrastructureView>("ProtocolInfrastructureView");
             containerRegistry.RegisterForNavigation<ParamView>("ParamView");
             containerRegistry.RegisterForNavigation<HomeView>("HomeView");
             containerRegistry.RegisterForNavigation<StationView>("StationView");
@@ -51,10 +53,10 @@ namespace Sophon.UI
             dbInitializer.Initialize();
 
             // 加载配置
-            var motionService = Container.Resolve<IMotionRepository>();
+            var axisService = Container.Resolve<IAxisRepository>();
             var protocolService = Container.Resolve<IProtocolRepository>();
             var paramService = Container.Resolve<IParamRepository>();
-            motionService.LoadAllConfigs();
+            axisService.LoadAllConfigs();
             protocolService.LoadAllConfigs();
             paramService.LoadAllConfigs();
 

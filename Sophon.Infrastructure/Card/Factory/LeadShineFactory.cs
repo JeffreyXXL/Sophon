@@ -3,7 +3,7 @@
 namespace Sophon.Infrastructure
 {
     [InjectableAttribute(DependencyLifetime.Delegate)]
-    public class GoogolTechFactory : IMotionFactory
+    public class LeadShineFactory : ICardFactory
     {
         private IAxisController axisController;
         private IIoController ioController;
@@ -12,7 +12,7 @@ namespace Sophon.Infrastructure
         {
             if (axisController == null)
             {
-                axisController = new GoogolTechAxisController();
+                axisController = new LeadShineAxisController();
             }
             return axisController;
         }
@@ -21,7 +21,8 @@ namespace Sophon.Infrastructure
         {
             if (ioController == null)
             {
-                ioController = new GoogolTechIoController();
+                var controller = CreateAxisController();
+                ioController = new LeadShineIoController(controller);
             }
             return ioController;
         }

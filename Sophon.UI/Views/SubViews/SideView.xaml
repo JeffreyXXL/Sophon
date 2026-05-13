@@ -38,14 +38,37 @@
                     <Image Margin="5" Source="/Resources/Station.png" />
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
-            <hc:SideMenuItem
-                Command="{Binding NavigateCommand}"
-                CommandParameter="InfrastructureView"
-                FontSize="18"
-                Header="  硬件操作">
+            <hc:SideMenuItem FontSize="18" Header="  硬件操作">
                 <hc:SideMenuItem.Icon>
                     <Image Margin="5" Source="/Resources/Infra.png" />
                 </hc:SideMenuItem.Icon>
+                <hc:SideMenuItem
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AxisInfrastructureView"
+                    FontSize="15"
+                    Header="    伺服操作">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" Source="/Resources/Axis.png" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="IOInfrastructureView"
+                    FontSize="15"
+                    Header="    IO操作">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" Source="/Resources/IO.png" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="ProtocolInfrastructureView"
+                    FontSize="15"
+                    Header="    通讯操作">
+                    <hc:SideMenuItem.Icon>
+                        <Image Margin="10" Source="/Resources/Protocol.png" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
             </hc:SideMenuItem>
             <hc:SideMenuItem
                 Command="{Binding NavigateCommand}"

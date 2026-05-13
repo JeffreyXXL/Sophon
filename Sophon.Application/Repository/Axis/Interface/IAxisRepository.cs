@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Sophon.Application
 {
-    public interface IMotionRepository
+    public interface IAxisRepository
     {
         ObservableCollection<AxisConfig> AxisConfigs { get; }
         ObservableCollection<InputConfig> InputConfigs { get; }

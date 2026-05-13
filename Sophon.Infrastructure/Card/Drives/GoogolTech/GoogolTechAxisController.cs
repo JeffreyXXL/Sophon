@@ -40,7 +40,7 @@ namespace Sophon.Infrastructure
             throw new NotImplementedException();
         }
 
-        public bool Jog(int cardNo, int axisno, bool direction)
+        public bool Jog(int cardNo, int axisNo, bool direction)
         {
             throw new NotImplementedException();
         }
@@ -65,7 +65,7 @@ namespace Sophon.Infrastructure
             throw new NotImplementedException();
         }
 
-        public bool ResetAxis(int cardNo, int axisno)
+        public bool ResetAxis(int cardNo, int axisNo)
         {
             throw new NotImplementedException();
         }
@@ -80,7 +80,7 @@ namespace Sophon.Infrastructure
             throw new NotImplementedException();
         }
 
-        public bool Stop(int cardNo, int axisno)
+        public bool Stop(int cardNo, int axisNo)
         {
             throw new NotImplementedException();
         }

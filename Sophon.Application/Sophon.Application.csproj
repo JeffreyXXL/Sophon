@@ -81,8 +81,8 @@
     <Compile Include="Repository\Protocol\ProtocolConfigConverter.cs" />
     <Compile Include="Repository\Protocol\ProtocolRepository.cs" />
     <Compile Include="Repository\Protocol\Interface\IProtocolRepository.cs" />
-    <Compile Include="Repository\Motion\MotionRepository.cs" />
-    <Compile Include="Repository\Motion\Interface\IMotionRepository.cs" />
+    <Compile Include="Repository\Axis\AxisRepository.cs" />
+    <Compile Include="Repository\Axis\Interface\IAxisRepository.cs" />
     <Compile Include="Repository\User\Interface\IUserContext.cs" />
     <Compile Include="Repository\User\UserContext.cs" />
   </ItemGroup>

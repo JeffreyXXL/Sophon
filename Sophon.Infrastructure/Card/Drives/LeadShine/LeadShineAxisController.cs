@@ -74,17 +74,17 @@ namespace Sophon.Infrastructure
             return false;
         }
 
-        public bool Jog(int cardNo, int axisno, bool direction)
+        public bool Jog(int cardNo, int axisNo, bool direction)
         {
             return false;
         }
 
-        public bool Stop(int cardNo, int axisno)
+        public bool Stop(int cardNo, int axisNo)
         {
             return false;
         }
 
-        public bool ResetAxis(int cardNo, int axisno)
+        public bool ResetAxis(int cardNo, int axisNo)
         {
             return false;
         }
