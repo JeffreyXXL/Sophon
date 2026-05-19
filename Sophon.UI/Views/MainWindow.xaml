@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:views="clr-namespace:Sophon.UI.Views"
@@ -31,6 +32,15 @@
             <views:HeaderView />
             <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion" />
             <views:BottomView Grid.Row="2" VerticalAlignment="Center" />
+
+            <hc:ScrollViewer
+                Grid.RowSpan="2"
+                Margin="0,30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                VerticalScrollBarVisibility="Hidden">
+                <StackPanel Margin="5" hc:Growl.GrowlParent="True" />
+            </hc:ScrollViewer>
         </Grid>
     </Grid>
 </Window>

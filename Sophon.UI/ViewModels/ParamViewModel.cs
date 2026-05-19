@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using HandyControl.Controls;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Sophon.Application;
@@ -120,7 +121,7 @@ namespace Sophon.UI.ViewModels
                         var isDuplicate = AllParamConfigs.Any(p => p.Category == newParam.Category && p.Name == newParam.Name);
                         if (isDuplicate)
                         {
-                            MessageBox.Show("已经存在同名参数！");
+                            Growl.Warning("已经存在同名参数！");
                             return;
                         }
 
@@ -136,6 +137,8 @@ namespace Sophon.UI.ViewModels
                         AllParamConfigs.Add(paramItem);
                         _paramService.SaveParamConfigs();
                         InitializeCategories();
+
+                        Growl.Success($"新建参数{newParam.Name}成功！");
                     }
                 }
             });
@@ -145,12 +148,14 @@ namespace Sophon.UI.ViewModels
         {
             if (SelectedParam != null)
             {
-                if (MessageBox.Show($"是否确认删除【{SelectedCategory}】【{SelectedParam.Name}】？",
+                string name = SelectedParam.Name;
+                if (System.Windows.MessageBox.Show($"是否确认删除【{SelectedCategory}】【{SelectedParam.Name}】？",
                     "删除确认", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     AllParamConfigs.Remove(SelectedParam);
                     _paramService.SaveParamConfigs();
                     InitializeCategories();
+                    Growl.Success($"删除参数{name}成功！");
                 }
             }
         }
@@ -160,10 +165,11 @@ namespace Sophon.UI.ViewModels
             try
             {
                 _paramService.SaveParamConfigs();
+                Growl.Success($"保存参数成功！");
             }
             catch (Exception e)
             {
-                MessageBox.Show("保存失败：" + e);
+                Growl.Warning("保存失败：" + e);
             }
         }
     }

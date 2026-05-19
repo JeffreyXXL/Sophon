@@ -53,7 +53,7 @@ namespace Sophon.UI
             dbInitializer.Initialize();
 
             // 加载配置
-            var axisService = Container.Resolve<IAxisRepository>();
+            var axisService = Container.Resolve<ICardRepository>();
             var protocolService = Container.Resolve<IProtocolRepository>();
             var paramService = Container.Resolve<IParamRepository>();
             axisService.LoadAllConfigs();

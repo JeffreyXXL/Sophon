@@ -14,43 +14,13 @@ namespace Sophon.UI.ViewModels
             get { return _axisConfigs; }
             set { SetProperty(ref _axisConfigs, value); }
         }
+        private readonly ICardRepository _cardService;
 
-        private ObservableCollection<InputConfig> _inputConfigs;
-
-        public ObservableCollection<InputConfig> InputConfigs
+        public AxisInfrastructureViewModel(ICardRepository cardService)
         {
-            get { return _inputConfigs; }
-            set { SetProperty(ref _inputConfigs, value); }
-        }
+            _cardService = cardService;
 
-        private ObservableCollection<OutputConfig> _outputConfigs;
-
-        public ObservableCollection<OutputConfig> OutputConfigs
-        {
-            get { return _outputConfigs; }
-            set { SetProperty(ref _outputConfigs, value); }
-        }
-
-        private ObservableCollection<ProtocolConfig> _protocolConfigs;
-
-        public ObservableCollection<ProtocolConfig> ProtocolConfigs
-        {
-            get { return _protocolConfigs; }
-            set { SetProperty(ref _protocolConfigs, value); }
-        }
-
-        private readonly IAxisRepository _axisService;
-        private readonly IProtocolRepository _protocolService;
-
-        public AxisInfrastructureViewModel(IAxisRepository axisService, IProtocolRepository protocolService)
-        {
-            _axisService = axisService;
-            _protocolService = protocolService;
-
-            AxisConfigs = _axisService.AxisConfigs;
-            InputConfigs = _axisService.InputConfigs;
-            OutputConfigs = _axisService.OutputConfigs;
-            ProtocolConfigs = _protocolService.ProtocolConfigs;
+            AxisConfigs = _cardService.AxisConfigs;
         }
     }
 }

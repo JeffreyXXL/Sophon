@@ -9,8 +9,6 @@ namespace Sophon.Application
 
         ObservableCollection<AlarmItem> RegisteredAlarms { get; }
 
-        ObservableCollection<AlarmItem> HistoryAlarms { get; }
-
         void Alarm(string alarmCode);
 
         void ClearAlarm(string alarmCode);

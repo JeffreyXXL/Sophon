@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Sophon.Application
 {
-    public interface IAxisRepository
+    public interface ICardRepository
     {
         ObservableCollection<AxisConfig> AxisConfigs { get; }
         ObservableCollection<InputConfig> InputConfigs { get; }

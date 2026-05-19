@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using HandyControl.Controls;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Sophon.Application;
@@ -75,6 +76,8 @@ namespace Sophon.UI.ViewModels
             }
 
             _alarmRepository.RegisterAlarm();
+
+            Growl.Success($"保存报警注册成功！");
         }
 
         private void ExcuteRestore()

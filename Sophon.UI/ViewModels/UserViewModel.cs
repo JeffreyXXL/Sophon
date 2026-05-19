@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using HandyControl.Controls;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -163,7 +164,7 @@ namespace Sophon.UI.ViewModels
         /// <param name="param"></param>
         private void ExecuteLogin(object param)
         {
-            var passwordBox = param as PasswordBox;
+            var passwordBox = param as System.Windows.Controls.PasswordBox;
             string password = passwordBox?.Password;
 
             string storedPassword = _userRepository.GetPasswordByUserName(UserName);
@@ -171,6 +172,10 @@ namespace Sophon.UI.ViewModels
             if (password == storedPassword)
             {
                 _eventAggregator.GetEvent<UserChangeEvent>().Publish(UserName);
+            }
+            else
+            {
+                Growl.Warning("用户名或密码错误，请确认后重新登录！");
             }
 
             passwordBox?.Clear();
@@ -205,7 +210,7 @@ namespace Sophon.UI.ViewModels
         private void ExecuteSaveNewPwd(object param)
         {
             var view = param as UserControl;
-            var txtNewPwd = view.FindName("TxtNewPwd") as PasswordBox;
+            var txtNewPwd = view.FindName("TxtNewPwd") as System.Windows.Controls.PasswordBox;
 
             if (_userRepository.ChangePassword(UserName, txtNewPwd?.Password))
             {
@@ -215,7 +220,7 @@ namespace Sophon.UI.ViewModels
             }
             else
             {
-                MessageBox.Show("修改密码失败！");
+                Growl.Warning("修改密码失败！");
             }
         }
 
@@ -239,29 +244,29 @@ namespace Sophon.UI.ViewModels
         {
             if (string.IsNullOrEmpty(NewUserName))
             {
-                MessageBox.Show("请正确输入用户名！");
+                Growl.Warning("请正确输入用户名！");
                 return;
             }
             var user = await _userRepository.GetUserByName(NewUserName);
             if (user != null)
             {
-                MessageBox.Show("用户名已经存在！");
+                Growl.Warning("用户名已经存在！");
                 return;
             }
 
             var view = param as UserControl;
-            var txtPwd_1 = view.FindName("UserPwd_1") as PasswordBox;
-            var txtPwd_2 = view.FindName("UserPwd_2") as PasswordBox;
+            var txtPwd_1 = view.FindName("UserPwd_1") as System.Windows.Controls.PasswordBox;
+            var txtPwd_2 = view.FindName("UserPwd_2") as System.Windows.Controls.PasswordBox;
 
             if (txtPwd_1?.Password != txtPwd_2?.Password)
             {
-                MessageBox.Show("请确保两次密码输入一致！");
+                Growl.Warning("请确保两次密码输入一致！");
                 return;
             }
 
             if (SelectedLevel == 0)
             {
-                MessageBox.Show("请选择用户等级！");
+                Growl.Warning("请选择用户等级！");
                 return;
             }
 
@@ -276,7 +281,7 @@ namespace Sophon.UI.ViewModels
             int result = await _userRepository.InsertAsync(newUser);
             if (result == 0)
             {
-                MessageBox.Show("新建用户失败！");
+                Growl.Warning("新建用户失败！");
                 return;
             }
             await UpdateUserListAsync();

@@ -7,30 +7,6 @@ namespace Sophon.UI.ViewModels
 {
     public class ProtocolInfrastructureViewModel : BindableBase
     {
-        private ObservableCollection<AxisConfig> _axisConfigs;
-
-        public ObservableCollection<AxisConfig> AxisConfigs
-        {
-            get { return _axisConfigs; }
-            set { SetProperty(ref _axisConfigs, value); }
-        }
-
-        private ObservableCollection<InputConfig> _inputConfigs;
-
-        public ObservableCollection<InputConfig> InputConfigs
-        {
-            get { return _inputConfigs; }
-            set { SetProperty(ref _inputConfigs, value); }
-        }
-
-        private ObservableCollection<OutputConfig> _outputConfigs;
-
-        public ObservableCollection<OutputConfig> OutputConfigs
-        {
-            get { return _outputConfigs; }
-            set { SetProperty(ref _outputConfigs, value); }
-        }
-
         private ObservableCollection<ProtocolConfig> _protocolConfigs;
 
         public ObservableCollection<ProtocolConfig> ProtocolConfigs
@@ -39,17 +15,12 @@ namespace Sophon.UI.ViewModels
             set { SetProperty(ref _protocolConfigs, value); }
         }
 
-        private readonly IAxisRepository _axisService;
         private readonly IProtocolRepository _protocolService;
 
-        public ProtocolInfrastructureViewModel(IAxisRepository axisService, IProtocolRepository protocolService)
+        public ProtocolInfrastructureViewModel( IProtocolRepository protocolService)
         {
-            _axisService = axisService;
             _protocolService = protocolService;
 
-            AxisConfigs = _axisService.AxisConfigs;
-            InputConfigs = _axisService.InputConfigs;
-            OutputConfigs = _axisService.OutputConfigs;
             ProtocolConfigs = _protocolService.ProtocolConfigs;
         }
     }

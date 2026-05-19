@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 namespace Sophon.Application
 {
     [InjectableAttribute(DependencyLifetime.Singleton)]
-    public class AxisRepository : IAxisRepository
+    public class AxisRepository : ICardRepository
     {
         public ObservableCollection<AxisConfig> AxisConfigs { get; private set; }
         public ObservableCollection<InputConfig> InputConfigs { get; private set; }

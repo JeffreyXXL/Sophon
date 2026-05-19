@@ -1,4 +1,6 @@
 ﻿using Common;
+using HandyControl.Controls;
+using HandyControl.Data;
 using Prism.Events;
 using Sophon.Common;
 using Sophon.Core;
@@ -19,8 +21,6 @@ namespace Sophon.Application
 
         public ObservableCollection<AlarmItem> RegisteredAlarms { get; private set; }
 
-        public ObservableCollection<AlarmItem> HistoryAlarms { get; private set; }
-
         private readonly IConfigManager _alarmConfigManager;
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerManager _logger;
@@ -32,17 +32,12 @@ namespace Sophon.Application
             _logger = loggerFactory.CreateLogger("Alarms");
 
             ActuralAlarmList = new ObservableCollection<AlarmItem>();
-            HistoryAlarms = new ObservableCollection<AlarmItem>();
             Restore();
         }
 
         public void ClearAlarm(string alarmCode)
         {
-            foreach (var item in ActuralAlarmList)
-            {
-                HistoryAlarms.Add(item);
-            }
-            ActuralAlarmList.Clear();
+            ActuralAlarmList.Remove(ActuralAlarmList.FirstOrDefault(x => x.AlarmCode == alarmCode));
             _eventAggregator.GetEvent<AlarmClearedEvent>().Publish();
         }
 
@@ -78,9 +73,18 @@ namespace Sophon.Application
                 ActuralAlarmList.Insert(0, alarmItem);
                 string logMsg = $"- {alarmCode} - {alarmItem.Content}";
                 _logger.Warn(logMsg);
+                Growl.Error(
+                    new GrowlInfo
+                    {
+                        Message = $"{alarmCode} - {alarmItem.Content}",
+                        ActionBeforeClose = isConfirmed =>
+                        {
+                            ClearAlarm(alarmCode);
+                            return true; 
+                        }
+                    });
+                _eventAggregator.GetEvent<AlarmOccurredEvent>().Publish(alarmItem);
             }
-
-            _eventAggregator.GetEvent<AlarmOccurredEvent>().Publish(alarmItem);
         }
 
         public void RegisterAlarm()

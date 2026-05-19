@@ -110,6 +110,8 @@
     <Compile Include="Helper\BindingProxy.cs" />
     <Compile Include="ViewModels\AlarmRegisterViewModel.cs" />
     <Compile Include="ViewModels\AlarmHistoryViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\IOInfrastructureViewModel.cs" />
     <Compile Include="ViewModels\AxisInfrastructureViewModel.cs" />
     <Compile Include="ViewModels\SubViewModels\BottomViewModel.cs" />
     <Compile Include="ViewModels\ProtocolInfrastructureViewModel.cs" />

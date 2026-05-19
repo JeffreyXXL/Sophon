@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using HandyControl.Controls;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Sophon.Core;
@@ -74,17 +75,17 @@ namespace Sophon.UI.Views
         {
             if (string.IsNullOrEmpty(SelectedCategory))
             {
-                MessageBox.Show("【参数分类】不能为空！");
+                Growl.Warning("【参数分类】不能为空！");
                 return;
             }
             if (string.IsNullOrEmpty(Name))
             {
-                MessageBox.Show("【参数名称】不能为空！");
+                Growl.Warning("【参数名称】不能为空！");
                 return;
             }
             if (string.IsNullOrEmpty(Value))
             {
-                MessageBox.Show("【参数值】不能为空！");
+                Growl.Warning("【参数值】不能为空！");
                 return;
             }
 
