@@ -7,7 +7,7 @@ namespace Common
     {
         public string Serialize<T>(T config)
         {
-            return JsonConvert.SerializeObject(config);
+            return JsonConvert.SerializeObject(config, Formatting.Indented);
         }
 
         public T Deserialize<T>(string content)

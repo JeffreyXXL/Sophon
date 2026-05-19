@@ -168,7 +168,6 @@ namespace Sophon.UI.ViewModels
             string password = passwordBox?.Password;
 
             string storedPassword = _userRepository.GetPasswordByUserName(UserName);
-            UserLevel level = _userRepository.GetLevelByUserName(UserName);
             if (password == storedPassword)
             {
                 _eventAggregator.GetEvent<UserChangeEvent>().Publish(UserName);

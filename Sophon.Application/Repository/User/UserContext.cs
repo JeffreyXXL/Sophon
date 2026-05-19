@@ -1,16 +1,22 @@
-﻿using Sophon.Infrastructure;
+﻿using Prism.Events;
+using Prism.Mvvm;
 using Sophon.Common;
-using Prism.Events;
 using Sophon.Core.Event;
+using Sophon.Infrastructure;
 
 namespace Sophon.Application
 {
     [InjectableAttribute(DependencyLifetime.Singleton)]
-    public class UserContext : IUserContext
+    public class UserContext : BindableBase, IUserContext
     {
         public string CurrentUser { get; set; }
-        public UserLevel CurrentLevel { get; set; } = UserLevel.None;
 
+        private UserLevel _currentLevel = UserLevel.None;
+        public UserLevel CurrentLevel
+        {
+            get => _currentLevel;
+            set => SetProperty(ref _currentLevel, value);
+        }
         public bool IsLoggedIn { get; set; } = false;
 
         private readonly IEventAggregator _eventAggregator;

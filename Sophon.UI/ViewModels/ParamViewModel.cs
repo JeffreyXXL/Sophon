@@ -1,9 +1,13 @@
 ﻿using HandyControl.Controls;
 using Prism.Commands;
+using Prism.DryIoc;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Sophon.Application;
 using Sophon.Core;
+using Sophon.Core.Event;
+using Sophon.Infrastructure;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -27,7 +31,7 @@ namespace Sophon.UI.ViewModels
             {
                 if (SetProperty(ref _selectedCategory, value))
                 {
-                    FilteredParamConfigs?.Refresh();
+                    SafeRefresh();
                 }
             }
         }
@@ -48,13 +52,7 @@ namespace Sophon.UI.ViewModels
             set { SetProperty(ref _selectedParam, value); }
         }
 
-        private bool _categoryVisibility;
 
-        public bool CategoryVisibility
-        {
-            get { return _categoryVisibility; }
-            set { SetProperty(ref _categoryVisibility, value); }
-        }
 
         public DelegateCommand AddParamCommand { get; private set; }
         public DelegateCommand DeleteParamCommand { get; private set; }
@@ -62,11 +60,13 @@ namespace Sophon.UI.ViewModels
 
         private readonly IParamRepository _paramService;
         private readonly IDialogService _dialogService;
+        private readonly IUserContext _userContext;
 
-        public ParamViewModel(IParamRepository paramService, IDialogService dialogService)
+        public ParamViewModel(IParamRepository paramService, IDialogService dialogService, IUserContext userContext)
         {
             _paramService = paramService;
             _dialogService = dialogService;
+            _userContext = userContext;
 
             AllParamConfigs = _paramService.ParamConfigs;
             FilteredParamConfigs = CollectionViewSource.GetDefaultView(AllParamConfigs);
@@ -76,20 +76,44 @@ namespace Sophon.UI.ViewModels
             AddParamCommand = new DelegateCommand(ExcuteAddParam);
             DeleteParamCommand = new DelegateCommand(ExcuteDeleteParam);
             SaveParamCommand = new DelegateCommand(ExcuteSaveParam);
+
+            if (_userContext is INotifyPropertyChanged notifyContext)
+            {
+                notifyContext.PropertyChanged += (s, e) =>
+                {
+                    if (e.PropertyName == nameof(IUserContext.CurrentLevel))
+                    {
+                        PrismApplication.Current.Dispatcher.Invoke(() => SafeRefresh());
+                    }
+                };
+            }
         }
 
         private bool MyFilterLogic(object item)
         {
             if (item is ParamConfig config)
             {
+                bool matchCategory = false;
                 if (string.IsNullOrEmpty(SelectedCategory) || SelectedCategory == "所有参数")
                 {
-                    CategoryVisibility = true;
-                    return true;
+                    matchCategory = true;
                 }
-                CategoryVisibility = false;
-                return config.Category == SelectedCategory;
+                else
+                {
+                    matchCategory = config.Category == SelectedCategory;
+                }
+                bool matchLevel = false;
+                if (_userContext.CurrentLevel == UserLevel.Admin)
+                {
+                    matchLevel = true;
+                }
+                else
+                {
+                    matchLevel = config.Level <= _userContext.CurrentLevel;
+                }
+                return matchCategory && matchLevel;
             }
+
             return false;
         }
 
@@ -131,14 +155,15 @@ namespace Sophon.UI.ViewModels
                             Name = newParam.Name,
                             Value = newParam.Value,
                             Unit = newParam.Unit,
-                            Description = newParam.Description
+                            Description = newParam.Description,
+                            Level = newParam.Level
                         };
 
                         AllParamConfigs.Add(paramItem);
                         _paramService.SaveParamConfigs();
                         InitializeCategories();
 
-                        Growl.Success($"新建参数{newParam.Name}成功！");
+                        Growl.Success($"新建参数【{newParam.Name}】成功！");
                     }
                 }
             });
@@ -155,7 +180,7 @@ namespace Sophon.UI.ViewModels
                     AllParamConfigs.Remove(SelectedParam);
                     _paramService.SaveParamConfigs();
                     InitializeCategories();
-                    Growl.Success($"删除参数{name}成功！");
+                    Growl.Success($"删除参数【{name}】成功！");
                 }
             }
         }
@@ -171,6 +196,26 @@ namespace Sophon.UI.ViewModels
             {
                 Growl.Warning("保存失败：" + e);
             }
+        }
+
+
+        private void SafeRefresh()
+        {
+            if (FilteredParamConfigs == null) return;
+
+            if (FilteredParamConfigs is IEditableCollectionView editableView)
+            {
+                if (editableView.IsEditingItem)
+                {
+                    editableView.CommitEdit();
+                }
+
+                if (editableView.IsAddingNew)
+                {
+                    editableView.CommitEdit();
+                }
+            }
+            FilteredParamConfigs.Refresh();
         }
     }
 }

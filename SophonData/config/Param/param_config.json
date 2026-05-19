@@ -1,1 +1,50 @@
-[{"Category":"分类1","Name":"参数1","Value":"12","Unit":null,"Description":null},{"Category":"分类2","Name":"参数2","Value":"2","Unit":null,"Description":null}]
+[
+  {
+    "Category": "系统参数",
+    "Name": "设备号",
+    "Value": "M001",
+    "Unit": null,
+    "Description": null,
+    "Level": 0
+  },
+  {
+    "Category": "系统参数",
+    "Name": "设备IP",
+    "Value": "192.168.0.11",
+    "Unit": null,
+    "Description": null,
+    "Level": 0
+  },
+  {
+    "Category": "系统参数",
+    "Name": "轴数量",
+    "Value": "12",
+    "Unit": null,
+    "Description": null,
+    "Level": 1
+  },
+  {
+    "Category": "轴参数",
+    "Name": "全局加速度",
+    "Value": "1000",
+    "Unit": "mm/s²",
+    "Description": null,
+    "Level": 2
+  },
+  {
+    "Category": "轴参数",
+    "Name": "全局减速度",
+    "Value": "1000",
+    "Unit": "mm/s²",
+    "Description": null,
+    "Level": 2
+  },
+  {
+    "Category": "轴参数",
+    "Name": "全局最大速度",
+    "Value": "1000",
+    "Unit": "mm/s",
+    "Description": null,
+    "Level": 10
+  }
+]

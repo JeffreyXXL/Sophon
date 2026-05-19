@@ -1,4 +1,6 @@
-﻿namespace Sophon.Core
+﻿using Sophon.Infrastructure;
+
+namespace Sophon.Core
 {
     public class ParamConfig
     {
@@ -7,5 +9,7 @@
         public string Value { get; set; }
         public string Unit { get; set; }
         public string Description { get; set; }
+
+        public UserLevel Level { get; set; }
     }
 }

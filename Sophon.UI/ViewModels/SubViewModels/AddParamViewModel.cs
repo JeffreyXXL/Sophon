@@ -3,10 +3,10 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Sophon.Core;
+using Sophon.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace Sophon.UI.Views
 {
@@ -52,6 +52,14 @@ namespace Sophon.UI.Views
             set { SetProperty(ref _selectedCategory, value); }
         }
 
+        private UserLevel _selectedLevel = UserLevel.Operator;
+
+        public UserLevel SelectedLevel
+        {
+            get { return _selectedLevel; }
+            set { SetProperty(ref _selectedLevel, value); }
+        }
+
         private ObservableCollection<string> _availableCategorys;
 
         public ObservableCollection<string> AvailableCategorys
@@ -60,12 +68,26 @@ namespace Sophon.UI.Views
             set { SetProperty(ref _availableCategorys, value); }
         }
 
+        private ObservableCollection<string> _userLevels;
+
+        public ObservableCollection<string> UserLevels
+        {
+            get { return _userLevels; }
+            set { SetProperty(ref _userLevels, value); }
+        }
+
         public DelegateCommand ConfirmCommand { get; private set; }
         public DelegateCommand CancelCommand { get; private set; }
 
         public AddParamViewModel()
         {
             AvailableCategorys = new ObservableCollection<string>();
+            UserLevels = new ObservableCollection<string>()
+            {
+                UserLevel.Operator.ToString(),
+                UserLevel.Engineer.ToString(),
+                UserLevel.Admin.ToString(),
+            };
 
             ConfirmCommand = new DelegateCommand(ExcuteConfirm);
             CancelCommand = new DelegateCommand(ExcuteCancel);
@@ -88,6 +110,11 @@ namespace Sophon.UI.Views
                 Growl.Warning("【参数值】不能为空！");
                 return;
             }
+            if (SelectedLevel == 0)
+            {
+                Growl.Warning("【用户等级】不能为空！");
+                return;
+            }
 
             var result = new ParamConfig()
             {
@@ -96,6 +123,7 @@ namespace Sophon.UI.Views
                 Value = Value,
                 Unit = Unit,
                 Description = Description,
+                Level = SelectedLevel,
             };
             var param = new DialogParameters() { { "NewParam", result } };
             RequestClose?.Invoke(new DialogResult(ButtonResult.OK, param));
