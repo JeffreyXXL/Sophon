@@ -153,11 +153,14 @@
     <Compile Include="Views\SubViews\AxisOpView.xaml.cs">
       <DependentUpon>AxisOpView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SubViews\OutputOpView.xaml.cs">
+      <DependentUpon>OutputOpView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubViews\SideView.xaml.cs">
       <DependentUpon>SideView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SubViews\IoOpView.xaml.cs">
-      <DependentUpon>IoOpView.xaml</DependentUpon>
+    <Compile Include="Views\SubViews\InputOpView.xaml.cs">
+      <DependentUpon>InputOpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ParamView.xaml.cs">
       <DependentUpon>ParamView.xaml</DependentUpon>
@@ -216,11 +219,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SubViews\OutputOpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SubViews\SideView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SubViews\IoOpView.xaml">
+    <Page Include="Views\SubViews\InputOpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

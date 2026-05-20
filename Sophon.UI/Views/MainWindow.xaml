@@ -12,6 +12,7 @@
     Height="850"
     prism:ViewModelLocator.AutoWireViewModel="True"
     ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
     <Grid>

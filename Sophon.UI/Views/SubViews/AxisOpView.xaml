@@ -15,21 +15,6 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="0,0,0,10" />
         </Style>
-
-        <Style x:Key="ShadowValueStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect
-                        BlurRadius="10"
-                        Opacity="0.3"
-                        ShadowDepth="5"
-                        Color="Gray" />
-                </Setter.Value>
-            </Setter>
-        </Style>
     </UserControl.Resources>
 
     <Border Style="{StaticResource CardBorderStyle}">

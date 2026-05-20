@@ -5,9 +5,9 @@ namespace Sophon.UI.Views
     /// <summary>
     /// IoOpView.xaml 的交互逻辑
     /// </summary>
-    public partial class IoOpView : UserControl
+    public partial class InputOpView : UserControl
     {
-        public IoOpView()
+        public InputOpView()
         {
             InitializeComponent();
         }
