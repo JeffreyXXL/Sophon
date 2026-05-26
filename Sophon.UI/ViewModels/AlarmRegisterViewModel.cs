@@ -41,26 +41,26 @@ namespace Sophon.UI.ViewModels
             _alarmRepository = alarmRepository;
             RegisteredAlarms = _alarmRepository.RegisteredAlarms;
 
-            AddAlarmCommand = new DelegateCommand(ExcuteAddAlarm);
-            DeleteAlarmCommand = new DelegateCommand(ExcuteDeleteAlarm);
-            SaveCommand = new DelegateCommand(ExcuteSave);
-            RestoreCommand = new DelegateCommand(ExcuteRestore);
-            ImportCommand = new DelegateCommand(ExcuteImport);
-            ExportCommand = new DelegateCommand(ExcuteExport);
+            AddAlarmCommand = new DelegateCommand(ExecuteAddAlarm);
+            DeleteAlarmCommand = new DelegateCommand(ExecuteDeleteAlarm);
+            SaveCommand = new DelegateCommand(ExecuteSave);
+            RestoreCommand = new DelegateCommand(ExecuteRestore);
+            ImportCommand = new DelegateCommand(ExecuteImport);
+            ExportCommand = new DelegateCommand(ExecuteExport);
 
         }
 
-        private void ExcuteAddAlarm()
+        private void ExecuteAddAlarm()
         {
             RegisteredAlarms.Insert(0, new AlarmItem());
         }
 
-        private void ExcuteDeleteAlarm()
+        private void ExecuteDeleteAlarm()
         {
             RegisteredAlarms.Remove(SelectedAlarm);
         }
 
-        private void ExcuteSave()
+        private void ExecuteSave()
         {
             var emptyItems = RegisteredAlarms
                             .Where(x => x == null || string.IsNullOrWhiteSpace(x.AlarmCode))
@@ -76,19 +76,19 @@ namespace Sophon.UI.ViewModels
             Growl.Success($"保存报警注册成功！");
         }
 
-        private void ExcuteRestore()
+        private void ExecuteRestore()
         {
             _alarmRepository.Restore();
             RegisteredAlarms = _alarmRepository.RegisteredAlarms;
         }
 
 
-        public void ExcuteImport()
+        public void ExecuteImport()
         {
 
         }
 
-        public void ExcuteExport()
+        public void ExecuteExport()
         {
 
         }

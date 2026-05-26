@@ -25,7 +25,7 @@ namespace Sophon.Infrastructure
             container.RegisterDelegate<DbContext>(c =>
             {
                 var factory = c.Resolve<ILoggerFactory>();
-                var path = ConfigurationManager.AppSettings["DatebaseFilePath"];
+                var path = ConfigurationManager.AppSettings["DatabaseFilePath"];
                 string connstr = "Data Source = " + PathResolver.GetAbsolutePath(path) + ";";
                 return new DbContext(connstr, factory);
             }, Reuse.Singleton);

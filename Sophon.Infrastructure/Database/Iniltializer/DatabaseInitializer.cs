@@ -28,7 +28,7 @@ namespace Sophon.Infrastructure
 
         public void InitDbContext()
         {
-            var path = ConfigurationManager.AppSettings["DatebaseFilePath"];
+            var path = ConfigurationManager.AppSettings["DatabaseFilePath"];
 
             string connstr = "Data Source = " + PathResolver.GetAbsolutePath(path) + ";";
 

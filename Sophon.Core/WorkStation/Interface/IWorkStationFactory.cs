@@ -4,7 +4,7 @@ namespace Sophon.Core
 {
     public interface IWorkStationFactory
     {
-        ConcurrentDictionary<string, IWorkStation> WorkStationcache { get; }
+        ConcurrentDictionary<string, IWorkStation> WorkStationCache { get; }
 
         IWorkStation CreateWorkStation(string workStationName);
     }

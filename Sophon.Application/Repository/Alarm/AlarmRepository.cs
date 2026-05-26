@@ -17,7 +17,7 @@ namespace Sophon.Application
     [InjectableAttribute(DependencyLifetime.Singleton)]
     public class AlarmRepository : IAlarmRepository
     {
-        public ObservableCollection<AlarmItem> ActuralAlarmList { get; private set; }
+        public ObservableCollection<AlarmItem> ActualAlarmList { get; private set; }
 
         public ObservableCollection<AlarmItem> RegisteredAlarms { get; private set; }
 
@@ -31,13 +31,13 @@ namespace Sophon.Application
             _eventAggregator = eventAggregator;
             _logger = loggerFactory.CreateLogger("Alarms");
 
-            ActuralAlarmList = new ObservableCollection<AlarmItem>();
+            ActualAlarmList = new ObservableCollection<AlarmItem>();
             Restore();
         }
 
         public void ClearAlarm(string alarmCode)
         {
-            ActuralAlarmList.Remove(ActuralAlarmList.FirstOrDefault(x => x.AlarmCode == alarmCode));
+            ActualAlarmList.Remove(ActualAlarmList.FirstOrDefault(x => x.AlarmCode == alarmCode));
             _eventAggregator.GetEvent<AlarmClearedEvent>().Publish();
         }
 
@@ -68,9 +68,9 @@ namespace Sophon.Application
                 RegisteredAlarms.Add(alarmItem);
             }
 
-            if (!ActuralAlarmList.Contains(alarmItem))
+            if (!ActualAlarmList.Contains(alarmItem))
             {
-                ActuralAlarmList.Insert(0, alarmItem);
+                ActualAlarmList.Insert(0, alarmItem);
                 string logMsg = $"- {alarmCode} - {alarmItem.Content}";
                 _logger.Warn(logMsg);
                 Growl.Error(

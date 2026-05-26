@@ -14,10 +14,10 @@ namespace Sophon.UI.ViewModels
         {
             _regionManager = regionManager;
 
-            NavigateCommand = new DelegateCommand<object>(ExcuteNavigate);
+            NavigateCommand = new DelegateCommand<object>(ExecuteNavigate);
         }
 
-        public void ExcuteNavigate(object param)
+        public void ExecuteNavigate(object param)
         {
             string viewName = (string)param;
 

@@ -24,7 +24,7 @@
                     Width="200"
                     Height="30"
                     FontSize="14"
-                    ItemsSource="{Binding AvailableCategorys}"
+                    ItemsSource="{Binding AvailableCategories}"
                     SelectedItem="{Binding SelectedCategory}" />
                 <Button
                     Margin="20,0"

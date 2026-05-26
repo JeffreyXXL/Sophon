@@ -9,20 +9,20 @@ namespace Sophon.Core
         public WorkStationFactory(IFlowEngineFactory flowEngineFactory, IFlowContextFactory flowContextFactory, IStateMachine stateMachine)
         {
             _flowEngineFactory = flowEngineFactory;
-            _flowcontextfactory = flowContextFactory;
+            _flowContextFactory = flowContextFactory;
             _stateMachine = stateMachine;
-            WorkStationcache = new ConcurrentDictionary<string, IWorkStation>();
+            WorkStationCache = new ConcurrentDictionary<string, IWorkStation>();
         }
 
-        public ConcurrentDictionary<string, IWorkStation> WorkStationcache { get; }
+        public ConcurrentDictionary<string, IWorkStation> WorkStationCache { get; }
 
         private readonly IFlowEngineFactory _flowEngineFactory;
-        private readonly IFlowContextFactory _flowcontextfactory;
+        private readonly IFlowContextFactory _flowContextFactory;
         private readonly IStateMachine _stateMachine;
 
         public IWorkStation CreateWorkStation(string workStationName)
         {
-            return WorkStationcache.GetOrAdd(workStationName, new WorkStation(workStationName, _flowEngineFactory, _flowcontextfactory, _stateMachine));
+            return WorkStationCache.GetOrAdd(workStationName, new WorkStation(workStationName, _flowEngineFactory, _flowContextFactory, _stateMachine));
         }
     }
 }

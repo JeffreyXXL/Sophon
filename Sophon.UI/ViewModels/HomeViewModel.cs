@@ -11,10 +11,10 @@ namespace Sophon.UI.ViewModels
         public HomeViewModel(IAlarmRepository alarmRepository)
         {
             _alarmRepository = alarmRepository;
-            TestCommand = new DelegateCommand(ExcuteTest);
+            TestCommand = new DelegateCommand(ExecuteTest);
         }
 
-        private void ExcuteTest()
+        private void ExecuteTest()
         {
             _alarmRepository.Alarm("E0012");
             _alarmRepository.Alarm("E0004");

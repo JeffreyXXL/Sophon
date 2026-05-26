@@ -5,7 +5,7 @@ namespace Sophon.Application
 {
     public interface IAlarmRepository
     {
-        ObservableCollection<AlarmItem> ActuralAlarmList { get; }
+        ObservableCollection<AlarmItem> ActualAlarmList { get; }
 
         ObservableCollection<AlarmItem> RegisteredAlarms { get; }
 

@@ -57,7 +57,7 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     IsEditable="True"
-                    ItemsSource="{Binding AvailableCategorys}"
+                    ItemsSource="{Binding AvailableCategories}"
                     Text="{Binding SelectedCategory, Mode=TwoWay}" />
 
                 <TextBlock Grid.Row="1" Grid.Column="0">

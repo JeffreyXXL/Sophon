@@ -60,11 +60,11 @@ namespace Sophon.UI.ViewModels
                                _historyAlarmList;
             }, ThreadOption.UIThread);
 
-            FilterCommand = new DelegateCommand(ExcuteFilter);
+            FilterCommand = new DelegateCommand(ExecuteFilter);
         }
 
 
-        private void ExcuteFilter()
+        private void ExecuteFilter()
         {
             IsFiltered = !IsFiltered;
 

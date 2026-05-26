@@ -34,12 +34,12 @@ namespace Sophon.UI.ViewModels
             }
         }
 
-        private ObservableCollection<string> _availableCategorys;
+        private ObservableCollection<string> _availableCategories;
 
-        public ObservableCollection<string> AvailableCategorys
+        public ObservableCollection<string> AvailableCategories
         {
-            get { return _availableCategorys; }
-            set { SetProperty(ref _availableCategorys, value); }
+            get { return _availableCategories; }
+            set { SetProperty(ref _availableCategories, value); }
         }
 
         private ParamConfig _selectedParam;
@@ -71,9 +71,9 @@ namespace Sophon.UI.ViewModels
             FilteredParamConfigs.Filter = MyFilterLogic;
             InitializeCategories();
 
-            AddParamCommand = new DelegateCommand(ExcuteAddParam);
-            DeleteParamCommand = new DelegateCommand(ExcuteDeleteParam);
-            SaveParamCommand = new DelegateCommand(ExcuteSaveParam);
+            AddParamCommand = new DelegateCommand(ExecuteAddParam);
+            DeleteParamCommand = new DelegateCommand(ExecuteDeleteParam);
+            SaveParamCommand = new DelegateCommand(ExecuteSaveParam);
 
             if (_userContext is INotifyPropertyChanged notifyContext)
             {
@@ -122,14 +122,14 @@ namespace Sophon.UI.ViewModels
                                       .Distinct()
                                       .ToList();
             categories.Insert(0, "所有参数");
-            AvailableCategorys = new ObservableCollection<string>(categories);
+            AvailableCategories = new ObservableCollection<string>(categories);
         }
 
-        private void ExcuteAddParam()
+        private void ExecuteAddParam()
         {
             var categorys = new DialogParameters()
             {
-                { "Categorys",AvailableCategorys.Where(p => p != "所有参数").ToList()}
+                { "Categorys",AvailableCategories.Where(p => p != "所有参数").ToList()}
             };
 
             _dialogService.ShowDialog("AddParamView", categorys, result =>
@@ -167,7 +167,7 @@ namespace Sophon.UI.ViewModels
             });
         }
 
-        private void ExcuteDeleteParam()
+        private void ExecuteDeleteParam()
         {
             if (SelectedParam != null)
             {
@@ -183,7 +183,7 @@ namespace Sophon.UI.ViewModels
             }
         }
 
-        private void ExcuteSaveParam()
+        private void ExecuteSaveParam()
         {
             try
             {

@@ -60,12 +60,12 @@ namespace Sophon.UI.Views
             set { SetProperty(ref _selectedLevel, value); }
         }
 
-        private ObservableCollection<string> _availableCategorys;
+        private ObservableCollection<string> _availableCategories;
 
-        public ObservableCollection<string> AvailableCategorys
+        public ObservableCollection<string> AvailableCategories
         {
-            get { return _availableCategorys; }
-            set { SetProperty(ref _availableCategorys, value); }
+            get { return _availableCategories; }
+            set { SetProperty(ref _availableCategories, value); }
         }
 
         private ObservableCollection<string> _userLevels;
@@ -81,7 +81,7 @@ namespace Sophon.UI.Views
 
         public AddParamViewModel()
         {
-            AvailableCategorys = new ObservableCollection<string>();
+            AvailableCategories = new ObservableCollection<string>();
             UserLevels = new ObservableCollection<string>()
             {
                 UserLevel.Operator.ToString(),
@@ -89,11 +89,11 @@ namespace Sophon.UI.Views
                 UserLevel.Admin.ToString(),
             };
 
-            ConfirmCommand = new DelegateCommand(ExcuteConfirm);
-            CancelCommand = new DelegateCommand(ExcuteCancel);
+            ConfirmCommand = new DelegateCommand(ExecuteConfirm);
+            CancelCommand = new DelegateCommand(ExecuteCancel);
         }
 
-        private void ExcuteConfirm()
+        private void ExecuteConfirm()
         {
             if (string.IsNullOrEmpty(SelectedCategory))
             {
@@ -129,7 +129,7 @@ namespace Sophon.UI.Views
             RequestClose?.Invoke(new DialogResult(ButtonResult.OK, param));
         }
 
-        private void ExcuteCancel()
+        private void ExecuteCancel()
         {
             RequestClose?.Invoke(new DialogResult(ButtonResult.Cancel));
         }
@@ -153,7 +153,7 @@ namespace Sophon.UI.Views
             if (parameters.ContainsKey("Categorys"))
             {
                 var categorys = parameters.GetValue<List<string>>("Categorys");
-                AvailableCategorys = new ObservableCollection<string>(categorys);
+                AvailableCategories = new ObservableCollection<string>(categorys);
             }
         }
     }

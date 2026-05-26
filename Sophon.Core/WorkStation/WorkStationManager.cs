@@ -14,39 +14,39 @@ namespace Sophon.Core
 
         public void Start(string stationName)
         {
-            if (_workStationFactory.WorkStationcache.ContainsKey(stationName))
+            if (_workStationFactory.WorkStationCache.ContainsKey(stationName))
             {
-                _workStationFactory.WorkStationcache[stationName].Start();
+                _workStationFactory.WorkStationCache[stationName].Start();
             }
         }
 
         public void Pause(string stationName)
         {
-            if (_workStationFactory.WorkStationcache.ContainsKey(stationName))
+            if (_workStationFactory.WorkStationCache.ContainsKey(stationName))
             {
-                _workStationFactory.WorkStationcache[stationName].Pause();
+                _workStationFactory.WorkStationCache[stationName].Pause();
             }
         }
 
         public void Resume(string stationName)
         {
-            if (_workStationFactory.WorkStationcache.ContainsKey(stationName))
+            if (_workStationFactory.WorkStationCache.ContainsKey(stationName))
             {
-                _workStationFactory.WorkStationcache[stationName].Resume();
+                _workStationFactory.WorkStationCache[stationName].Resume();
             }
         }
 
         public void Stop(string stationName)
         {
-            if (_workStationFactory.WorkStationcache.ContainsKey(stationName))
+            if (_workStationFactory.WorkStationCache.ContainsKey(stationName))
             {
-                _workStationFactory.WorkStationcache[stationName].Stop();
+                _workStationFactory.WorkStationCache[stationName].Stop();
             }
         }
 
         public void StartAll()
         {
-            foreach (var station in _workStationFactory.WorkStationcache.Values)
+            foreach (var station in _workStationFactory.WorkStationCache.Values)
             {
                 station.Start();
             }
@@ -54,7 +54,7 @@ namespace Sophon.Core
 
         public void PauseAll()
         {
-            foreach (var station in _workStationFactory.WorkStationcache.Values)
+            foreach (var station in _workStationFactory.WorkStationCache.Values)
             {
                 station.Pause();
             }
@@ -62,7 +62,7 @@ namespace Sophon.Core
 
         public void ResumeAll()
         {
-            foreach (var station in _workStationFactory.WorkStationcache.Values)
+            foreach (var station in _workStationFactory.WorkStationCache.Values)
             {
                 station.Resume();
             }
@@ -70,7 +70,7 @@ namespace Sophon.Core
 
         public void StopAll()
         {
-            foreach (var station in _workStationFactory.WorkStationcache.Values)
+            foreach (var station in _workStationFactory.WorkStationCache.Values)
             {
                 station.Stop();
             }
