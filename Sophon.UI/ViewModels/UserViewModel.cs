@@ -9,7 +9,6 @@ using Sophon.Infrastructure;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Sophon.UI.ViewModels
@@ -129,7 +128,7 @@ namespace Sophon.UI.ViewModels
         private readonly IUserContext _userContext;
         private readonly IEventAggregator _eventAggregator;
 
-        public UserViewModel(IUserRepository userRepository, IUserContext userContext ,IEventAggregator eventAggregator)
+        public UserViewModel(IUserRepository userRepository, IUserContext userContext, IEventAggregator eventAggregator)
         {
             LoginCommand = new DelegateCommand<object>(ExecuteLogin);
             LogoutCommand = new DelegateCommand(ExecuteLogout);

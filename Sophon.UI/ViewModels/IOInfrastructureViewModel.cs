@@ -7,7 +7,7 @@ namespace Sophon.UI.ViewModels
 {
     public class IOInfrastructureViewModel : BindableBase
     {
-               private ObservableCollection<InputConfig> _inputConfigs;
+        private ObservableCollection<InputConfig> _inputConfigs;
 
         public ObservableCollection<InputConfig> InputConfigs
         {
@@ -22,7 +22,7 @@ namespace Sophon.UI.ViewModels
             get { return _outputConfigs; }
             set { SetProperty(ref _outputConfigs, value); }
         }
-        
+
         private readonly ICardRepository _cardService;
 
         public IOInfrastructureViewModel(ICardRepository cardService)

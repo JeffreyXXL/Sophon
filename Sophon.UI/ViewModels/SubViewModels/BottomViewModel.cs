@@ -46,7 +46,7 @@ namespace Sophon.UI.ViewModels
             }, ThreadOption.UIThread);
             StartTimer();
         }
-        
+
         private void StartTimer()
         {
             DispatcherTimer timer = new DispatcherTimer

@@ -17,7 +17,7 @@ namespace Sophon.UI.ViewModels
 
         private readonly IProtocolRepository _protocolService;
 
-        public ProtocolInfrastructureViewModel( IProtocolRepository protocolService)
+        public ProtocolInfrastructureViewModel(IProtocolRepository protocolService)
         {
             _protocolService = protocolService;
 

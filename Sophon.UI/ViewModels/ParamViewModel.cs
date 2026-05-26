@@ -1,12 +1,10 @@
 ﻿using HandyControl.Controls;
 using Prism.Commands;
 using Prism.DryIoc;
-using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using Sophon.Application;
 using Sophon.Core;
-using Sophon.Core.Event;
 using Sophon.Infrastructure;
 using System;
 using System.Collections.ObjectModel;

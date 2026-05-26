@@ -170,7 +170,7 @@
                     Grid.Column="2"
                     Margin="5"
                     Size="10"
-                    Status="{Binding IsOrg}" />
+                    Status="{Binding IsRel}" />
             </Grid>
         </Grid>
     </Border>

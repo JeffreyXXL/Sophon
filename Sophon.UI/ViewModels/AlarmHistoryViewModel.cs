@@ -1,13 +1,11 @@
 ﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using Sophon.Application;
 using Sophon.Core;
 using Sophon.Core.Event;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Security.Claims;
 
 namespace Sophon.UI.ViewModels
 {
