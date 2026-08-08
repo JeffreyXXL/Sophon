@@ -2,6 +2,7 @@
 using Prism.Commands;
 using Prism.DryIoc;
 using Prism.Mvvm;
+using Prism.Regions;
 using Prism.Services.Dialogs;
 using Sophon.Application;
 using Sophon.Core;
@@ -15,7 +16,7 @@ using System.Windows.Data;
 
 namespace Sophon.UI.ViewModels
 {
-    public class ParamViewModel : BindableBase
+    public class ParamViewModel : BindableBase, INavigationAware
     {
         public ObservableCollection<ParamConfig> AllParamConfigs { get; set; }
         public ICollectionView FilteredParamConfigs { get; set; }
@@ -75,16 +76,7 @@ namespace Sophon.UI.ViewModels
             DeleteParamCommand = new DelegateCommand(ExecuteDeleteParam);
             SaveParamCommand = new DelegateCommand(ExecuteSaveParam);
 
-            if (_userContext is INotifyPropertyChanged notifyContext)
-            {
-                notifyContext.PropertyChanged += (s, e) =>
-                {
-                    if (e.PropertyName == nameof(IUserContext.CurrentLevel))
-                    {
-                        PrismApplication.Current.Dispatcher.Invoke(() => SafeRefresh());
-                    }
-                };
-            }
+
         }
 
         private bool MyFilterLogic(object item)
@@ -214,6 +206,35 @@ namespace Sophon.UI.ViewModels
                 }
             }
             FilteredParamConfigs.Refresh();
+        }
+
+        private void OnUserContextPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(IUserContext.CurrentLevel))
+            {
+                PrismApplication.Current.Dispatcher.Invoke(() => SafeRefresh());
+            }
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            if (_userContext is INotifyPropertyChanged notifyContext)
+            {
+                notifyContext.PropertyChanged += OnUserContextPropertyChanged;
+            }
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            if (_userContext is INotifyPropertyChanged notifyContext)
+            {
+                notifyContext.PropertyChanged -= OnUserContextPropertyChanged;
+            }
         }
     }
 }
